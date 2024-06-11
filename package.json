@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "pa11y-ci": "^3.1.0"
+  },
+  "scripts": {
+    "start-detached": "bundle exec jekyll serve --detach",
+    "pa11y-ci:sitemap": "pa11y-ci --sitemap http://127.0.0.1:4000/berkeley-class-site/sitemap.xml --sitemap-exclude \"/*.pdf\""
+  }
+}
