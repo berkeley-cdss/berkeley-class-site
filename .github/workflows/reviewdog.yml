@@ -32,21 +32,6 @@ jobs:
         with:
           tool_name: blackfmt
   
-  spellcheck:
-    runs-on: ubuntu-latest
-    steps:
-      - name: 🛎 Checkout
-        uses: actions/checkout@v3
-
-      - name: 🧑‍🏫 Spell-Check
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        uses: simbo/vale-action@v1.1.3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          reviewdog: true
-          reporter: github-pr-check
-  
   markdownlint:
     name: runner / markdownlint
     runs-on: ubuntu-latest

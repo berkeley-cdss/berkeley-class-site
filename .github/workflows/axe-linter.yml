@@ -1,4 +1,4 @@
-name: Linting for accessibility issues
+name: Run axe linter
 
 on: [pull_request]
 
