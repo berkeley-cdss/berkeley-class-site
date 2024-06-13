@@ -17,11 +17,11 @@ title: Just the Class
 tagline: A Jekyll template for course websites
 description: A modern, highly customizable, responsive Jekyll template for course websites
 author: Kevin Lin
-baseurl: '/just-the-class' # the subpath of your site, e.g. /blog
-url: 'https://phrdang.github.io/berkeley-class-site' # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: '/berkeley-class-site' # the subpath of your site, e.g. /blog
+url: 'https://phrdang.github.io' # the base hostname & protocol for your site, e.g. http://example.com
 plugins:
   - "jekyll-sitemap"
-exclude: ["Gemfile", "Gemfile.lock", "LICENSE", "vendor"]
+exclude: ["Gemfile", "Gemfile.lock", "vendor", "node_modules", "LICENSE"]
 
 # Theme settings
 remote_theme: just-the-docs/just-the-docs@v0.5.1
