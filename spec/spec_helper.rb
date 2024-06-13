@@ -68,7 +68,12 @@ RSpec.configure do |config|
   # (force_build: true) builds the site before the tests are run,
   # so our tests are always running against the latest version
   # of our jekyll site.
-  Capybara.app = Rack::Jekyll.new(force_build: true)
+  jekyll_app = Rack::Jekyll.new(force_build: true)
+
+  # https://stackoverflow.com/questions/52506822/testing-a-jekyll-site-with-rspec-and-capybara-getting-a-bizarre-race-case-on-rs
+  sleep 0.1 while jekyll_app.compiling?
+  
+  Capybara.app = jekyll_app
 
   # Configure Capybara server (otherwise it will error and say to use webrick or puma)
   Capybara.server = :webrick
