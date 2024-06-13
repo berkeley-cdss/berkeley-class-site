@@ -14,10 +14,8 @@ describe "course website", type: :feature, js: true do
   # TODO run each page's axe check separately so it doesn't exit on first failure
   it "is accessible" do
     @links.each do |link|
-      if link != '/'
-        visit(link)
-        expect(page).to be_axe_clean.according_to :wcag2a, "path: #{link} not accessible"
-      end
+      visit(link)
+      expect(page).to be_axe_clean.according_to :wcag2a, "path: #{link} not accessible"
     end
   end
 end
