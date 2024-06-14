@@ -1,8 +1,7 @@
 This is a sample question description.
 
-```python
-def sample_question(a, b, c):
-    pass
-```
+{% highlight python %}
+{% include questions/sample_question.py %}
+{% endhighlight %}
 
 {% include okpy.md question="sample_question" %}
