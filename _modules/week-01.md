@@ -15,7 +15,7 @@ Sep 30
   : [1.2](#), [2.1](#)
 
 Oct 1
-: **Lab**{: .label .label-purple } [Intro to Java](#)
+: **Lab**{: .label .label-purple } [Lab 1: Control and Functions]({{ site.baseurl }}/labs/lab01)
 
 Oct 2
 : [Tracing, IntLists, & Recursion](#)

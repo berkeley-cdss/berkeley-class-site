@@ -43,6 +43,7 @@ collections:
   modules:
   schedules:
   announcements:
+
 # Default layouts for each collection type
 defaults:
   - scope:
@@ -77,4 +78,6 @@ compress_html:
   blanklines: false
   profile: false
 
+# Course variables
 course_email: cs88@berkeley.edu
+gradescope_course_id: 693229
