@@ -3,6 +3,7 @@ layout: page
 title: Syllabus
 description: >-
     Course policies and information.
+nav_order: 3
 ---
 
 # Syllabus
