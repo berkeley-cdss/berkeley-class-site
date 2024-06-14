@@ -1,0 +1,9 @@
+When you are done, submit your file to <a href="https://www.gradescope.com/courses/{{ site.gradescope_course_id }}/assignments/{{ include.gradescope_assignment_id }}">Gradescope</a>. You only need to upload the following files:
+
+<ul>
+{% for file in include.submission_files %}
+    <li>{{ file }}</li>
+{% endfor %}
+</ul>
+
+You may submit more than once before the deadline; only the final submission will be graded. It is your responsibility to check that the autograder on Gradescope runs as expected after you upload your submission.

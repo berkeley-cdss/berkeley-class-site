@@ -1,0 +1,14 @@
+---
+layout: default
+---
+
+<div class="hw">
+    <h1>{{ page.title }}: {{ page.description }}</h1>
+    <div class="due">Due at: {{ page.due }}</div>
+    <!-- TODO zip file button starter code (zero fill) -->
+
+    {{ content }}
+
+    <h2>Submission</h2>
+    {% include submission.html gradescope_assignment_id=page.gradescope_assignment_id submission_files=page.submission_files %}
+</div>

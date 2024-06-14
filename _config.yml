@@ -43,10 +43,38 @@ collections:
   modules:
   schedules:
   announcements:
+  labs:
+    output: true
+    permalink: /:collection/:path
+  hw:
+    output: true
+    permalink: /:collection/:path
+  projects:
+    output: true
+    permalink: /:collection/:path
+
 # Default layouts for each collection type
 defaults:
   - scope:
       path: ''
+      type: labs
+    values:
+      layout: lab
+      nav_exclude: true
+  - scope:
+      path: ''
+      type: hw
+    values:
+      layout: hw
+      nav_exclude: true
+  - scope:
+      path: ''
+      type: projects
+    values:
+      layout: project
+      nav_exclude: true
+  - scope:
+      path: '_staffers'
       type: staffers
     values:
       layout: staffer
@@ -77,4 +105,6 @@ compress_html:
   blanklines: false
   profile: false
 
+# Course variables
 course_email: cs88@berkeley.edu
+gradescope_course_id: 693229
