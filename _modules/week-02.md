@@ -15,7 +15,7 @@ Oct 7
   : [2.4](#), [2.5](#)
 
 Oct 8
-: **Lab**{: .label .label-purple } [Resizing Arrays](#)
+: **Project**{: .label .label-green } [Project 1: Ants vs. Some Bees]({{ site.baseurl }}/projects/proj01)
 
 Oct 9
 : [Runtime Analysis](#)

@@ -20,4 +20,4 @@ Oct 1
 Oct 2
 : [Tracing, IntLists, & Recursion](#)
   : [2.1](#)
-: **HW 1 due**{: .label .label-red }
+: **HW 1 due**{: .label .label-red } [HW 1: Recursion]({{ site.baseurl }}/hw/hw01)
