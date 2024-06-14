@@ -1,6 +1,6 @@
 ---
-name: Evil Kevin
-role: Teaching Assistant
+name: Really Really Evil Kevin
+role: Tutor
 email: me@example.com
 website: https://kevinl.info
 photo: kevin.jpg

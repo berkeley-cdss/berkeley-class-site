@@ -39,6 +39,7 @@ footer_content:
 # Collections for website data
 collections:
   staffers:
+    sort_by: name
   modules:
   schedules:
   announcements:
@@ -75,3 +76,5 @@ compress_html:
   startings: []
   blanklines: false
   profile: false
+
+course_email: cs88@berkeley.edu
