@@ -79,7 +79,6 @@ RSpec.configure do |config|
   # (force_build: true) builds the site before the tests are run,
   # so our tests are always running against the latest version
   # of our jekyll site.
-  # TODO: Update this to expose _config.yml
   jekyll_app = Rack::Jekyll.new(force_build: true, config: RSPEC_CONFIG_FILE)
 
   # https://stackoverflow.com/questions/52506822/testing-a-jekyll-site-with-rspec-and-capybara-getting-a-bizarre-race-case-on-rs
