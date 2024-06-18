@@ -1,0 +1,16 @@
+name: Run rspec tests
+
+on: [pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          # The Ruby version is determined by either a `.ruby-version` or a `.tool-versions` file in root of the repo.
+          bundler-cache: true
+      - name: Run rspec tests
+        run: |
+          bundle exec rspec

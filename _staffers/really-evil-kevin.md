@@ -1,6 +1,6 @@
 ---
 name: Really Evil Kevin
-role: Teaching Assistant
+role: Academic Intern
 email: me@example.com
 website: https://kevinl.info
 photo: kevin.jpg

@@ -17,9 +17,11 @@ title: Just the Class
 tagline: A Jekyll template for course websites
 description: A modern, highly customizable, responsive Jekyll template for course websites
 author: Kevin Lin
-baseurl: '/just-the-class' # the subpath of your site, e.g. /blog
-url: 'https://kevinl.info' # the base hostname & protocol for your site, e.g. http://example.com
-exclude: ["Gemfile", "Gemfile.lock", "LICENSE"]
+baseurl: '/berkeley-class-site' # the subpath of your site, e.g. /blog
+url: 'https://phrdang.github.io' # the base hostname & protocol for your site, e.g. http://example.com
+plugins:
+  - "jekyll-sitemap"
+exclude: ["Gemfile", "Gemfile.lock", "vendor", "node_modules", "LICENSE"]
 
 # Theme settings
 remote_theme: just-the-docs/just-the-docs@v0.5.1
@@ -37,13 +39,42 @@ footer_content:
 # Collections for website data
 collections:
   staffers:
+    sort_by: name
   modules:
   schedules:
   announcements:
+  labs:
+    output: true
+    permalink: /:collection/:path
+  hw:
+    output: true
+    permalink: /:collection/:path
+  projects:
+    output: true
+    permalink: /:collection/:path
+
 # Default layouts for each collection type
 defaults:
   - scope:
       path: ''
+      type: labs
+    values:
+      layout: lab
+      nav_exclude: true
+  - scope:
+      path: ''
+      type: hw
+    values:
+      layout: hw
+      nav_exclude: true
+  - scope:
+      path: ''
+      type: projects
+    values:
+      layout: project
+      nav_exclude: true
+  - scope:
+      path: '_staffers'
       type: staffers
     values:
       layout: staffer
@@ -73,3 +104,7 @@ compress_html:
   startings: []
   blanklines: false
   profile: false
+
+# Course variables
+course_email: cs88@berkeley.edu
+gradescope_course_id: 693229
