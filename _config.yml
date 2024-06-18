@@ -24,7 +24,7 @@ plugins:
 exclude: ["Gemfile", "Gemfile.lock", "vendor", "node_modules", "LICENSE"]
 
 # Theme settings
-remote_theme: just-the-docs/just-the-docs@v0.5.1
+theme: just-the-docs
 color_scheme: light
 search_enabled: true
 heading_anchors: true
