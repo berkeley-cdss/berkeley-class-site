@@ -17,18 +17,20 @@ title: Just the Class
 tagline: A Jekyll template for course websites
 description: A modern, highly customizable, responsive Jekyll template for course websites
 author: Kevin Lin
+
+# TODO: This should be the semester, ideally. (faXX / spXX / suXX / wiXX )
 baseurl: '/berkeley-class-site' # the subpath of your site, e.g. /blog
 url: 'https://phrdang.github.io' # the base hostname & protocol for your site, e.g. http://example.com
+
+# Common Jekyll Plugins, which should also be in the Gemfile
 plugins:
-  - "jekyll-sitemap"
-exclude: ["Gemfile", "Gemfile.lock", "vendor", "node_modules", "LICENSE"]
+  - jekyll-sitemap
 
 # Theme settings
+# TODO: (Su24): Ensure this is updated to most recent (v0.8+)
 remote_theme: just-the-docs/just-the-docs@v0.5.1
 color_scheme: light
 search_enabled: true
-heading_anchors: true
-permalink: pretty
 aux_links:
   Kevin Lin:
     - 'https://kevinl.info'
@@ -97,6 +99,17 @@ defaults:
     values:
       layout: announcement
 
+
+# Course variables
+course_email: cs88@berkeley.edu
+gradescope_course_id: 693229
+
+#######
+# Just the Docs / Berkeley Class Site Common Config
+# Options below here will likely not need to be configured..
+heading_anchors: true
+permalink: pretty
+
 compress_html:
   clippings: all
   comments: all
@@ -105,6 +118,11 @@ compress_html:
   blanklines: false
   profile: false
 
-# Course variables
-course_email: cs88@berkeley.edu
-gradescope_course_id: 693229
+exclude:
+  - .*
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - node_modules/
+  - tmp/
+  - spec/
