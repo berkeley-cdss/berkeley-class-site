@@ -11,3 +11,8 @@ group :development, :test do
     gem "axe-core-rspec"
     gem "axe-core-capybara"
 end
+
+group :development, :rubocop do
+    gem "rubocop", require: false
+    gem "rubocop-rspec", require: false
+end
