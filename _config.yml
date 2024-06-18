@@ -30,7 +30,7 @@ course_email: COURSE_EMAIL@berkeley.edu
 gradescope_course_id: 123456 # you can find this in the Gradescope URL after /courses
 
 # Theme settings
-remote_theme: just-the-docs/just-the-docs@v0.5.1
+theme: just-the-docs
 color_scheme: light
 search_enabled: true
 heading_anchors: true
