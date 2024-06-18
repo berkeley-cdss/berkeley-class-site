@@ -1,5 +1,7 @@
 # Berkeley Class Site
 
+[![a11y specs](https://github.com/berkeley-eecs/berkeley-class-site/actions/workflows/rspec.yml/badge.svg)](https://github.com/berkeley-eecs/berkeley-class-site/actions/workflows/rspec.yml)
+
 A template for UC Berkeley class websites (with a focus on EECS/CS/DS courses).
 
 ## Installation
