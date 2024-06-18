@@ -30,6 +30,8 @@ To run the site locally, run:
 bundle exec jekyll serve
 ```
 
+Search throughout the repository for TODO items called `TODO(setup)` and complete them to customize the site for your course.
+
 ## Deployment
 
 The easiest way to deploy your site is with [GitHub Pages](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll).

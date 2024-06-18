@@ -13,30 +13,36 @@
 # you will see them accessed via {{ site.title }}, {{ site.github_repo }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: Just the Class
+
+title: Berkeley Class Site
 tagline: A Jekyll template for course websites
 description: A modern, highly customizable, responsive Jekyll template for course websites
-author: Kevin Lin
+# TODO (template): this should be built from the staff list...
+author: Various Bears
 
-# TODO: This should be the semester, ideally. (faXX / spXX / suXX / wiXX )
+# TODO(setup): Set this to the semester, e.g. /sp24, (faXX / spXX / suXX / wiXX )
 baseurl: '/berkeley-class-site' # the subpath of your site, e.g. /blog
-url: 'https://phrdang.github.io' # the base hostname & protocol for your site, e.g. http://example.com
+# TODO(setup): Set this to your course's domain
+url: 'https://berkeley-eecs.github.io' # the base hostname & protocol for your site, e.g. http://example.com
 
-# Common Jekyll Plugins, which should also be in the Gemfile
 plugins:
   - jekyll-sitemap
 
-# Theme settings
-# TODO: (Su24): Ensure this is updated to most recent (v0.8+)
-remote_theme: just-the-docs/just-the-docs@v0.5.1
-color_scheme: light
-search_enabled: true
+# Course variables
+# TODO(setup): Set all of these course variables
+course_email: COURSE_EMAIL@berkeley.edu
+gradescope_course_id: 123456 # you can find this in the Gradescope URL after /courses
+
+# TODO(setup): Set these auxiliary links as oyu wish - they show up on the top right
 aux_links:
-  Kevin Lin:
-    - 'https://kevinl.info'
-  Just the Class on GitHub:
-    - 'https://github.com/kevinlin1/just-the-class'
-footer_content:
+  Ed:
+    - 'https://edstem.org'
+  OH Queue:
+    - 'https://oh.c88c.org'
+  Berkeley Class Site on GitHub:
+    - 'https://github.com/berkeley-eecs/berkeley-class-site'
+# TODO(setup): Set copyright/licensing or any other footer content
+footer_content: "Copyright &copy; 2024 UC Berkeley"
 
 # Collections for website data
 collections:
@@ -107,6 +113,10 @@ gradescope_course_id: 693229
 #######
 # Just the Docs / Berkeley Class Site Common Config
 # Options below here will likely not need to be configured..
+# Theme settings
+theme: just-the-docs
+color_scheme: light
+search_enabled: true
 heading_anchors: true
 permalink: pretty
 
@@ -118,11 +128,14 @@ compress_html:
   blanklines: false
   profile: false
 
+# Files excluded from the Jekyll build
 exclude:
-  - .*
   - Gemfile
   - Gemfile.lock
-  - vendor/
-  - node_modules/
+  - vendor
+  - README.md
+  - CONTRIBUTING.md
+  - .*
   - tmp/
   - spec/
+  - docs/
