@@ -1,0 +1,31 @@
+{
+  "name": "Jekyll",
+  "image": "mcr.microsoft.com/devcontainers/jekyll:latest",
+
+  "features": {},
+
+  "forwardPorts": [
+    4000,
+    35729
+  ],
+
+  "postCreateCommand": "sh .devcontainer/post-create.sh",
+
+  "customizations": {
+    "codespaces": {
+      "openFiles": [
+        "README.md",
+        "index.md"
+      ]
+    },
+    "vscode": {
+      "settings": {},
+      "extensions": [
+        "ms-ruby.ruby",
+        "kargware.vscode-extension-jekyll-kw",
+        "rebornix.ruby",
+        "deque-systems.vscode-axe-linter"
+      ]
+    }
+  }
+}
