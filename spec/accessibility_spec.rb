@@ -45,8 +45,8 @@ excluded_elements = [
 ]
 
 ALL_PAGES.each do |path|
-  describe "'#{path}' is accessible", type: :feature, js: true do
-    before(:each) do
+  describe "'#{path}' is accessible", :js, type: :feature do
+    before do
       visit(path)
     end
 

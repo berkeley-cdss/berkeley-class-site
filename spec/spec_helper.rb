@@ -25,7 +25,7 @@ require 'rack/test'
 require 'axe-rspec'
 require 'axe-capybara'
 
-RSPEC_CONFIG_FILE = '_config.yml' or ENV['RSPEC_CONFIG_FILE']
+RSPEC_CONFIG_FILE = '_config.yml' or ENV.fetch('RSPEC_CONFIG_FILE', nil)
 
 RSpec.configure do |config|
   # Allow rspec to use `--only-failures` and `--next-failure` flags
