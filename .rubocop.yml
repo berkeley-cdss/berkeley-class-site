@@ -1,8 +1,8 @@
-require:
-  - rubocop-rspec
+# require:
+#   - rubocop-rspec
 
 AllCops:
   NewCops: enable
-  Exclude:
-    - '_site/**/*'
+  # Exclude:
+  #   - '_site/**/*'
 
