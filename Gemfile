@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 source 'https://rubygems.org'
-gem 'github-pages', group: :jekyll_plugins
 gem 'jekyll-sitemap'
 gem 'just-the-docs'
+gem 'kramdown-parser-gfm'
 gem 'webrick'
 
 group :development, :test do
