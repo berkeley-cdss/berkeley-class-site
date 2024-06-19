@@ -20,6 +20,7 @@ jobs:
           glob_pattern: "**/*.py"
           filter_mode: nofilter
           fail_on_error: true
+          pylint_args: "--disable=missing-module-docstring"
   
   black:
     name: runner / black
