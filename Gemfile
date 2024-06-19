@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 gem 'jekyll-sitemap'
-gem 'webrick'
-gem 'kramdown-parser-gfm'
 gem 'just-the-docs'
+gem 'kramdown-parser-gfm'
+gem 'webrick'
 
 group :development, :test do
   gem 'axe-core-capybara'
