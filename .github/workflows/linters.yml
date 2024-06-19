@@ -52,6 +52,7 @@ jobs:
           reporter: github-pr-check
           filter_mode: nofilter
           fail_on_error: true
+          markdownlint_flags: "--disable MD013 MD041"
   
   rubocop:
     name: runner / rubocop
