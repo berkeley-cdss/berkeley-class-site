@@ -82,7 +82,7 @@ RSpec.configure do |config|
   jekyll_app = Rack::Jekyll.new(force_build: true, config: RSPEC_CONFIG_FILE)
 
   # https://stackoverflow.com/questions/52506822/testing-a-jekyll-site-with-rspec-and-capybara-getting-a-bizarre-race-case-on-rs
-  sleep 0.1 while jekyll_app.compiling?
+  # sleep 0.1 while jekyll_app.compiling?
 
   Capybara.app = jekyll_app
 

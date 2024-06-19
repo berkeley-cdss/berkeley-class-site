@@ -11,6 +11,7 @@ group :development, :test do
   gem 'axe-core-rspec'
   gem 'capybara'
   gem 'rack-jekyll'
+  gem 'rackup'
   gem 'rspec'
   gem 'selenium-webdriver'
 end
