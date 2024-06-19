@@ -1,5 +1,5 @@
-# require:
-#   - rubocop-rspec
+require:
+  - rubocop-rspec
 
 AllCops:
   NewCops: enable
