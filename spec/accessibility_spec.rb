@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe 'course website', type: :feature, js: true do
   before :all do
     visit('/sitemap.xml')
