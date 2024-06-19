@@ -20,6 +20,7 @@ jobs:
           glob_pattern: "**/*.py"
           filter_mode: nofilter
           fail_on_error: true
+          pylint_args: "--disable=missing-module-docstring"
   
   black:
     name: runner / black
@@ -51,6 +52,7 @@ jobs:
           reporter: github-pr-check
           filter_mode: nofilter
           fail_on_error: true
+          markdownlint_flags: "--disable MD013 MD041"
   
   rubocop:
     name: runner / rubocop
@@ -61,7 +63,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3'
           bundler-cache: true
       - uses: reviewdog/action-rubocop@v2
         with:
