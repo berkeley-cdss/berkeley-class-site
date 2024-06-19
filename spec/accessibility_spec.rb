@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe 'course website', type: :feature, js: true do
+describe 'course website', :js, type: :feature do
   before :all do
     visit('/sitemap.xml')
     sitemap_links = page.html.scan(%r{<loc>.+</loc>})
