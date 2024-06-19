@@ -13,29 +13,27 @@
 # you will see them accessed via {{ site.title }}, {{ site.github_repo }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
+
 title: Berkeley Class Site
 tagline: A Jekyll template for course websites
 description: A modern, highly customizable, responsive Jekyll template for course websites
+# TODO (template): this should be built from the staff list...
 author: Various Bears
-# TODO(setup): Set this to the semester, e.g. /sp24
+
+# TODO(setup): Set this to the semester, e.g. /sp24, (faXX / spXX / suXX / wiXX )
 baseurl: '/berkeley-class-site' # the subpath of your site, e.g. /blog
 # TODO(setup): Set this to your course's domain
 url: 'https://berkeley-eecs.github.io' # the base hostname & protocol for your site, e.g. http://example.com
+
 plugins:
-  - "jekyll-sitemap"
+  - jekyll-sitemap
 
 # Course variables
 # TODO(setup): Set all of these course variables
 course_email: COURSE_EMAIL@berkeley.edu
 gradescope_course_id: 123456 # you can find this in the Gradescope URL after /courses
 
-# Theme settings
-theme: just-the-docs
-color_scheme: light
-search_enabled: true
-heading_anchors: true
-permalink: pretty
-# TODO(setup): Set these auxiliary links as oyu wish - they show up on the top right
+# TODO(setup): Set these auxiliary links as you wish - they show up on the top right
 aux_links:
   Ed:
     - 'https://edstem.org'
@@ -55,13 +53,13 @@ collections:
   announcements:
   labs:
     output: true
-    permalink: /:collection/:path
+    permalink: /:collection/:path/
   hw:
     output: true
-    permalink: /:collection/:path
+    permalink: /:collection/:path/
   projects:
     output: true
-    permalink: /:collection/:path
+    permalink: /:collection/:path/
 
 # Default layouts for each collection type
 defaults:
@@ -107,6 +105,21 @@ defaults:
     values:
       layout: announcement
 
+
+# TODO(setup): Set all of these course variables
+course_email: YOUR_COURSE@berkeley.edu
+gradescope_course_id: 123456 # you can find this in the Gradescope URL after /courses
+
+#######
+# Just the Docs / Berkeley Class Site Common Config
+# Options below here will likely not need to be configured..
+# Theme settings
+theme: just-the-docs
+color_scheme: light
+search_enabled: true
+heading_anchors: true
+permalink: pretty
+
 compress_html:
   clippings: all
   comments: all
@@ -117,10 +130,12 @@ compress_html:
 
 # Files excluded from the Jekyll build
 exclude:
-  - "Gemfile"
-  - "Gemfile.lock"
-  - "vendor"
-  - "README.md"
-  - "CONTRIBUTING.md"
-  - "LICENSE"
-  - "spec"
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - README.md
+  - CONTRIBUTING.md
+  - .*
+  - tmp/
+  - spec/
+  - docs/

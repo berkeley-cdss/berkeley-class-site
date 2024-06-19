@@ -17,13 +17,21 @@
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'rspec'
+require 'yaml'
+
 require 'capybara/rspec'
 require 'rack/jekyll'
 require 'rack/test'
 require 'axe-rspec'
 require 'axe-capybara'
 
+RSPEC_CONFIG_FILE = '_config.yml' or ENV.fetch('RSPEC_CONFIG_FILE', nil)
+
 RSpec.configure do |config|
+  # Allow rspec to use `--only-failures` and `--next-failure` flags
+  # Ensure that `tmp` is in your `.gitignore` file
+  config.example_status_persistence_file_path = 'tmp/rspec-failures.txt'
+
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
@@ -56,7 +64,8 @@ RSpec.configure do |config|
     options.add_argument('--headless')
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
-    options.add_argument('--window-size=1400,1400')
+    # macbook air ~13" screen size
+    options.add_argument('--window-size=1280,800')
 
     Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
   end
@@ -70,7 +79,7 @@ RSpec.configure do |config|
   # (force_build: true) builds the site before the tests are run,
   # so our tests are always running against the latest version
   # of our jekyll site.
-  jekyll_app = Rack::Jekyll.new(force_build: true)
+  jekyll_app = Rack::Jekyll.new(force_build: true, config: RSPEC_CONFIG_FILE)
 
   # https://stackoverflow.com/questions/52506822/testing-a-jekyll-site-with-rspec-and-capybara-getting-a-bizarre-race-case-on-rs
   sleep 0.1 while jekyll_app.compiling?
@@ -79,4 +88,6 @@ RSpec.configure do |config|
 
   # Configure Capybara server (otherwise it will error and say to use webrick or puma)
   Capybara.server = :webrick
+
+  config.include Capybara::DSL
 end

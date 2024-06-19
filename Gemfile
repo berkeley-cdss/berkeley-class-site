@@ -10,7 +10,8 @@ group :development, :test do
   gem 'axe-core-capybara'
   gem 'axe-core-rspec'
   gem 'capybara'
-  gem 'rack-jekyll'
+  gem 'rack-jekyll', '>= 0.5.0'
+  gem 'rackup'
   gem 'rspec'
   gem 'selenium-webdriver'
 end
