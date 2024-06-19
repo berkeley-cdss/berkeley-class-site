@@ -58,7 +58,7 @@ RSpec.configure do |config|
     options.add_argument('--disable-dev-shm-usage')
     options.add_argument('--window-size=1400,1400')
 
-    Capybara::Selenium::Driver.new(app, browser: :chrome, options: options)
+    Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
   end
 
   # Change default_driver to :selenium_chrome if you want to actually see the tests running in a browser locally.
