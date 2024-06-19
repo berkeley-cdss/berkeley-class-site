@@ -53,13 +53,13 @@ collections:
   announcements:
   labs:
     output: true
-    permalink: /:collection/:path
+    permalink: /:collection/:path/
   hw:
     output: true
-    permalink: /:collection/:path
+    permalink: /:collection/:path/
   projects:
     output: true
-    permalink: /:collection/:path
+    permalink: /:collection/:path/
 
 # Default layouts for each collection type
 defaults:
