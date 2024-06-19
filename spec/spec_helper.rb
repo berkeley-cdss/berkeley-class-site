@@ -83,6 +83,7 @@ RSpec.configure do |config|
 
   # https://stackoverflow.com/questions/52506822/testing-a-jekyll-site-with-rspec-and-capybara-getting-a-bizarre-race-case-on-rs
   # sleep 0.1 while jekyll_app.compiling?
+  sleep 10 # so there is time to generate pages in ci?
 
   Capybara.app = jekyll_app
 
