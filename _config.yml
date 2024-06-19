@@ -33,7 +33,7 @@ plugins:
 course_email: COURSE_EMAIL@berkeley.edu
 gradescope_course_id: 123456 # you can find this in the Gradescope URL after /courses
 
-# TODO(setup): Set these auxiliary links as oyu wish - they show up on the top right
+# TODO(setup): Set these auxiliary links as you wish - they show up on the top right
 aux_links:
   Ed:
     - 'https://edstem.org'
@@ -106,9 +106,9 @@ defaults:
       layout: announcement
 
 
-# Course variables
-course_email: cs88@berkeley.edu
-gradescope_course_id: 693229
+# TODO(setup): Set all of these course variables
+course_email: YOUR_COURSE@berkeley.edu
+gradescope_course_id: 123456 # you can find this in the Gradescope URL after /courses
 
 #######
 # Just the Docs / Berkeley Class Site Common Config
