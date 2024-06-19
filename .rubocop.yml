@@ -3,6 +3,3 @@ require:
 
 AllCops:
   NewCops: enable
-  # Exclude:
-  #   - '_site/**/*'
-
