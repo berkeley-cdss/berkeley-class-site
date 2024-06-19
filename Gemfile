@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 gem 'github-pages', group: :jekyll_plugins
 gem 'jekyll-sitemap'
-gem 'webrick'
 gem 'just-the-docs'
+gem 'webrick'
 
 group :development, :test do
   gem 'axe-core-capybara'
