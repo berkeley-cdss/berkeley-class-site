@@ -1,5 +1,8 @@
-name: reviewdog
+name: Linters
 on: [pull_request]
+permissions:
+  contents: read
+  pull-requests: write
 jobs:
   pylint:
     name: runner / pylint
@@ -15,6 +18,8 @@ jobs:
           # GitHub Status Check won't become failure with warning.
           level: warning
           glob_pattern: "**/*.py"
+          filter_mode: nofilter
+          fail_on_error: true
   
   black:
     name: runner / black
@@ -26,11 +31,13 @@ jobs:
         id: action_black
         with:
           black_args: "."
+          fail_on_error: true
       - name: Annotate diff changes using reviewdog
         if: steps.action_black.outputs.is_formatted == 'true'
         uses: reviewdog/action-suggester@v1
         with:
           tool_name: blackfmt
+          # NOTE: the reviewdog filter_mode is diff_context - this is the only thing supported by GitHub suggestions
   
   markdownlint:
     name: runner / markdownlint
@@ -42,3 +49,24 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-pr-check
+          filter_mode: nofilter
+          fail_on_error: true
+  
+  rubocop:
+    name: runner / rubocop
+    runs-on: ubuntu-latest
+    env:
+      BUNDLE_ONLY: rubocop
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+      - uses: reviewdog/action-rubocop@v2
+        with:
+          reporter: github-pr-check
+          skip_install: true
+          use_bundler: true
+          filter_mode: nofilter
+          fail_on_error: true
