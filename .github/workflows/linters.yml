@@ -69,5 +69,5 @@ jobs:
           reporter: github-pr-check
           skip_install: true
           use_bundler: true
-          filter_mode: nofilter
+          filter_mode: file
           fail_on_error: true
