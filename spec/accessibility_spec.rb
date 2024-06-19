@@ -7,7 +7,7 @@
 require 'spec_helper'
 
 def site_url
-  @site_url ||= YAML.load_file(RSPEC_CONFIG_FILE)['url']
+  @site_url ||= YAML.load_file(RSPEC_CONFIG_FILE)['url'] + YAML.load_file(RSPEC_CONFIG_FILE)['baseurl']
 end
 
 def load_site_urls
