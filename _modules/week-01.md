@@ -15,9 +15,9 @@ Sep 30
   : [1.2](#), [2.1](#)
 
 Oct 1
-: **Lab**{: .label .label-purple } [Lab 1: Control and Functions]({{ site.baseurl }}/labs/lab01)
+: **Lab**{: .label .label-purple } [Lab 1: Control and Functions]({% link _labs/lab01.md %})
 
 Oct 2
 : [Tracing, IntLists, & Recursion](#)
   : [2.1](#)
-: **HW 1 due**{: .label .label-red } [HW 1: Recursion]({{ site.baseurl }}/hw/hw01)
+: **HW 1 due**{: .label .label-red } [HW 1: Recursion]({% link _hw/hw01.md %})
