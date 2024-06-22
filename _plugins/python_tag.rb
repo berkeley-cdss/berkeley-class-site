@@ -45,8 +45,11 @@ module Jekyll
           saw_begin = true
           saw_end = false
         elsif line.include?(END_SOLUTION)
-          raise PythonTagError, "'#{END_SOLUTION}' without preceding '#{BEGIN_SOLUTION}' at _includes/#{@file_name}:#{index + 1}" unless saw_begin
-          
+          unless saw_begin
+            raise PythonTagError,
+                  "'#{END_SOLUTION}' without preceding '#{BEGIN_SOLUTION}' at _includes/#{@file_name}:#{index + 1}"
+          end
+
           saw_begin = false
           saw_end = true
         elsif !saw_begin || (saw_begin && @show_solution)
