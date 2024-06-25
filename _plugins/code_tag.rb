@@ -43,21 +43,28 @@ module Jekyll
 
     def get_extension_and_comment_chars(file_name)
       SUPPORTED_LANGUAGES.each do |extension, comment_chars|
-        if file_name.end_with?(extension.to_s)
-          @file_extension = extension
-          @comment_chars = comment_chars
-          return
-        end
+        next unless file_name.end_with?(extension.to_s)
+
+        @file_extension = extension
+        @comment_chars = comment_chars
+        return
       end
 
-      raise ArgumentError, "File extension not supported: #{file_name}. Supported extensions: #{SUPPORTED_LANGUAGES.join(', ')}"
+      raise ArgumentError,
+            "File extension not supported: #{file_name}. Supported extensions: #{SUPPORTED_LANGUAGES.join(', ')}"
     end
 
     def parse_params(params)
       file_name, show_solution = params.strip.split
 
-      raise ArgumentError, "Missing first argument to code tag, which must be a file path relative to _includes directory" if file_name.nil?
-      raise ArgumentError, "Missing second argument to code tag, which must be a boolean representing whether solutions are displayed" if show_solution.nil?
+      if file_name.nil?
+        raise ArgumentError,
+              'Missing first argument to code tag, which must be a file path relative to _includes directory'
+      end
+      if show_solution.nil?
+        raise ArgumentError,
+              'Missing second argument to code tag, which must be a boolean representing whether solutions are displayed'
+      end
 
       get_extension_and_comment_chars(file_name)
 
@@ -74,7 +81,10 @@ module Jekyll
     end
 
     def to_boolean(value)
-      raise ArgumentError, "value must be 'true' or 'false' not '#{value}' (type #{value.class})" unless string_boolean?(value)
+      unless string_boolean?(value)
+        raise ArgumentError,
+              "value must be 'true' or 'false' not '#{value}' (type #{value.class})"
+      end
 
       value == 'true'
     end
@@ -123,7 +133,10 @@ module Jekyll
       elsif !boolean?(@show_solution)
         jekyll_variable_value = context[@show_solution]
 
-        raise ArgumentError, "Second argument to code tag must be a boolean, not '#{jekyll_variable_value}' (type #{jekyll_variable_value.class})" unless boolean?(jekyll_variable_value)
+        unless boolean?(jekyll_variable_value)
+          raise ArgumentError,
+                "Second argument to code tag must be a boolean, not '#{jekyll_variable_value}' (type #{jekyll_variable_value.class})"
+        end
 
         @show_solution = jekyll_variable_value
       end
