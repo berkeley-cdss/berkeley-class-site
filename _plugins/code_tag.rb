@@ -47,7 +47,9 @@ module Jekyll
 
         @file_extension = extension
         @comment_chars = comment_chars
+        # rubocop:disable Lint/NonLocalExitFromIterator
         return
+        # rubocop:enable Lint/NonLocalExitFromIterator
       end
 
       raise ArgumentError,
@@ -61,9 +63,11 @@ module Jekyll
         raise ArgumentError,
               'Missing first argument to code tag, which must be a file path relative to _includes directory'
       end
+
       if show_solution.nil?
         raise ArgumentError,
-              'Missing second argument to code tag, which must be a boolean representing whether solutions are displayed'
+              'Missing second argument to code tag, which must be a boolean \
+              representing whether solutions are displayed'
       end
 
       get_extension_and_comment_chars(file_name)
@@ -109,7 +113,8 @@ module Jekyll
         elsif line.strip == full_end_solution
           unless saw_begin
             raise CodeTagError,
-                  "'#{full_end_solution}' without preceding '#{full_begin_solution}' at _includes/#{@file_name}:#{index + 1}"
+                  "'#{full_end_solution}' without preceding '#{full_begin_solution}' at \
+                  _includes/#{@file_name}:#{index + 1}"
           end
 
           saw_begin = false
@@ -135,7 +140,8 @@ module Jekyll
 
         unless boolean?(jekyll_variable_value)
           raise ArgumentError,
-                "Second argument to code tag must be a boolean, not '#{jekyll_variable_value}' (type #{jekyll_variable_value.class})"
+                "Second argument to code tag must be a boolean, not \
+                '#{jekyll_variable_value}' (type #{jekyll_variable_value.class})"
         end
 
         @show_solution = jekyll_variable_value
