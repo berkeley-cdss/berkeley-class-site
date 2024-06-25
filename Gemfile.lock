@@ -200,6 +200,7 @@ DEPENDENCIES
   axe-core-capybara
   axe-core-rspec
   capybara
+  jekyll (>= 4.0.0)
   jekyll-sitemap
   just-the-docs
   kramdown-parser-gfm
