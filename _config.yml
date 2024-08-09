@@ -33,6 +33,14 @@ course_department: dsus
 # The sitemap **must** be enabled. It's published as /baseurl/sitemap.xmlcccccbngjdcb
 plugins:
   - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-github-metadata
+  - jekyll-include-cache
+
+# TODO(setup): if true, this links to url.org/archive
+# TODO(template): Implement this into the site footer/nav
+# This should be a listing of the websites for each semester.
+# iclude_archive_link: true
 
 # Course variables
 # TODO(setup): Set all of these course variables
@@ -113,10 +121,6 @@ defaults:
     values:
       layout: announcement
 
-
-# TODO(setup): Set all of these course variables
-course_email: YOUR_COURSE@berkeley.edu
-gradescope_course_id: 123456 # you can find this in the Gradescope URL after /courses
 
 #######
 # Just the Docs / Berkeley Class Site Common Config
