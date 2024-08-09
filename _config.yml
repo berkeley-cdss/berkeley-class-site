@@ -14,6 +14,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
+# TODO(semester): Typically the course number, "DEPT XXX"
 title: Berkeley Class Site
 tagline: A Jekyll template for course websites
 description: A modern, highly customizable, responsive Jekyll template for course websites
@@ -25,11 +26,17 @@ baseurl: '/berkeley-class-site' # the subpath of your site, e.g. /blog
 # TODO(setup): Set this to your course's domain
 url: 'https://berkeley-eecs.github.io' # the base hostname & protocol for your site, e.g. http://example.com
 
+# TODO(setup): This should be one of eecs, dsus, stats
+# This controls some footer text, and later custom styling.
+course_department: dsus
+
+# The sitemap **must** be enabled. It's published as /baseurl/sitemap.xmlcccccbngjdcb
 plugins:
   - jekyll-sitemap
 
 # Course variables
 # TODO(setup): Set all of these course variables
+course: SAMPLE 101
 course_email: COURSE_EMAIL@berkeley.edu
 gradescope_course_id: 123456 # you can find this in the Gradescope URL after /courses
 
@@ -41,6 +48,7 @@ aux_links:
     - 'https://oh.c88c.org'
   Berkeley Class Site on GitHub:
     - 'https://github.com/berkeley-eecs/berkeley-class-site'
+
 # TODO(setup): Set copyright/licensing or any other footer content
 footer_content: "Copyright &copy; 2024 UC Berkeley"
 
