@@ -3,16 +3,20 @@
  This footer should be included on all EECS/DS sites.
 -->
 
+{%- if site.footer_content and site.footer_content != true -%}
+  <p class="text-small text-grey-dk-100 m-0">{{ site.footer_content }}</p>
+{%- endif -%}
+
+<p class="text-small text-grey-dk-100 my-1">
+  <a rel="nofollow noopener" href="https://dap.berkeley.edu/get-help/report-web-accessibility-issue" target="_blank" class="pr-2">Accessibility <i class="fa-solid fa-external-link" aria-hidden=true></i></a>
+  <a rel="nofollow noopener" href="https://ophd.berkeley.edu/policies-and-procedures/nondiscrimination-policy-statement" target="_blank" class="px-2">Nondiscrimination <i class="fa-solid fa-external-link" aria-hidden=true></i></a>
+</p>
+
 <!-- Use this to add additional content. -->
 <p class="text-small text-grey-dk-100 m-0">
   Copyright ©{{ "now" | date: "%Y" }}, Regents of the University of Californa and respective authors.
 </p>
 
-<p class="text-small text-grey-dk-100 m-0">
-  <a rel="nofollow noopener" href="https://dap.berkeley.edu/get-help/report-web-accessibility-issue" target="_blank" class="px-2">Accessibility <i class="fa feather-external-link" aria-hidden=true></i></a>
-  <a rel="nofollow noopener" href="https://ophd.berkeley.edu/policies-and-procedures/nondiscrimination-policy-statement" target="_blank" class="px-2">Nondiscrimination <i class="fa feather-external-link" aria-hidden=true></i></a>
+<p class="fs-1 text-grey-dk-100 my-1">
+  This site is built following the <a href="https://github.com/just-the-docs/just-the-docs" target="_bank" rel="noopener">Berkeley Class Site <i class="fa-solid fa-external-link" aria-hidden=true></i></a> template, which is generously based on the <a href="https://github.com/kevinl/just-the-class" target="_bank" rel="noopener">Just the Class <i class="fa-solid fa-external-link" aria-hidden=true></i></a>, and <a href="https://github.com/just-the-docs/just-the-docs" target="_bank" rel="noopener">Just the Docs <i class="fa-solid fa-external-link" aria-hidden=true></i></a> templates.
 </p>
-
-{%- if site.footer_content and site.footer_content != true -%}
-  <p class="text-small text-grey-dk-100 m-0">{{ site.footer_content }}</p>
-{%- endif -%}

@@ -47,6 +47,9 @@ plugins:
 course: SAMPLE 101
 course_email: COURSE_EMAIL@berkeley.edu
 gradescope_course_id: 123456 # you can find this in the Gradescope URL after /courses
+# This should be the page of all class archives
+# Typically just / for DS courses (with a visible index page), or /archives if you're hosting your own, or a link to the inst.eecs page
+class_archive_path: /
 
 # TODO(setup): Set these auxiliary links as you wish - they show up on the top right
 aux_links:
@@ -62,6 +65,7 @@ aux_links:
 # Footer *must* included the accessibility text defined in footer_custom.html
 footer_content: true
 back_to_top: true
+back_to_top_text: "Back to Top"
 last_edit_timestamp: true
 last_edit_time_format: '%m %d, %Y at %H:%M'
 
