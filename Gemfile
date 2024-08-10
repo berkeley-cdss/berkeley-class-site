@@ -20,3 +20,5 @@ group :development, :rubocop do
   gem 'rubocop', require: false
   gem 'rubocop-rspec', require: false
 end
+
+gem "jekyll-github-metadata", "~> 2.16"

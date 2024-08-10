@@ -30,7 +30,7 @@ url: 'https://berkeley-eecs.github.io' # the base hostname & protocol for your s
 # This controls some footer text, and later custom styling.
 course_department: dsus
 
-# The sitemap **must** be enabled. It's published as /baseurl/sitemap.xmlcccccbngjdcb
+# The sitemap **must** be enabled. It's published as /baseurl/sitemap.xml
 plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
@@ -57,8 +57,13 @@ aux_links:
   Berkeley Class Site on GitHub:
     - 'https://github.com/berkeley-eecs/berkeley-class-site'
 
-# TODO(setup): Set copyright/licensing or any other footer content
-footer_content: "Copyright &copy; 2024 UC Berkeley"
+## Footer Content.
+# You should probably not change these, but may add to footer_content if necessary.
+# Footer *must* included the accessibility text defined in footer_custom.html
+footer_content: true
+back_to_top: true
+last_edit_timestamp: true
+last_edit_time_format: '%m %d, %Y at %H:%M'
 
 # Collections for website data
 collections:
