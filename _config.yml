@@ -14,6 +14,7 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
+# TODO(setup): Typically the course number, "DEPT XXX"
 title: Berkeley Class Site
 tagline: A Jekyll template for course websites
 description: A modern, highly customizable, responsive Jekyll template for course websites
@@ -25,13 +26,27 @@ baseurl: '/berkeley-class-site' # the subpath of your site, e.g. /blog
 # TODO(setup): Set this to your course's domain
 url: 'https://berkeley-eecs.github.io' # the base hostname & protocol for your site, e.g. http://example.com
 
+# TODO(setup): This should be one of eecs, dsus, stats
+# This controls some footer text, and later custom styling.
+course_department: dsus
+
+# The sitemap **must** be enabled. It's published as /baseurl/sitemap.xml
 plugins:
   - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-github-metadata
+  - jekyll-include-cache
+
 
 # Course variables
 # TODO(setup): Set all of these course variables
+course: SAMPLE 101
 course_email: COURSE_EMAIL@berkeley.edu
 gradescope_course_id: 123456 # you can find this in the Gradescope URL after /courses
+# This should be the page of all class archives
+# Typically just / for DS courses (with a visible index page), or /archives if you're hosting your own, or a link to the inst.eecs page
+# If you have no archive page, comment this line out.
+class_archive_path: /
 
 # TODO(setup): Set these auxiliary links as you wish - they show up on the top right
 aux_links:
@@ -41,8 +56,6 @@ aux_links:
     - 'https://oh.c88c.org'
   Berkeley Class Site on GitHub:
     - 'https://github.com/berkeley-eecs/berkeley-class-site'
-# TODO(setup): Set copyright/licensing or any other footer content
-footer_content: "Copyright &copy; 2024 UC Berkeley"
 
 # Collections for website data
 collections:
@@ -106,19 +119,26 @@ defaults:
       layout: announcement
 
 
-# TODO(setup): Set all of these course variables
-course_email: YOUR_COURSE@berkeley.edu
-gradescope_course_id: 123456 # you can find this in the Gradescope URL after /courses
-
 #######
 # Just the Docs / Berkeley Class Site Common Config
 # Options below here will likely not need to be configured..
+
 # Theme settings
 theme: just-the-docs
 color_scheme: light
 search_enabled: true
 heading_anchors: true
 permalink: pretty
+
+## Footer Content.
+# You should probably not change these, but may add to footer_content if necessary.
+# Footer *must* included the accessibility text defined in footer_custom.html
+footer_content: true
+back_to_top: true
+back_to_top_text: "Back to Top"
+last_edit_timestamp: true
+last_edit_time_format: '%m %d, %Y at %H:%M'
+
 
 compress_html:
   clippings: all
