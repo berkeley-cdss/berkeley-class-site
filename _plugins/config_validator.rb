@@ -27,8 +27,8 @@ class ConfigValidationError < StandardError
   end
 end
 
-# A UC Berkeley-specific validator for Jekyll sites
 module Jekyll
+  # Jekyll::ConfigValidator class definition (see docs at the top of file)
   class ConfigValidator
     SEMESTER_REGEXP = /(wi|sp|su|fa)\d\d$/
     VALID_DEPTS = %w[eecs dsus stat].freeze
@@ -65,6 +65,7 @@ module Jekyll
     end
 
     private
+
     def validate_clean_url(url)
       errors << '`url` should not end with a `/`' if url.end_with?('/')
       errors << '`url` should contain a protocol' unless url.match?(%r{https?://})
