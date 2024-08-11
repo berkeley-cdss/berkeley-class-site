@@ -1,6 +1,19 @@
 # frozen_string_literal: true
 
-# A UC Berkeley-specific validator for Jekyll site's.
+# A UC Berkeley-specific validator for Jekyll sites
+# This class validates the following options:
+# 1) Ensures required attributes are present in the config file.
+# 2) Ensures the baseurl is a consistent format based on the semester
+# 3) Uses a `course_department` config to implement some shared styling/language.
+# Future config validations might make sense, like footer/a11y/etc.
+
+# Implement additional validations by registering an entry in `KEY_VALIDATIONS`
+# This is a key_name => function_name map.
+# function_name should be defined in the ConfigValidator class, and is called with
+# the *value* of the config.
+# Note that Jekyll parses the YAML file such that the config keys are *strings* not symbols.
+
+# A simple class for nicer error message formatting.
 class ConfigValidationError < StandardError
   attr_reader :errors
 
@@ -14,11 +27,13 @@ class ConfigValidationError < StandardError
   end
 end
 
+# A UC Berkeley-specific validator for Jekyll sites
 module Jekyll
   class ConfigValidator
     SEMESTER_REGEXP = /(wi|sp|su|fa)\d\d$/
     VALID_DEPTS = %w[eecs dsus stat].freeze
     KEY_VALIDATIONS = {
+      url: :validate_clean_url,
       baseurl: :validate_semester_format,
       course_department: :validate_department
     }.freeze
@@ -49,7 +64,14 @@ module Jekyll
       end
     end
 
+    private
+    def validate_clean_url(url)
+      errors << '`url` should not end with a `/`' if url.end_with?('/')
+      errors << '`url` should contain a protocol' unless url.match?(%r{https?://})
+    end
+
     def validate_semester_format(baseurl)
+      # This is just for consistency of URL presentation.
       errors << '`baseurl` must start with a `/`.' unless baseurl.match?(%r{^/})
       # skip, just for the template.
       return if baseurl == '/berkeley-class-site'
