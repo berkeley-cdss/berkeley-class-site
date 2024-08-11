@@ -28,6 +28,10 @@ summary {
   width: 100%;
 }
 
+.label-a11y-green:not(g) {
+  background-color: $green-300;
+}
+
 .main-content-wrap {
   max-width: $content-width;
   margin: auto;

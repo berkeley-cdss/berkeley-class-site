@@ -11,4 +11,5 @@ _site/
 
 node_modules/
 vendor/
+!assets/vendor/
 tmp/

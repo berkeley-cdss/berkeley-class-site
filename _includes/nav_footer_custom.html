@@ -1,0 +1,9 @@
+<!-- This file adds links at the bottom of the sidebar on the left. -->
+
+{% if site.class_archive_path %}
+<footer class="site-footer">
+  <a href="{{ site.class_archive_path }}"
+    target="_blank" rel="noopener nofollow">View all course offerings
+    <i class="fa-solid fa-external-link" aria-hidden="true"></i></a>
+</footer>
+{% endif %}

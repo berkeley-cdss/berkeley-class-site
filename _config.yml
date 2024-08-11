@@ -14,12 +14,12 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-# TODO(setup): This should likely be the "course code" it appears on nearly every page. Keep it short. :)
-title: CDSS 100
+# TODO(setup): Typically the course number, "DEPT XXX". it appears on nearly every page. Keep it short. :)
+title: Berkeley Class Site
 # TODO:(setup): This should be the extended title of your course. e.g. "Introduction to Data Science"
-tagline: A Template Class Website
+tagline: A Jekyll template for course websites
 description: A modern, highly customizable, responsive Jekyll template for course websites
-# TODO (template): this should be built from the staff list...
+# TODO(template): this should be built from the staff list...
 author: Various Bears
 
 # TODO(setup): Set this to the semester, e.g. /sp24, (faXX / spXX / suXX / wiXX )
@@ -27,17 +27,31 @@ baseurl: '/berkeley-class-site' # the subpath of your site, which should just be
 # TODO(setup): Set this to your course's domain
 url: 'https://berkeley-eecs.github.io' # the hostname & protocol for your site, e.g. http://example.com
 
+# TODO(setup): This should be one of eecs, dsus, stats
+# This controls some footer text, and later custom styling.
+course_department: dsus
+
+# The sitemap **must** be enabled. It's published as /baseurl/sitemap.xml
 plugins:
   - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-github-metadata
+  - jekyll-include-cache
+
 
 # Course variables
 # Course variables can appear in various places around the website, if something isn't used leave it blank.
 # TODO(setup): Set all of these course variables
+course: SAMPLE 101
 course_email: COURSE_EMAIL@berkeley.edu
 gradescope_course_id: 123456 # you can find this in the Gradescope URL after /courses
 bcourses_course_id: 123456 # Same as above, but for bCourses. Leave blank if not in use...
 ed_course_id: 123456 # Again, same as above.
 sememster: spYY | suYY | faYY # set for the current seemester
+# This should be the page of all class archives
+# Typically just / for DS courses (with a visible index page), or /archives if you're hosting your own, or a link to the inst.eecs page
+# If you have no archive page, comment this line out or leave blank.
+class_archive_path: /
 
 # TODO(setup): Set these auxiliary links as you wish - they show up on the top right
 aux_links:
@@ -48,8 +62,6 @@ aux_links:
     - 'https://oh.c88c.org'
   Berkeley Class Site on GitHub:
     - 'https://github.com/berkeley-eecs/berkeley-class-site'
-# TODO(setup): Set copyright/licensing or any other footer content
-footer_content: "Copyright &copy; 2024 UC Berkeley"
 
 
 # Collections for website data
@@ -124,6 +136,16 @@ color_scheme: light
 search_enabled: true
 heading_anchors: true
 permalink: pretty
+
+## Footer Content.
+# You should probably not change these, but may add to footer_content if necessary.
+# Replace `true` with any additional HTML that you would like to add.
+# Footer *must* included the accessibility text defined in footer_custom.html
+footer_content: true
+back_to_top: true
+back_to_top_text: "Back to Top"
+last_edit_timestamp: true
+last_edit_time_format: '%m %d, %Y at %H:%M'
 
 # Compilation settings used by compress-html plugin:
 # https://github.com/penibelst/jekyll-compress-html/tree/v3.2.0?tab=readme-ov-file
