@@ -163,7 +163,7 @@ compress_html:
 
 # This makes it easier when pushing to a static directory.
 # The default false removes files in that directory, which is useful for when you unpublish pages.
-keep_files: false
+# keep_files: false
 
 # Likely not necessary, but a google default for Berkeley
 timezone: America/Los_Angeles
