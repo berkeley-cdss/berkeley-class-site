@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # A UC Berkeley-specific validator for Jekyll site's.
 class ConfigValidationError < StandardError
   attr_reader :errors
@@ -15,11 +17,11 @@ end
 module Jekyll
   class ConfigValidator
     SEMESTER_REGEXP = /(wi|sp|su|fa)\d\d$/
-    VALID_DEPTS = %w[eecs dsus stat]
+    VALID_DEPTS = %w[eecs dsus stat].freeze
     KEY_VALIDATIONS = {
       baseurl: :validate_semester_format,
       course_department: :validate_department
-    }
+    }.freeze
 
     attr_accessor :config, :errors
 
@@ -35,7 +37,7 @@ module Jekyll
         send(validator, config[key.to_s]) if @config.key?(key.to_s)
       end
 
-      raise ConfigValidationError.new(errors) if errors.length > 0
+      raise ConfigValidationError, errors if errors.length.positive?
 
       puts 'Passed Berkeley YAML Config Validations'
     end
