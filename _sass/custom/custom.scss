@@ -1,15 +1,11 @@
-// Just the Class dependencies
-@import 'card';
-
-// Just the Class styles
-@import 'announcement';
-@import 'module';
-@import 'schedule';
-@import 'staffer';
+// Place Custom CSS here.
+// You may want to add CSS in additional files.
+// It's recommended that you make a new file as _sass/custom/file.scss
+// You would then add `@import "file"; to this file.
 
 // Overrides
 code {
-  font-size: 14px;
+  font-size: 16px;
   padding: 0.2em 0.4em;
   border: none;
 }

@@ -27,7 +27,7 @@ baseurl: '/berkeley-class-site' # the subpath of your site, which should just be
 # TODO(setup): Set this to your course's domain
 url: 'https://berkeley-eecs.github.io' # the hostname & protocol for your site, e.g. http://example.com
 
-# TODO(setup): This should be one of eecs, dsus, stats
+# TODO(setup): This should be one of eecs, dsus, stat
 # This controls some footer text, and later custom styling.
 course_department: dsus
 
@@ -56,7 +56,7 @@ class_archive_path: /
 # TODO(setup): Set these auxiliary links as you wish - they show up on the top right
 aux_links:
   # TODO(template): Move this to be built-in.
-  Ed: 
+  Ed:
     - 'https://edstem.org'
   OH Queue:
     - 'https://oh.c88c.org'
@@ -158,7 +158,7 @@ compress_html:
   profile: false
 
 # Native Jeykll build options
-# You likely shouldn't need to touch these, but they are documented here just in case. 
+# You likely shouldn't need to touch these, but they are documented here just in case.
 # https://jekyllrb.com/docs/configuration/options/
 
 # This makes it easier when pushing to a static directory.
@@ -172,7 +172,7 @@ timezone: America/Los_Angeles
 include:
   - LICENSE
   - .htaccess
-  
+
 exclude:
   - .sass-cache/
   - .jekyll-cache/
