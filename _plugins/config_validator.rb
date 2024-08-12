@@ -89,7 +89,7 @@ module Jekyll
 end
 
 Jekyll::Hooks.register [:site], :after_init do |site|
-  break if ENV['JEKYLL_ENV'] == 'production'
+  next if ENV['JEKYLL_ENV'] == 'production'
 
   Jekyll::ConfigValidator.new(site.config).validate
 end
