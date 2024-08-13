@@ -23,4 +23,4 @@ jobs:
           bundle exec rspec
       - name: summary
         if: always()
-        run: ruby specs/support/spec_summary.rb
+        run: ruby spec/support/spec_summary.rb

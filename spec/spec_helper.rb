@@ -16,6 +16,7 @@
 #
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
+require 'jekyll'
 require 'rspec'
 require 'rack'
 require 'yaml'
@@ -30,23 +31,29 @@ require 'rack/test'
 require 'axe-rspec'
 require 'axe-capybara'
 
-RSPEC_CONFIG_FILE = '_config.yml' or ENV.fetch('RSPEC_CONFIG_FILE', nil)
-
+# ------------
+# Tools to build / compile the Jekyll site and extract the sitemap
 def site_config
-  @site_config ||= YAML.load_file(RSPEC_CONFIG_FILE)
+  # TODO(template): We should standardize the build for specs
+  # Consider simplifying baseurl
+  # Consider forcing the desination folder
+  # Override the local URL too? Would it break the sitemap?
+  # Note: Config keys must be strings and thus use => style hashes.
+  @config ||= ::Jekyll.configuration({
+    'sass' => { 'quiet_deps' => true }
+  })
 end
 
-def site_url
-  @site_url ||= site_config['url'] + site_config['baseurl']
-end
+@site = ::Jekyll::Site.new(site_config)
+@site.process
+puts "Site build complete"
 
 def load_site_urls
-  puts "Running accessibility tests, expected deploy URL: #{site_url}"
-  # TODO: Handle case where build is not in _site
+  puts "Running accessibility tests"
   sitemap_text = File.read('_site/sitemap.xml')
   sitemap_links = sitemap_text.scan(%r{<loc>.+</loc>})
   sitemap_links.filter_map do |link|
-    link = link.gsub("<loc>#{site_url}", '').gsub('</loc>', '')
+    link = link.gsub("<loc>#{site_config['url']}", '').gsub('</loc>', '')
     # Skip non-html pages
     # (FUTURE?) Are there other pages that should be audited for accessibility?
     # (e.g. PDFs, documents. They'd need a different checker.)
@@ -55,7 +62,6 @@ def load_site_urls
     link
   end.sort
 end
-
 # --------
 
 # This is the root of the repository, e.g. the bjc-r directory
