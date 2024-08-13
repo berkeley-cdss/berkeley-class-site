@@ -4,7 +4,6 @@
 # TODO: This should be an RSpec formatter
 
 require 'json'
-require 'pp'
 
 RESULTS_PATH = File.join(File.dirname(__FILE__), '..', '..', 'tmp/rspec_output.json')
 AXE_CASE_TITLE = /\n\s*\n\s*\d+\)\s+([-\w]+):/
@@ -33,7 +32,7 @@ def group_results(results)
   results.default = []
   all_cases_list.each do |test_hash|
     test_hash.each do |axe_name, failure|
-      if results.has_key?(axe_name)
+      if results.key?(axe_name)
         results[axe_name] << failure
       else
         results[axe_name] = [failure]

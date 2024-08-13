@@ -39,9 +39,9 @@ def site_config
   # Consider forcing the desination folder
   # Override the local URL too? Would it break the sitemap?
   # Note: Config keys must be strings and thus use => style hashes.
-  @config ||= Jekyll.configuration({
-                                     'sass' => { 'quiet_deps' => true }
-                                   })
+  @site_config ||= Jekyll.configuration({
+                                          'sass' => { 'quiet_deps' => true }
+                                        })
 end
 
 @site = Jekyll::Site.new(site_config)
@@ -86,9 +86,9 @@ class StaticSite
     # Use index.html for / paths
     env['PATH_INFO'] = if path.end_with?('/') && exists?('index.html')
                          'index.html'
-                       elsif path.end_with?('/') && exists?(path + 'index.html')
-                         path + 'index.html'
-                       elsif !exists?(path) && exists?(path + '.html')
+                       elsif path.end_with?('/') && exists?("#{path}index.html")
+                         "#{path}index.html"
+                       elsif !exists?(path) && exists?("#{path}.html")
                          "#{path}.html"
                        else
                          path
