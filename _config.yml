@@ -21,24 +21,13 @@ tagline: A Jekyll template for course websites
 description: A modern, highly customizable, responsive Jekyll template for course websites
 # TODO(template): this should be built from the staff list...
 author: Various Bears
-color_scheme: berkeley-dark
+# You should use either berkeley_light or berkeley_dark as the theme.
+color_scheme: berkeley_light
 
 # TODO(setup): Set this to the semester, e.g. /sp24, (faXX / spXX / suXX / wiXX )
 baseurl: '/berkeley-class-site' # the subpath of your site, which should just be the semester.
 # TODO(setup): Set this to your course's domain
 url: 'https://berkeley-eecs.github.io' # the hostname & protocol for your site, e.g. http://example.com
-
-# TODO(setup): This should be one of eecs, dsus, stat
-# This controls some footer text, and later custom styling.
-course_department: dsus
-
-# The sitemap **must** be enabled. It's published as /baseurl/sitemap.xml
-plugins:
-  - jekyll-sitemap
-  - jekyll-seo-tag
-  - jekyll-github-metadata
-  - jekyll-include-cache
-
 
 # Course variables
 # Course variables can appear in various places around the website, if something isn't used leave it blank.
@@ -49,6 +38,9 @@ gradescope_course_id: 123456 # you can find this in the Gradescope URL after /co
 bcourses_course_id: 123456 # Same as above, but for bCourses. Leave blank if not in use...
 ed_course_id: 123456 # Again, same as above.
 sememster: spYY | suYY | faYY # set for the current seemester
+# This should be one of eecs, dsus, stat
+# (Future) This will control some footer text, and later custom styling.
+course_department: dsus
 # This should be the page of all class archives
 # Typically just / for DS courses (with a visible index page), or /archives if you're hosting your own, or a link to the inst.eecs page
 # If you have no archive page, comment this line out or leave blank.
@@ -130,6 +122,20 @@ defaults:
 # Just the Docs / Berkeley Class Site Common Config
 # Options below here will likely not need to be configured..
 ######################################################################
+# TODO(template): CSS compilations. Handle warnings...
+sass:
+  style: expanded
+  sass_dir: _sass
+  sourcemap: always
+  quiet_deps: true
+  verbose: false
+
+# The sitemap **must** be enabled. It's published as /baseurl/sitemap.xml
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-github-metadata
+  - jekyll-include-cache
 
 # Theme settings
 theme: just-the-docs

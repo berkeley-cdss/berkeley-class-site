@@ -31,11 +31,17 @@ module Jekyll
   # Jekyll::ConfigValidator class definition (see docs at the top of file)
   class ConfigValidator
     SEMESTER_REGEXP = /(wi|sp|su|fa)\d\d$/
-    VALID_DEPTS = %w[eecs dsus stat].freeze
+    VALID_COURSE_DEPARTMENT = %w[eecs dsus stat].freeze
+    VALID_COLOR_SCHEME = %w[berkeley_light berkeley_dark].freeze
+
+    # To validate a key with an 'allow list':
+    # Use the function :inclusion_validator
+    # and definite VALID_KEY_NAME above
     KEY_VALIDATIONS = {
       url: :validate_clean_url,
       baseurl: :validate_semester_format,
-      course_department: :validate_department
+      course_department: :inclusion_validator,
+      color_scheme: :inclusion_validator
     }.freeze
 
     attr_accessor :config, :errors
@@ -49,7 +55,11 @@ module Jekyll
       validate_keys!
 
       KEY_VALIDATIONS.each do |key, validator|
-        send(validator, config[key.to_s]) if @config.key?(key.to_s)
+        if validator == :inclusion_validator
+          send(validator, key, config[key.to_s], self.class.const_get("VALID_#{key.upcase}"))
+        else
+          send(validator, config[key.to_s]) if @config.key?(key.to_s)
+        end
       end
 
       raise ConfigValidationError, errors if errors.length.positive?
@@ -84,6 +94,14 @@ module Jekyll
 
     def validate_department(dept)
       errors << "`course_department` must be one of #{VALID_DEPTS} (not '#{dept}')" unless VALID_DEPTS.include?(dept)
+    end
+
+    def validate_color_theme(color_theme)
+      errors << "`course_department` must be one of #{VALID_DEPTS} (not '#{dept}')" unless VALID_DEPTS.include?(dept)
+    end
+
+    def inclusion_validator(key, value, allowed)
+      errors << "`#{key}` must be one of #{allowed} (not '#{value}')" unless allowed.include?(value)
     end
   end
 end

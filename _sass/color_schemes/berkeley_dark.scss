@@ -1,5 +1,8 @@
 // Default JTD color scheme
+
 @import "./color_schemes/dark";
+$color-scheme: 'berkeley_dark' !default;
+
 // Then load general Berkeley data
 @import './berkeley/variables';
 
@@ -26,10 +29,10 @@ $grey-dk-100: #eeebee !default;
 $grey-dk-200: #ecebed !default;
 $grey-dk-300: #e6e1e8 !default;
 
-@import './berkeley/berkeley';
-
 // Just the Class customizations are all loaded in one file.
 @import '../just-the-class/just-the-class';
+
+@import './berkeley/berkeley';
 
 // This is intended to be used for the footer
 .text-lighter {
