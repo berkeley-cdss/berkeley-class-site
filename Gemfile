@@ -19,7 +19,8 @@ group :development, :test do
   gem 'axe-core-rspec'
   gem 'capybara'
   gem 'capybara-screenshot'
-  gem 'rack', '< 3'
+  gem 'rack'
+  gem 'rackup'
   gem 'rspec'
   gem 'selenium-webdriver'
 end

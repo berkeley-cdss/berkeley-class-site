@@ -19,6 +19,7 @@
 require 'rspec'
 require 'rack'
 require 'yaml'
+require 'webrick'
 
 require 'capybara/rspec'
 require 'capybara/dsl'
@@ -68,7 +69,7 @@ class StaticSite
   # TODO: Rack::File will be deprecated soon. Find a better solution.
   def initialize(root)
     @root = root
-    @server = Rack::File.new(root)
+    @server = Rack::Files.new(root)
   end
 
   def call(env)
@@ -101,8 +102,8 @@ Capybara.register_driver :chrome_headless do |app|
   options.add_argument('--headless')
   options.add_argument('--no-sandbox')
   options.add_argument('--disable-dev-shm-usage')
-  # macbook air ~13" screen size
-  options.add_argument('--window-size=1280,800')
+  # macbook air ~13" screen size, with an absurd height for full size screenshots.
+  options.add_argument('--window-size=1280,4000')
 
   Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
 end
@@ -113,7 +114,6 @@ Capybara.default_driver = :chrome_headless
 Capybara.javascript_driver = :chrome_headless
 
 Capybara::Screenshot.register_driver(:chrome_headless) do |driver, path|
-  # driver.browser.save_screenshot(path, full: true)
   driver.save_screenshot(path)
 end
 
