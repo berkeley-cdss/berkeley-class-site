@@ -1,0 +1,35 @@
+// This config applies to all berkeley courses.
+// It is loaded before all Just-the-class customizations
+
+// h1 {
+//   font-family: serif;
+// }
+
+// Override default JTD CSS for larger/more accessibile fonts.
+html {
+  @include fs-3;
+}
+
+body {
+  font-family: $body-font-family;
+  font-size: inherit;
+  line-height: $body-line-height;
+  color: $body-text-color;
+  background-color: $body-background-color;
+  overflow-wrap: break-word;
+}
+
+// Link Colors
+a,
+.main-content .anchor-heading svg {
+  color: $link-color;
+
+  &:hover,
+  &:focus {
+    color: $hover-focus-link-color;
+  }
+}
+
+a:not([class]):hover {
+  text-decoration-color: lighten($link-color, 20%);
+}

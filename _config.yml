@@ -21,6 +21,7 @@ tagline: A Jekyll template for course websites
 description: A modern, highly customizable, responsive Jekyll template for course websites
 # TODO(template): this should be built from the staff list...
 author: Various Bears
+color_scheme: berkeley-dark
 
 # TODO(setup): Set this to the semester, e.g. /sp24, (faXX / spXX / suXX / wiXX )
 baseurl: '/berkeley-class-site' # the subpath of your site, which should just be the semester.
@@ -132,7 +133,6 @@ defaults:
 
 # Theme settings
 theme: just-the-docs
-color_scheme: light
 search_enabled: true
 heading_anchors: true
 permalink: pretty
