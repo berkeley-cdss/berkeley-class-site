@@ -80,13 +80,9 @@ class StaticSite
 
   def call(env)
     # Remove the /baseurl prefix, which is present in all URLs, but not in the file system.
-    path = env['PATH_INFO'].gsub(site_config['baseurl'], '/')
-    path = "_site#{path}"
+    path = "_site#{env['PATH_INFO'].gsub(site_config['baseurl'], '/')}"
 
-    # Use index.html for / paths
-    env['PATH_INFO'] = if path.end_with?('/') && exists?('index.html')
-                         'index.html'
-                       elsif path.end_with?('/') && exists?("#{path}index.html")
+    env['PATH_INFO'] = if path.end_with?('/') && exists?("#{path}index.html")
                          "#{path}index.html"
                        elsif !exists?(path) && exists?("#{path}.html")
                          "#{path}.html"
