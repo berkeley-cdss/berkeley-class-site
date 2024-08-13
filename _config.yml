@@ -172,6 +172,7 @@ timezone: America/Los_Angeles
 include:
   - LICENSE
   - .htaccess
+  - robots.txt
 
 exclude:
   - .sass-cache/

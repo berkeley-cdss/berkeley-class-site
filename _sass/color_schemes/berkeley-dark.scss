@@ -1,8 +1,37 @@
 // Default JTD color scheme
 @import "./color_schemes/dark";
-
+// Then load general Berkeley data
 @import './berkeley/variables';
+
+// Override dark-mode variables here
+$grey-dk-400: #0C0A0E !default;
+$body-background-color: $grey-dk-400;
+$sidebar-color: $grey-dk-400;
+$search-background-color: $grey-dk-400;
+$body-text-color: $white;
+
+$link-color: #406FFE;
+$hover-focus-link-color: darken($link-color, 10%);
+
+// TODO(template): We need to figure out a much better solution!
+// This swaps the "dk" and "lt" variants from the original JTD files.
+$grey-lt-000: #959396 !default;
+$grey-lt-100: #5c5962 !default;
+$grey-lt-200: #44434d !default;
+$grey-lt-250: #302d36 !default;
+$grey-lt-300: #27262b !default;
+
+$grey-dk-000: #f5f6fa !default;
+$grey-dk-100: #eeebee !default;
+$grey-dk-200: #ecebed !default;
+$grey-dk-300: #e6e1e8 !default;
+
 @import './berkeley/berkeley';
 
 // Just the Class customizations are all loaded in one file.
 @import '../just-the-class/just-the-class';
+
+// This is intended to be used for the footer
+.text-lighter {
+  color: darken($body-text-color, 20%);
+}

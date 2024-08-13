@@ -4,10 +4,15 @@
 $content-width: 1200px;
 
 // Typography
-// $body-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$mono-font-family: "Source Code Pro", "SFMono-Regular", menlo, consolas, monospace !default;
+$body-font-family: 'Inter', system-ui, -apple-system, blinkmacsystemfont, "Segoe UI",
+roboto, "Helvetica Neue", arial, sans-serif, "Segoe UI Emoji" !default;
+$serif-font-family: 'Source Serif 4', 'Georiga', 'Baskerville', serif;
+
+$berkeley-blue: #002676;
 
 // Colors
-$link-color: $blue-100;
+$link-color: $berkeley-blue;
 $hover-focus-link-color: darken($link-color, 0.3);
 
 // Layout

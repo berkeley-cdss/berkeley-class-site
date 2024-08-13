@@ -2,7 +2,7 @@
   display: flex;
   margin: $sp-4 0;
 
-  .staffer-image {
+  .staffer-iage {
     border-radius: 50%;
     height: 100px;
     margin-right: $sp-4;
@@ -15,7 +15,7 @@
   }
 
   .staffer-badge {
-    @extend .label, .text-grey-dk-100, .bg-grey-lt-200;
+    @extend .label, .bg-grey-lt-200;
 
     user-select: none;
   }
