@@ -9,7 +9,6 @@ require 'pp'
 RESULTS_PATH = File.join(File.dirname(__FILE__), '..', '..', 'tmp/rspec_output.json')
 AXE_CASE_TITLE = /\n\s*\n\s*\d+\)\s+([-\w]+):/
 
-
 def failing_specs(results_data)
   results_data['examples'].filter do |ex|
     ex['status'] == 'failed'
@@ -28,18 +27,18 @@ def group_results(results)
     msg.gsub!(/\nInvocation:.*;/, '')
     cases = msg.split(AXE_CASE_TITLE)
     cases.delete_at(0)
-    Hash[*cases].transform_values { |v| { page: ex['full_description'], message: v }}
+    Hash[*cases].transform_values { |v| { page: ex['full_description'], message: v } }
   end
-  results = Hash.new
+  results = {}
   results.default = []
   all_cases_list.each do |test_hash|
-      test_hash.each do |axe_name, failure|
-        if results.has_key?(axe_name)
-          results[axe_name] << failure
-        else
-          results[axe_name] = [ failure ]
-        end
+    test_hash.each do |axe_name, failure|
+      if results.has_key?(axe_name)
+        results[axe_name] << failure
+      else
+        results[axe_name] = [failure]
       end
+    end
   end
   results
 end
@@ -61,7 +60,7 @@ def print_summary
   pp(failing_tests_by_type)
   puts "Total: #{failing_tests_by_type.values.sum} failures."
 
-  puts "\n#{'-'*16}"
+  puts "\n#{'-' * 16}"
   summary_group = group_results(results_data)
   nicely_print(test_failures_with_pages(summary_group))
 end

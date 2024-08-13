@@ -39,17 +39,17 @@ def site_config
   # Consider forcing the desination folder
   # Override the local URL too? Would it break the sitemap?
   # Note: Config keys must be strings and thus use => style hashes.
-  @config ||= ::Jekyll.configuration({
-    'sass' => { 'quiet_deps' => true }
-  })
+  @config ||= Jekyll.configuration({
+                                     'sass' => { 'quiet_deps' => true }
+                                   })
 end
 
-@site = ::Jekyll::Site.new(site_config)
+@site = Jekyll::Site.new(site_config)
 @site.process
-puts "Site build complete"
+puts 'Site build complete'
 
 def load_site_urls
-  puts "Running accessibility tests"
+  puts 'Running accessibility tests'
   sitemap_text = File.read('_site/sitemap.xml')
   sitemap_links = sitemap_text.scan(%r{<loc>.+</loc>})
   sitemap_links.filter_map do |link|
@@ -84,15 +84,15 @@ class StaticSite
     path = "_site#{path}"
 
     # Use index.html for / paths
-    if path.end_with?('/') && exists?('index.html')
-      env['PATH_INFO'] = 'index.html'
-    elsif path.end_with?('/') && exists?(path + 'index.html')
-      env['PATH_INFO'] = path + 'index.html'
-    elsif !exists?(path) && exists?(path + '.html')
-      env['PATH_INFO'] = "#{path}.html"
-    else
-      env['PATH_INFO'] = path
-    end
+    env['PATH_INFO'] = if path.end_with?('/') && exists?('index.html')
+                         'index.html'
+                       elsif path.end_with?('/') && exists?(path + 'index.html')
+                         path + 'index.html'
+                       elsif !exists?(path) && exists?(path + '.html')
+                         "#{path}.html"
+                       else
+                         path
+                       end
 
     server.call(env)
   end
@@ -124,7 +124,7 @@ Capybara::Screenshot.register_driver(:chrome_headless) do |driver, path|
 end
 
 Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
-  "tmp/capybara/screenshot_#{example.description.gsub('/', '-').gsub(' ', '-').gsub(/^.*\/spec\//,'')}"
+  "tmp/capybara/screenshot_#{example.description.gsub('/', '-').gsub(' ', '-').gsub(%r{^.*/spec/}, '')}"
 end
 
 Capybara::Screenshot.autosave_on_failure = true
