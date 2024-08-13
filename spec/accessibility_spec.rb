@@ -24,19 +24,19 @@ excluded_elements = [
 ]
 
 ALL_PAGES.each do |path|
-  describe "'#{path}' is accessible", :js, type: :feature do
+  describe "page is accessible", :js, type: :feature do
     before do
       visit(path)
     end
 
-    it 'according to WCAG 2.0 AA' do
+    it "#{path} meets WCAG 2.0" do
       expect(page).to be_axe_clean
         .according_to(*required_a11y_standards, "#{path} does NOT meet WCAG 2.0 AA")
         .skipping(*skipped_rules)
         .excluding(*excluded_elements)
     end
 
-    it 'according to WCAG 2.2 AA' do
+    it "#{path} meets WCAG 2.2" do
       expect(page).to be_axe_clean
         .according_to(*complete_a11y_standards)
         .skipping(*skipped_rules)

@@ -18,8 +18,8 @@ group :development, :test do
   gem 'axe-core-capybara'
   gem 'axe-core-rspec'
   gem 'capybara'
-  gem 'rack-jekyll', '>= 0.5.0'
-  gem 'rackup'
+  gem 'capybara-screenshot'
+  gem 'rack', '< 3'
   gem 'rspec'
   gem 'selenium-webdriver'
 end
