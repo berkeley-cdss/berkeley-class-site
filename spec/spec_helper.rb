@@ -47,7 +47,6 @@ def load_site_urls
   end.sort
 end
 
-
 RSpec.configure do |config|
   # Allow rspec to use `--only-failures` and `--next-failure` flags
   # Ensure that `tmp` is in your `.gitignore` file

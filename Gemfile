@@ -2,6 +2,8 @@
 
 source 'https://rubygems.org'
 
+gem 'jekyll', '~> 4'
+
 gem 'faraday-retry', '~> 2.2'
 gem 'kramdown-parser-gfm'
 gem 'webrick'

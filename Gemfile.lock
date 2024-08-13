@@ -223,6 +223,7 @@ DEPENDENCIES
   axe-core-rspec
   capybara
   faraday-retry (~> 2.2)
+  jekyll (~> 4)
   jekyll-github-metadata (~> 2.16)
   jekyll-sitemap
   just-the-docs
