@@ -56,9 +56,9 @@ module Jekyll
 
       KEY_VALIDATIONS.each do |key, validator|
         if validator == :inclusion_validator
-          send(validator, key, config[key.to_s], self.class.const_get("VALID_#{key.upcase}"))
-        else
-          send(validator, config[key.to_s]) if @config.key?(key.to_s)
+          send(validator, key, config[key.to_s], ConfigValidator.const_get("VALID_#{key.upcase}"))
+        elsif @config.key?(key.to_s)
+          send(validator, config[key.to_s])
         end
       end
 
@@ -90,14 +90,6 @@ module Jekyll
       return if baseurl.match?(SEMESTER_REGEXP)
 
       errors << "`baseurl` must be a valid semester (faXX, spXX, suXX or wiXX), not #{baseurl}"
-    end
-
-    def validate_department(dept)
-      errors << "`course_department` must be one of #{VALID_DEPTS} (not '#{dept}')" unless VALID_DEPTS.include?(dept)
-    end
-
-    def validate_color_theme(color_theme)
-      errors << "`course_department` must be one of #{VALID_DEPTS} (not '#{dept}')" unless VALID_DEPTS.include?(dept)
     end
 
     def inclusion_validator(key, value, allowed)
