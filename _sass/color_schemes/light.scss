@@ -1,0 +1,26 @@
+// This file is coped from Just The Docs
+// Individual courses should not modify it!
+// All deviations should be documented.
+// https://github.com/just-the-docs/just-the-docs/blob/main/_sass/color_schemes/light.scss
+
+/////////// Do not modify this section.
+$color-scheme: light !default;
+$body-background-color: $white !default;
+$body-heading-color: $grey-dk-300 !default;
+$body-text-color: $grey-dk-100 !default;
+$link-color: $purple-000 !default;
+$nav-child-link-color: $grey-dk-100 !default;
+$sidebar-color: $grey-lt-000 !default;
+$base-button-color: #f7f7f7 !default;
+$btn-primary-color: $purple-100 !default;
+$code-background-color: $grey-lt-000 !default;
+$feedback-color: darken($sidebar-color, 3%) !default;
+$table-background-color: $white !default;
+$search-background-color: $white !default;
+$search-result-preview-color: $grey-dk-000 !default;
+/////////////////// Add modifications below
+
+@import "../snytax_highliters/a11y-light";
+
+// Minimum lightness on white.
+$body-lighter-color: $grey-dk-100;

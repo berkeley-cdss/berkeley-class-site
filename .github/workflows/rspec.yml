@@ -7,7 +7,7 @@ on:
   - push
   - workflow_dispatch
   - deployment
-  - release 
+  - release
 
 jobs:
   build:
@@ -21,3 +21,14 @@ jobs:
       - name: Run rspec tests
         run: |
           bundle exec rspec
+      - name: summary
+        if: always()
+        run: ruby spec/support/spec_summary.rb
+      - name: Keep screenshots from failed tests
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: screenshots
+          path: ${{ github.workspace }}/tmp/capybara
+          if-no-files-found: ignore
+          retention-days: 7

@@ -12,15 +12,22 @@
   p,
   .staffer-name {
     margin: $sp-1 !important;
+
+  .anchor-heading {
+      width: 1.8rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
   }
 
   .staffer-badge {
-    @extend .label, .text-grey-dk-100, .bg-grey-lt-200;
+    @extend .label, .text-grey-dk-300, .bg-grey-lt-200;
 
+    -webkit-user-select: none;
     user-select: none;
   }
 
   .staffer-meta {
-    @extend .text-grey-dk-000;
+    @extend .text-grey-dk-300;
   }
 }

@@ -2,6 +2,8 @@
 
 source 'https://rubygems.org'
 
+gem 'jekyll', '~> 4'
+
 gem 'faraday-retry', '~> 2.2'
 gem 'kramdown-parser-gfm'
 gem 'webrick'
@@ -16,7 +18,8 @@ group :development, :test do
   gem 'axe-core-capybara'
   gem 'axe-core-rspec'
   gem 'capybara'
-  gem 'rack-jekyll', '>= 0.5.0'
+  gem 'capybara-screenshot'
+  gem 'rack'
   gem 'rackup'
   gem 'rspec'
   gem 'selenium-webdriver'

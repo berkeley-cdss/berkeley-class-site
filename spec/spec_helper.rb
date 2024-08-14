@@ -16,17 +16,127 @@
 #
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
+require 'jekyll'
 require 'rspec'
+require 'rack'
 require 'yaml'
+require 'webrick'
 
 require 'capybara/rspec'
-require 'rack/jekyll'
+require 'capybara/dsl'
+require 'capybara-screenshot/rspec'
+require 'capybara/session'
+
 require 'rack/test'
 require 'axe-rspec'
 require 'axe-capybara'
 
-RSPEC_CONFIG_FILE = '_config.yml' or ENV.fetch('RSPEC_CONFIG_FILE', nil)
+# ------------
+# Tools to build / compile the Jekyll site and extract the sitemap
+def site_config
+  # TODO(template): We should standardize the build for specs
+  # Consider simplifying baseurl
+  # Consider forcing the desination folder
+  # Override the local URL too? Would it break the sitemap?
+  # Note: Config keys must be strings and thus use => style hashes.
+  @site_config ||= Jekyll.configuration({
+                                          'sass' => { 'quiet_deps' => true }
+                                        })
+end
 
+@site = Jekyll::Site.new(site_config)
+@site.process
+puts 'Site build complete'
+
+def load_site_urls
+  puts 'Running accessibility tests'
+  sitemap_text = File.read('_site/sitemap.xml')
+  sitemap_links = sitemap_text.scan(%r{<loc>.+</loc>})
+  sitemap_links.filter_map do |link|
+    link = link.gsub("<loc>#{site_config['url']}", '').gsub('</loc>', '')
+    # Skip non-html pages
+    # (FUTURE?) Are there other pages that should be audited for accessibility?
+    # (e.g. PDFs, documents. They'd need a different checker.)
+    next unless link.end_with?('.html') || link.end_with?('/')
+
+    link
+  end.sort
+end
+# --------
+
+# This is the root of the repository, e.g. the bjc-r directory
+# Update this is you move this file.
+REPO_ROOT = File.expand_path('../', __dir__)
+
+# https://nts.strzibny.name/how-to-test-static-sites-with-rspec-capybara-and-webkit/
+class StaticSite
+  attr_reader :root, :server
+
+  # TODO: Rack::File will be deprecated soon. Find a better solution.
+  def initialize(root)
+    @root = root
+    @server = Rack::Files.new(root)
+  end
+
+  def call(env)
+    # Remove the /baseurl prefix, which is present in all URLs, but not in the file system.
+    path = "_site#{env['PATH_INFO'].gsub(site_config['baseurl'], '/')}"
+
+    env['PATH_INFO'] = if path.end_with?('/') && exists?("#{path}index.html")
+                         "#{path}index.html"
+                       elsif !exists?(path) && exists?("#{path}.html")
+                         "#{path}.html"
+                       else
+                         path
+                       end
+
+    server.call(env)
+  end
+
+  def exists?(path)
+    File.exist?(File.join(root, path))
+  end
+end
+# ---------
+
+Capybara.register_driver :chrome_headless do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.add_argument('--headless')
+  options.add_argument('--no-sandbox')
+  options.add_argument('--disable-dev-shm-usage')
+  # macbook air ~13" screen size, with an absurd height for full size screenshots.
+  options.add_argument('--window-size=1280,4000')
+
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
+end
+
+# Change default_driver to :selenium_chrome if you want to actually see the tests running in a browser locally.
+# Should be :chrome_headless in CI though.
+Capybara.default_driver = :chrome_headless
+Capybara.javascript_driver = :chrome_headless
+
+Capybara::Screenshot.register_driver(:chrome_headless) do |driver, path|
+  driver.save_screenshot(path)
+end
+
+Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
+  "tmp/capybara/screenshot_#{example.description.gsub('/', '-').gsub(' ', '-').gsub(%r{^.*/spec/}, '')}"
+end
+
+Capybara::Screenshot.autosave_on_failure = true
+Capybara::Screenshot.append_timestamp = false
+Capybara::Screenshot.prune_strategy = :keep_last_run
+
+# Setup for Capybara to serve static files served by Rack
+Capybara.server = :webrick
+Capybara.app = Rack::Builder.new do
+  use Rack::Lint
+  run StaticSite.new(REPO_ROOT)
+  # map '/' do
+  # end
+end.to_app
+
+# ---------
 RSpec.configure do |config|
   # Allow rspec to use `--only-failures` and `--next-failure` flags
   # Ensure that `tmp` is in your `.gitignore` file
@@ -58,36 +168,6 @@ RSpec.configure do |config|
   # inherited by the metadata hash of host groups and examples, rather than
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
-
-  Capybara.register_driver :chrome_headless do |app|
-    options = Selenium::WebDriver::Chrome::Options.new
-    options.add_argument('--headless')
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-    # macbook air ~13" screen size
-    options.add_argument('--window-size=1280,800')
-
-    Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
-  end
-
-  # Change default_driver to :selenium_chrome if you want to actually see the tests running in a browser locally.
-  # Should be :chrome_headless in CI though.
-  Capybara.default_driver = :chrome_headless
-  Capybara.javascript_driver = :chrome_headless
-
-  # Configure Capybara to load the website through rack-jekyll.
-  # (force_build: true) builds the site before the tests are run,
-  # so our tests are always running against the latest version
-  # of our jekyll site.
-  jekyll_app = Rack::Jekyll.new(force_build: true, config: RSPEC_CONFIG_FILE)
-
-  # https://stackoverflow.com/questions/52506822/testing-a-jekyll-site-with-rspec-and-capybara-getting-a-bizarre-race-case-on-rs
-  sleep 0.1 while jekyll_app.compiling?
-
-  Capybara.app = jekyll_app
-
-  # Configure Capybara server (otherwise it will error and say to use webrick or puma)
-  Capybara.server = :webrick
 
   config.include Capybara::DSL
 end

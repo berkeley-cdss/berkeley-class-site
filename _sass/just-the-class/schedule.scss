@@ -22,7 +22,7 @@
 
   .schedule-time {
     @extend .fs-2;
-    color: $grey-dk-000;
+    color: $grey-dk-200;
     height: 40px;
     margin: 0;
     padding: $sp-2;
@@ -93,15 +93,16 @@
     }
 
     &.lecture {
-      background-color: $grey-dk-000;
+      background-color: $grey-lt-300;
+      color: $grey-dk-300;
     }
 
     &.section {
-      background-color: $purple-000;
+      background-color: darken($purple-000, 15%);
     }
 
     &.office-hours {
-      background-color: $blue-000;
+      background-color: darken($green-200, 10%);
     }
   }
 }
