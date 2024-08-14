@@ -24,3 +24,9 @@ jobs:
       - name: summary
         if: always()
         run: ruby spec/support/spec_summary.rb
+      - name: 'Upload Test Screenshots'
+        uses: actions/upload-artifact@v4
+        with:
+          name: my-artifact
+          path: tmp/capybara/*
+          retention-days: 7
