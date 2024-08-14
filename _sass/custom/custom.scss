@@ -1,58 +1,12 @@
-// Place Custom CSS here.
 // You may want to add CSS in additional files.
-// It's recommended that you make a new file as _sass/custom/file.scss
+// It's best to not edit this file too much.
+// "course_overrides.scss" is designed for each course's customizations.
+// You can make additional files as necessary.
 // You would then add `@import "file"; to this file.
 
 // Just the Class customizations are all loaded in one file.
 @import '../just-the-class/just-the-class';
-@import '../color_schemes/berkeley/berkeley';
+@import '../berkeley/berkeley';
 
-// Overrides
-code {
-  font-size: 16px;
-  padding: 0.2em 0.4em;
-  border: none;
-}
-
-iframe {
-  max-width: 100%;
-}
-
-details {
-  @extend .mb-4;
-}
-
-summary {
-  @extend .btn, .btn-outline;
-
-  width: 100%;
-}
-
-.main-content-wrap {
-  max-width: $content-width;
-  margin: auto;
-}
-
-.main-content {
-  dl {
-    display: block;
-    grid-template-columns: none;
-  }
-
-  dt {
-    font-weight: 700;
-    text-align: start;
-
-    &::after {
-      content: normal;
-    }
-  }
-
-  dd {
-    font-weight: normal;
-
-    + dt {
-      margin-top: 1em;
-    }
-  }
-}
+// Place all of your course-specific CSS here.
+@import './course_overrides';
