@@ -1,11 +1,3 @@
 // Default JTD color scheme
 @import "./color_schemes/light";
-
 $color-scheme: 'berkeley_light' !default;
-
-@import './berkeley/variables';
-
-// Just the Class customizations are all loaded in one file.
-@import '../just-the-class/just-the-class';
-
-@import './berkeley/berkeley';

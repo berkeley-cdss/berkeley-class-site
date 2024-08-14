@@ -3,6 +3,10 @@
 // It's recommended that you make a new file as _sass/custom/file.scss
 // You would then add `@import "file"; to this file.
 
+// Just the Class customizations are all loaded in one file.
+@import '../just-the-class/just-the-class';
+@import '../color_schemes/berkeley/berkeley';
+
 // Overrides
 code {
   font-size: 16px;
@@ -22,10 +26,6 @@ summary {
   @extend .btn, .btn-outline;
 
   width: 100%;
-}
-
-.label-a11y-green:not(g) {
-  background-color: $green-300;
 }
 
 .main-content-wrap {

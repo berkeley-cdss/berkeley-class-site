@@ -1,10 +1,6 @@
 // Default JTD color scheme
-
 @import "./color_schemes/dark";
 $color-scheme: 'berkeley_dark' !default;
-
-// Then load general Berkeley data
-@import './berkeley/variables';
 
 // Override dark-mode variables here
 $grey-dk-400: #0C0A0E !default;
