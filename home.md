@@ -11,19 +11,9 @@ seo:
 # UC Berkeley Class Site Template
 
 <p>
-  <button class="btn js-toggle-dark-mode">Preview dark color scheme</button>
+  <button class="btn js-toggle-dark-mode">Swap color scheme</button>
 </p>
-<script>
-  const toggleDarkMode = document.querySelector('.js-toggle-dark-mode'); jtd.addEvent(toggleDarkMode, 'click', function() {
-    if (jtd.getTheme() === 'berkeley_dark') {
-      jtd.setTheme('berkeley_light');
-      toggleDarkMode.textContent = 'Preview dark color scheme';
-    } else {
-      jtd.setTheme('berkeley_dark');
-      toggleDarkMode.textContent = 'Return to the light side';
-    }
-  });
-</script>
+
 
 Just the Class is a GitHub Pages template developed for the purpose of quickly deploying course websites. In addition to serving plain web pages and files, it provides a boilerplate for:
 

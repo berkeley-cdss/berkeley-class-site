@@ -6,7 +6,7 @@
 
 // Override default JTD CSS for larger/more accessibile fonts.
 html {
-  @include fs-3;
+  font-size: 16px;
 }
 
 body {
@@ -43,8 +43,11 @@ h1, h2, h3, h4, h5, h6,
   background-color: $green-300;
 }
 
+.label-red:not(g) {
+  background-color: $red-300;
+}
+
 code {
-  font-size: 16px;
   padding: 0.2em 0.4em;
   border: none;
 }
