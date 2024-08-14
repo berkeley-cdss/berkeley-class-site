@@ -24,9 +24,11 @@ jobs:
       - name: summary
         if: always()
         run: ruby spec/support/spec_summary.rb
-      - name: 'Upload Test Screenshots'
+      - name: Keep screenshots from failed tests
         uses: actions/upload-artifact@v4
+        if: failure()
         with:
-          name: my-artifact
-          path: tmp/capybara/*
+          name: screenshots
+          path: ${{ github.workspace }}/tmp/capybara
+          if-no-files-found: ignore
           retention-days: 7
