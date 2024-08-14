@@ -53,6 +53,6 @@ $btn-primary-color: $berkeley-blue;
 $base-button-color: $grey-dk-200;
 
 // This is not great, but JTD forces $link-color
-.btn {
+.btn:not(.btn-outline) {
   color: $btn-primary-color !important;
 }
