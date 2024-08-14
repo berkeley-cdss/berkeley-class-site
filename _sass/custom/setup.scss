@@ -2,5 +2,6 @@
 // You will likely want to review the Jst the Docs CSS
 // This file is loaded *early* in the SASS compilation process.
 
-// Then load general Berkeley data
+// Load berkeley variable customizations
+// These are loaded before berkeley_light and berkeley_dark themes
 @import '../berkeley/variables';

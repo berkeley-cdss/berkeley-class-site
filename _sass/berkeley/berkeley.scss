@@ -1,5 +1,5 @@
 // This config applies to all berkeley courses.
-// It is loaded before all Just-the-class customizations
+// It is loaded *after* all Just-the-class customizations
 
 // UC Berkeley fonts 'Inter' (sans serif) 'Source Serif' (serif), and 'Source Code Pro' (monospace)
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');
@@ -90,4 +90,9 @@ summary {
       margin-top: 1em;
     }
   }
+}
+
+// This is intended to be used for the footer
+.text-lighter {
+  color: $body-lighter-color;
 }

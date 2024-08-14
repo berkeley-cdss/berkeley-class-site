@@ -8,6 +8,7 @@ $body-background-color: $grey-dk-400;
 $sidebar-color: $grey-dk-400;
 $search-background-color: $grey-dk-400;
 $body-text-color: $white;
+$body-lighter-color: darken($body-text-color, 20%);
 
 $link-color: #406FFE;
 $hover-focus-link-color: darken($link-color, 10%);
@@ -24,13 +25,3 @@ $grey-dk-000: #f5f6fa !default;
 $grey-dk-100: #eeebee !default;
 $grey-dk-200: #ecebed !default;
 $grey-dk-300: #e6e1e8 !default;
-
-// Just the Class customizations are all loaded in one file.
-@import '../just-the-class/just-the-class';
-
-@import './berkeley/berkeley';
-
-// This is intended to be used for the footer
-.text-lighter {
-  color: darken($body-text-color, 20%);
-}
