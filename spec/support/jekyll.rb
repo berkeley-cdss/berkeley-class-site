@@ -1,4 +1,3 @@
-
 require 'jekyll'
 
 # Tools to build / compile the Jekyll site and extract the sitemap
@@ -8,7 +7,7 @@ def site_config
   # Consider forcing the desination folder
   # Override the local URL too? Would it break the sitemap?
   # Note: Config keys must be strings and thus use => style hashes.
-  @site_config ||= Jekyll.configuration({'sass' => { 'quiet_deps' => true }})
+  @site_config ||= Jekyll.configuration({ 'sass' => { 'quiet_deps' => true } })
 end
 
 def build_jekyll_site!
@@ -32,7 +31,6 @@ def load_sitemap
     link
   end.sort
 end
-
 
 # Start a local Rack server
 # https://nts.strzibny.name/how-to-test-static-sites-with-rspec-capybara-and-webkit/

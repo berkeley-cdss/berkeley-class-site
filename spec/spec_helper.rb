@@ -30,7 +30,7 @@ require 'rack/test'
 require 'axe-rspec'
 require 'axe-capybara'
 
-require_relative './support/jekyll'
+require_relative 'support/jekyll'
 
 # Used to set the path for a local webserver.
 # Update this if you move this file.
@@ -57,7 +57,7 @@ Capybara::Screenshot.register_driver(:chrome_headless) do |driver, path|
 end
 
 Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
-  path = example.example_group.top_level_description.gsub(/^\//, '').gsub('/', '-').gsub(' is accessible', '')
+  path = example.example_group.top_level_description.gsub(%r{^/}, '').gsub('/', '-').gsub(' is accessible', '')
   standards = example.description.split(' ').last
   "tmp/capybara/screenshot_#{page}_#{standards}"
 end

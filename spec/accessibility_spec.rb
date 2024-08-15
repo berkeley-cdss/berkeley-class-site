@@ -36,14 +36,14 @@ ALL_PAGES.each do |path|
       visit(path)
     end
 
-    it "meets WCAG 2.1" do
+    it 'meets WCAG 2.1' do
       expect(page).to be_axe_clean
         .according_to(*required_a11y_standards)
         .skipping(*skipped_rules)
         .excluding(*excluded_elements)
     end
 
-    it "meets WCAG 2.2" do
+    it 'meets WCAG 2.2' do
       expect(page).to be_axe_clean
         .according_to(*complete_a11y_standards)
         .skipping(*skipped_rules)
