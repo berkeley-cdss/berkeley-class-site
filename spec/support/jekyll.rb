@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'jekyll'
 
 # Tools to build / compile the Jekyll site and extract the sitemap

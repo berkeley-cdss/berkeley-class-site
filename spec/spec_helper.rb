@@ -57,8 +57,8 @@ Capybara::Screenshot.register_driver(:chrome_headless) do |driver, path|
 end
 
 Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
-  path = example.example_group.top_level_description.gsub(%r{^/}, '').gsub('/', '-').gsub(' is accessible', '')
-  standards = example.description.split(' ').last
+  example.example_group.top_level_description.gsub(%r{^/}, '').gsub('/', '-').gsub(' is accessible', '')
+  standards = example.description.split.last
   "tmp/capybara/screenshot_#{page}_#{standards}"
 end
 
