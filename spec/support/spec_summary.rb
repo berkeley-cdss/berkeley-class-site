@@ -60,10 +60,12 @@ end
 def print_summary
   results_data = JSON.parse(File.read(RESULTS_PATH))
   failing_tests_by_type = summarize_results(results_data)
-  pp(failing_tests_by_type)
-  puts "Total: #{failing_tests_by_type.values.sum} failures."
+  total_failures = failing_tests_by_type.values.sum
+  puts "#{total_failures} total a11y failures."
+  return if total_failures == 0
 
-  puts "\n#{'-' * 16}"
+  pp(failing_tests_by_type)
+  puts "Failing Pages:\n#{'-' * 16}"
   summary_group = group_results(results_data)
   nicely_print(test_failures_with_pages(summary_group))
 end

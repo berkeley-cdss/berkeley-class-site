@@ -11,7 +11,7 @@ seo:
 # UC Berkeley Class Site Template
 
 <p>
-  <button class="btn js-toggle-dark-mode">Swap color scheme</button>
+  <button class="btn js-toggle-dark-mode"></button>
 </p>
 
 
