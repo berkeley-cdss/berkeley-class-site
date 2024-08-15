@@ -30,24 +30,40 @@ ALL_PAGES = load_sitemap
 puts "Running tests on #{ALL_PAGES.count} pages."
 puts "  - #{ALL_PAGES.join("\n  - ")}\n\n"
 
+RSpec.shared_context :a11y_tests do
+  it 'meets WCAG 2.1' do
+    expect(page).to be_axe_clean
+      .according_to(*required_a11y_standards)
+      .skipping(*skipped_rules)
+      .excluding(*excluded_elements)
+  end
+
+  it 'meets WCAG 2.2' do
+    expect(page).to be_axe_clean
+      .according_to(*complete_a11y_standards)
+      .skipping(*skipped_rules)
+      .excluding(*excluded_elements)
+  end
+end
+
 ALL_PAGES.each do |path|
   describe "#{path} is accessible", :js, type: :feature do
-    before do
-      visit(path)
+    context "light mode" do
+      before do
+        visit(path)
+        page.execute_script('jtd.setTheme("light")')
+      end
+
+      include_context :a11y_tests
     end
 
-    it 'meets WCAG 2.1' do
-      expect(page).to be_axe_clean
-        .according_to(*required_a11y_standards)
-        .skipping(*skipped_rules)
-        .excluding(*excluded_elements)
-    end
+    context "dark mode" do
+      before do
+        visit(path)
+        page.execute_script('jtd.setTheme("dark")')
+      end
 
-    it 'meets WCAG 2.2' do
-      expect(page).to be_axe_clean
-        .according_to(*complete_a11y_standards)
-        .skipping(*skipped_rules)
-        .excluding(*excluded_elements)
+      include_context :a11y_tests
     end
   end
 end
