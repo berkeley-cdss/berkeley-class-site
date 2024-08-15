@@ -16,7 +16,6 @@
 #
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
-require 'jekyll'
 require 'rspec'
 require 'rack'
 require 'yaml'
@@ -31,80 +30,18 @@ require 'rack/test'
 require 'axe-rspec'
 require 'axe-capybara'
 
-# ------------
-# Tools to build / compile the Jekyll site and extract the sitemap
-def site_config
-  # TODO(template): We should standardize the build for specs
-  # Consider simplifying baseurl
-  # Consider forcing the desination folder
-  # Override the local URL too? Would it break the sitemap?
-  # Note: Config keys must be strings and thus use => style hashes.
-  @site_config ||= Jekyll.configuration({
-                                          'sass' => { 'quiet_deps' => true }
-                                        })
-end
+require_relative 'support/jekyll'
 
-@site = Jekyll::Site.new(site_config)
-@site.process
-puts 'Site build complete'
-
-def load_site_urls
-  puts 'Running accessibility tests'
-  sitemap_text = File.read('_site/sitemap.xml')
-  sitemap_links = sitemap_text.scan(%r{<loc>.+</loc>})
-  sitemap_links.filter_map do |link|
-    link = link.gsub("<loc>#{site_config['url']}", '').gsub('</loc>', '')
-    # Skip non-html pages
-    # (FUTURE?) Are there other pages that should be audited for accessibility?
-    # (e.g. PDFs, documents. They'd need a different checker.)
-    next unless link.end_with?('.html') || link.end_with?('/')
-
-    link
-  end.sort
-end
-# --------
-
-# This is the root of the repository, e.g. the bjc-r directory
-# Update this is you move this file.
+# Used to set the path for a local webserver.
+# Update this if you move this file.
 REPO_ROOT = File.expand_path('../', __dir__)
-
-# https://nts.strzibny.name/how-to-test-static-sites-with-rspec-capybara-and-webkit/
-class StaticSite
-  attr_reader :root, :server
-
-  # TODO: Rack::File will be deprecated soon. Find a better solution.
-  def initialize(root)
-    @root = root
-    @server = Rack::Files.new(root)
-  end
-
-  def call(env)
-    # Remove the /baseurl prefix, which is present in all URLs, but not in the file system.
-    path = "_site#{env['PATH_INFO'].gsub(site_config['baseurl'], '/')}"
-
-    env['PATH_INFO'] = if path.end_with?('/') && exists?("#{path}index.html")
-                         "#{path}index.html"
-                       elsif !exists?(path) && exists?("#{path}.html")
-                         "#{path}.html"
-                       else
-                         path
-                       end
-
-    server.call(env)
-  end
-
-  def exists?(path)
-    File.exist?(File.join(root, path))
-  end
-end
-# ---------
 
 Capybara.register_driver :chrome_headless do |app|
   options = Selenium::WebDriver::Chrome::Options.new
   options.add_argument('--headless')
   options.add_argument('--no-sandbox')
   options.add_argument('--disable-dev-shm-usage')
-  # macbook air ~13" screen size, with an absurd height for full size screenshots.
+  # MacBook Air ~13" screen size, with an absurd height to capture more content.
   options.add_argument('--window-size=1280,4000')
 
   Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
@@ -120,7 +57,9 @@ Capybara::Screenshot.register_driver(:chrome_headless) do |driver, path|
 end
 
 Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
-  "tmp/capybara/screenshot_#{example.description.gsub('/', '-').gsub(' ', '-').gsub(%r{^.*/spec/}, '')}"
+  page = example.example_group.top_level_description.gsub(%r{^/}, '').gsub('/', '-').gsub(' is accessible', '')
+  standards = example.description.split.last
+  "tmp/capybara/screenshot_#{page}_#{standards}"
 end
 
 Capybara::Screenshot.autosave_on_failure = true
@@ -132,11 +71,8 @@ Capybara.server = :webrick
 Capybara.app = Rack::Builder.new do
   use Rack::Lint
   run StaticSite.new(REPO_ROOT)
-  # map '/' do
-  # end
 end.to_app
 
-# ---------
 RSpec.configure do |config|
   # Allow rspec to use `--only-failures` and `--next-failure` flags
   # Ensure that `tmp` is in your `.gitignore` file

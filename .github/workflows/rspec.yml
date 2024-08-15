@@ -18,11 +18,11 @@ jobs:
         with:
           # The Ruby version is determined by either a `.ruby-version` or a `.tool-versions` file in root of the repo.
           bundler-cache: true
-      - name: Run rspec tests
+      - name: Run a11y tests
         run: |
           bundle exec rspec
       - name: summary
-        if: always()
+        if: failure()
         run: ruby spec/support/spec_summary.rb
       - name: Keep screenshots from failed tests
         uses: actions/upload-artifact@v4

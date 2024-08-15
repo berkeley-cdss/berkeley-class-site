@@ -4,22 +4,3 @@
   <link href="{{ site.baseurl }}/assets/vendor/fontawesome/css/fontawesome.css" rel="stylesheet" />
   <link href="{{ site.baseurl }}/assets/vendor/fontawesome/css/solid.css" rel="stylesheet" />
   <!-- <link href="{{ site.baseurl }}/assets/vendor/fontawesome/css/brands.css" rel="stylesheet" /> -->
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    if (jtd && localStorage['jtd-theme']) {
-      jtd.setTheme(localStorage['jtd-theme']);
-    }
-
-    const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
-    jtd.addEvent(toggleDarkMode, 'click', function() {
-      if (jtd.getTheme() === 'dark') {
-        localStorage['jtd-theme'] = 'light';
-        jtd.setTheme('light');
-      } else {
-        jtd.setTheme('dark');
-        localStorage['jtd-theme'] = 'dark';
-      }
-    });
-  });
-</script>
