@@ -5,21 +5,41 @@
   <link href="{{ site.baseurl }}/assets/vendor/fontawesome/css/solid.css" rel="stylesheet" />
   <!-- <link href="{{ site.baseurl }}/assets/vendor/fontawesome/css/brands.css" rel="stylesheet" /> -->
 
+<!-- TODO: Contribute to JtD. Needs a better location. -->
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    if (jtd && localStorage['jtd-theme']) {
+    if (!jtd) { return; }
+
+    // If the browser suggests a color scheme, and user hasn't saved/switch one yet..
+    if (window.matchMedia && !localStorage['jtd-theme']) {
+      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        jtd.setTheme('dark');
+      } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
+        jtd.setTheme('light');
+      }
+    } else if (localStorage['jtd-theme']) {
       jtd.setTheme(localStorage['jtd-theme']);
     }
 
-    const toggleDarkMode = document.querySelector('.js-toggle-dark-mode');
-    jtd.addEvent(toggleDarkMode, 'click', function() {
+    const toggleSchemeBtn = document.querySelector('.js-toggle-dark-mode');
+    jtd.addEvent(toggleSchemeBtn, 'click', function() {
       if (jtd.getTheme() === 'dark') {
         localStorage['jtd-theme'] = 'light';
         jtd.setTheme('light');
+        toggleSchemeBtn.textContent = '🌙 Dark Mode';
+        toggleSchemeBtn.ariaLabel = 'Switch to Dark Mode';
       } else {
         jtd.setTheme('dark');
         localStorage['jtd-theme'] = 'dark';
+        toggleSchemeBtn.textContent = '🔆 Light Mode';
+        toggleSchemeBtn.ariaLabel = 'Switch to Light Mode';
       }
+    });
+
+    const unsetColorScheme = document.querySelector('.js-unset-color-scheme');
+    jtd.addEvent(unsetColorScheme, 'click', function() {
+      delete localStorage['jtd-theme'];
+      jtd.setTheme('default');
     });
   });
 </script>
