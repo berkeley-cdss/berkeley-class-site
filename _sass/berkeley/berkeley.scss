@@ -99,3 +99,10 @@ summary {
 .text-lighter {
   color: $body-lighter-color;
 }
+
+a[target="_blank"]::after {
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  content: "\f08e";
+  padding: 0 0.25rem;
+}
