@@ -20,8 +20,6 @@ def summarize_results(results)
   end.flatten.tally
 end
 
-# rubocop:disable Metrics/AbcSize
-# rubocop:disable Metrics/MethodLength
 def group_results(results)
   all_cases_list = failing_specs(results).map do |ex|
     msg = ex['exception']['message']
@@ -43,9 +41,8 @@ def group_results(results)
   end
   results
 end
-# rubocop:enable Metrics/AbcSize
-# rubocop:enable Metrics/MethodLength
 
+# rubocop:enable Metrics/AbcSize
 def test_failures_with_pages(summary_group)
   summary_group.transform_values { |list| list.map { |h| h[:page] } }
 end
