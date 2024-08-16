@@ -1,14 +1,14 @@
 ---
 layout: page
-title: Just the Class
+title: Welcome!
 nav_exclude: true
-permalink: /:path/
+permalink: /
 seo:
   type: Course
-  name: Just the Class
+  name: Berkeley Class Site
 ---
 
-# Just the Class
+# UC Berkeley Class Site Template
 
 Just the Class is a GitHub Pages template developed for the purpose of quickly deploying course websites. In addition to serving plain web pages and files, it provides a boilerplate for:
 

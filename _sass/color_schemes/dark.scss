@@ -1,0 +1,58 @@
+// This file is coped from Just The Docs
+// Individual courses should not modify it!
+// All deviations should be documented.
+// https://github.com/just-the-docs/just-the-docs/blob/main/_sass/color_schemes/light.scss
+
+/////////// Do not modify this section.
+$color-scheme: dark;
+$body-background-color: $grey-dk-300;
+$body-heading-color: $grey-lt-000;
+$body-text-color: $grey-lt-300;
+// $link-color: $blue-000;
+$nav-child-link-color: $grey-dk-000;
+$sidebar-color: $grey-dk-300;
+$base-button-color: $grey-dk-250;
+// $btn-primary-color: $blue-200;
+$code-background-color: #31343f; // OneDarkJekyll default for syntax-one-dark-vivid
+$code-linenumber-color: #dee2f7; // OneDarkJekyll .nf for syntax-one-dark-vivid
+$feedback-color: darken($sidebar-color, 3%);
+$table-background-color: $grey-dk-250;
+$search-background-color: $grey-dk-250;
+$search-result-preview-color: $grey-dk-000;
+$border-color: $grey-dk-200;
+/////////////////// Add modifications below
+
+@import '../snytax_highliters/a11y-dark';
+
+// Override dark-mode variables here
+$berkeley-blue: #002676; // rgb(0, 38, 118);
+$grey-dk-400: #0C0A0E !default;
+$body-background-color: $grey-dk-400;
+$sidebar-color: $grey-dk-400;
+$search-background-color: $grey-dk-400;
+$body-text-color: $white;
+$body-lighter-color: darken($body-text-color, 20%);
+
+$link-color: #406FFE;
+$hover-focus-link-color: darken($link-color, 10%);
+
+// TODO(template): We need to figure out a much better solution!
+// This swaps the "dk" and "lt" variants from the original JTD files.
+$grey-lt-000: #959396;
+$grey-lt-100: #5c5962;
+$grey-lt-200: #44434d;
+$grey-lt-250: #302d36;
+$grey-lt-300: #27262b;
+
+$grey-dk-000: #f5f6fa;
+$grey-dk-100: #eeebee;
+$grey-dk-200: #ecebed;
+$grey-dk-300: #e6e1e8;
+
+$btn-primary-color: $berkeley-blue;
+$base-button-color: $grey-dk-200;
+
+// This is not great, but JTD forces $link-color
+.btn:not(.btn-outline) {
+  color: $btn-primary-color !important;
+}

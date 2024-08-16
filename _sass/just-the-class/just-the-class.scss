@@ -1,0 +1,12 @@
+// This file is common to Just The Class / theme styles.
+// You should not add CSS directly to this file.
+// You probably want to add files to _sass/custom/custom.scss
+
+// Just the Class dependencies
+@import 'card';
+
+// Just the Class styles
+@import 'announcement';
+@import 'module';
+@import 'schedule';
+@import 'staffer';

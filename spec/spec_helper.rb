@@ -17,15 +17,67 @@
 # See https://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 require 'rspec'
+require 'rack'
 require 'yaml'
+require 'webrick'
 
 require 'capybara/rspec'
-require 'rack/jekyll'
+require 'capybara/dsl'
+require 'capybara-screenshot/rspec'
+require 'capybara/session'
+
 require 'rack/test'
 require 'axe-rspec'
 require 'axe-capybara'
 
-RSPEC_CONFIG_FILE = '_config.yml' or ENV.fetch('RSPEC_CONFIG_FILE', nil)
+require_relative 'support/jekyll'
+
+# Used to set the path for a local webserver.
+# Update this if you move this file.
+REPO_ROOT = File.expand_path('../', __dir__)
+
+Capybara.register_driver :chrome_headless do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.add_argument('--headless')
+  options.add_argument('--no-sandbox')
+  options.add_argument('--disable-dev-shm-usage')
+  # MacBook Air ~13" screen size, with an absurd height to capture more content.
+  options.add_argument('--window-size=1280,4000')
+
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
+end
+
+# Change default_driver to :selenium_chrome if you want to actually see the tests running in a browser locally.
+# Should be :chrome_headless in CI though.
+Capybara.default_driver = :chrome_headless
+Capybara.javascript_driver = :chrome_headless
+
+Capybara::Screenshot.register_driver(:chrome_headless) do |driver, path|
+  driver.save_screenshot(path)
+end
+
+Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
+  # Highly specific to a11y specs: path-mode-wcag-version
+  # TODO: Find a nice way to name "index" pages, or consider using Capybara.page.title
+  page = example.example_group.top_level_description.gsub(' is accessible', '')
+  mode = example.example_group.description # i.e. light mode / dark mode
+  standard = example.description.split.last # i.e "meets WCAG 2.1"
+  test_case = "#{page}_#{mode}_#{standard}"
+  test_case = test_case.gsub(%r{^/}, '').gsub(%r{[/\s+]}, '-')
+
+  "tmp/capybara/screenshot_#{test_case}"
+end
+
+Capybara::Screenshot.autosave_on_failure = true
+Capybara::Screenshot.append_timestamp = false
+Capybara::Screenshot.prune_strategy = :keep_last_run
+
+# Setup for Capybara to serve static files served by Rack
+Capybara.server = :webrick
+Capybara.app = Rack::Builder.new do
+  use Rack::Lint
+  run StaticSite.new(REPO_ROOT)
+end.to_app
 
 RSpec.configure do |config|
   # Allow rspec to use `--only-failures` and `--next-failure` flags
@@ -58,36 +110,6 @@ RSpec.configure do |config|
   # inherited by the metadata hash of host groups and examples, rather than
   # triggering implicit auto-inclusion in groups with matching metadata.
   config.shared_context_metadata_behavior = :apply_to_host_groups
-
-  Capybara.register_driver :chrome_headless do |app|
-    options = Selenium::WebDriver::Chrome::Options.new
-    options.add_argument('--headless')
-    options.add_argument('--no-sandbox')
-    options.add_argument('--disable-dev-shm-usage')
-    # macbook air ~13" screen size
-    options.add_argument('--window-size=1280,800')
-
-    Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
-  end
-
-  # Change default_driver to :selenium_chrome if you want to actually see the tests running in a browser locally.
-  # Should be :chrome_headless in CI though.
-  Capybara.default_driver = :chrome_headless
-  Capybara.javascript_driver = :chrome_headless
-
-  # Configure Capybara to load the website through rack-jekyll.
-  # (force_build: true) builds the site before the tests are run,
-  # so our tests are always running against the latest version
-  # of our jekyll site.
-  jekyll_app = Rack::Jekyll.new(force_build: true, config: RSPEC_CONFIG_FILE)
-
-  # https://stackoverflow.com/questions/52506822/testing-a-jekyll-site-with-rspec-and-capybara-getting-a-bizarre-race-case-on-rs
-  sleep 0.1 while jekyll_app.compiling?
-
-  Capybara.app = jekyll_app
-
-  # Configure Capybara server (otherwise it will error and say to use webrick or puma)
-  Capybara.server = :webrick
 
   config.include Capybara::DSL
 end

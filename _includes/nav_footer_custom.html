@@ -1,9 +1,15 @@
 <!-- This file adds links at the bottom of the sidebar on the left. -->
 
 {% if site.class_archive_path %}
-<footer class="site-footer">
+<section class="site-footer py-1" aria-label="Footer: site archive">
   <a href="{{ site.class_archive_path }}"
     target="_blank" rel="noopener nofollow">View all course offerings
-    <i class="fa-solid fa-external-link" aria-hidden="true"></i></a>
-</footer>
+  </a>
+</section>
+{% endif %}
+
+{% if site.hide_color_scheme_toggle != 'true' %}
+  <div class="site-footer m-1">
+    {% include toggle-color-scheme.html %}
+  </div>
 {% endif %}

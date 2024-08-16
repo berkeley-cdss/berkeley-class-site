@@ -1,0 +1,136 @@
+/* a11y-light theme */
+/* Based on the Tomorrow Night Eighties theme: https://github.com/isagalaev/highlight.js/blob/master/src/styles/tomorrow-night-eighties.css */
+/* @author: ericwbailey */
+/* Adapted to pygments/rouge by @cycomachead */
+
+:root {
+  --pygments-a11y-bg-color: #fefefe;
+  --pygments-a11y-light-on-dark: #FFF; /* Used for errors */
+  --pygments-a11y-light-gray: #696969; /* comments */
+  --pygments-a11y-dark-gray: #545454;
+  --pygments-a11y-purple: #7928a1;
+  --pygments-a11y-blue: #007faa;
+  --pygments-a11y-green: #008000;
+  --pygments-a11y-yellow: #aa5d00; /* attributes */
+  --pygments-a11y-orange: #aa5d00;
+  --pygments-a11y-red: #d91e18;
+}
+
+.highlight,
+pre.highlight {
+  background: var(--pygments-a11y-bg-color);
+  color: var(--pygments-a11y-dark-gray);
+}
+
+.highlight pre,
+.highlight .hll,
+.highlight .w {
+  background: var(--pygments-a11y-bg-color);
+}
+
+.highlight .c {
+  color: var(--pygments-a11y-light-gray);
+  font-style: italic;
+}
+
+.highlight .err {
+  color: var(--pygments-a11y-light-on-dark);
+  background-color: var(--pygments-a11y-red);
+}
+
+.highlight .k,
+.highlight .kc,
+.highlight .kd,
+.highlight .kn,
+.highlight .kp,
+.highlight .kr,
+.highlight .kt {
+  color: var(--pygments-a11y-purple);
+}
+
+.highlight .n,
+.highlight .o,
+.highlight .p,
+.highlight .nf,
+.highlight .nn,
+.highlight .nx {
+  color: var(--pygments-a11y-dark-gray);
+}
+
+.highlight .cm,
+.highlight .cp,
+.highlight .c1,
+.highlight .cs {
+  color: var(--pygments-a11y-light-gray);
+  font-style: italic;
+}
+
+.highlight .ge {
+  font-style: italic;
+}
+
+.highlight .gs,
+.highlight .ow {
+  font-weight: 700;
+}
+
+.highlight .l,
+.highlight .ld,
+.highlight .s,
+.highlight .sb,
+.highlight .sc,
+.highlight .sd,
+.highlight .s2,
+.highlight .se,
+.highlight .sh,
+.highlight .si,
+.highlight .sx,
+.highlight .s1 {
+  color: var(--pygments-a11y-green);
+}
+
+.highlight .bp,
+.highlight .nb,
+.highlight .nc,
+.highlight .no,
+.highlight .nd,
+.highlight .ni,
+.highlight .ne,
+.highlight .nl,
+.highlight .nv,
+.highlight .py,
+.highlight .vc,
+.highlight .vg {
+  color: var(--pygments-a11y-orange); /* #ca7601; */
+}
+
+.highlight .gd,
+.highlight .nt,
+.highlight .vi,
+.highlight .language-json .w + .s2 {
+  color: var(--pygments-a11y-red); /* #e35549 */
+}
+
+.highlight .il,
+.highlight .m,
+.highlight .mf,
+.highlight .mh,
+.highlight .mi,
+.highlight .mo,
+.highlight .na {
+  color: var(--pygments-a11y-yellow); /* #b66a00 */
+}
+
+.highlight .sr,
+.highlight .ss,
+.highlight .language-json .kc {
+  color: var(--pygments-a11y-blue); /*#0083bb */
+}
+
+.highlight .gu {
+  color: var(--pygments-a11y-light-gray); /* was #75715e kind of dark yellow */
+}
+
+.highlight .gi {
+  color: var(--pygments-a11y-green); /* was #43d089 seafoam ish */
+}

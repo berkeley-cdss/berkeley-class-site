@@ -1,0 +1,108 @@
+// This config applies to all berkeley courses.
+// It is loaded *after* all Just-the-class customizations
+
+// UC Berkeley fonts 'Inter' (sans serif) 'Source Serif' (serif), and 'Source Code Pro' (monospace)
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap');
+
+// Override default JTD CSS for larger/more accessibile fonts.
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: $body-font-family;
+  font-size: inherit;
+  line-height: $body-line-height;
+  color: $body-text-color;
+  background-color: $body-background-color;
+  overflow-wrap: break-word;
+}
+
+// Link Colors
+a,
+.main-content .anchor-heading svg {
+  color: $link-color;
+
+  &:hover,
+  &:focus {
+    color: $hover-focus-link-color;
+  }
+}
+
+a:not([class]):hover {
+  text-decoration-color: lighten($link-color, 20%);
+}
+
+h1, h2, h3, h4, h5, h6,
+.serif {
+  font-family: $serif-font-family;
+}
+
+// Override JTD to be darker
+.label-green:not(g) {
+  background-color: $green-300;
+}
+
+.label-red:not(g) {
+  background-color: $red-300;
+}
+
+code {
+  padding: 0.2em 0.4em;
+  border: none;
+}
+
+iframe {
+  max-width: 100%;
+}
+
+details {
+  @extend .mb-4;
+}
+
+summary {
+  @extend .btn, .btn-outline;
+
+  width: 100%;
+}
+
+.main-content-wrap {
+  max-width: $content-width;
+  margin: auto;
+}
+
+.main-content {
+  dl {
+    display: block;
+    grid-template-columns: none;
+  }
+
+  dt {
+    font-weight: 700;
+    text-align: start;
+
+    &::after {
+      content: normal;
+    }
+  }
+
+  dd {
+    font-weight: normal;
+
+    + dt {
+      margin-top: 1em;
+    }
+  }
+}
+
+// This is intended to be used for the footer
+.text-lighter {
+  color: $body-lighter-color;
+}
+
+a[target="_blank"]::after {
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  content: "\f08e";
+  padding: 0 0.25rem;
+}
