@@ -57,9 +57,15 @@ Capybara::Screenshot.register_driver(:chrome_headless) do |driver, path|
 end
 
 Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
-  page = example.example_group.top_level_description.gsub(%r{^/}, '').gsub('/', '-').gsub(' is accessible', '')
-  standards = example.description.split.last
-  "tmp/capybara/screenshot_#{page}_#{standards}"
+  # Highly specific to a11y specs: path-mode-wcag-version
+  # TODO: Find a nice way to name "index" pages, or consider using Capybara.page.title
+  page = example.example_group.top_level_description.gsub(' is accessible', '')
+  mode = example.example_group.description # i.e. light mode / dark mode
+  standard = example.description.split.last # i.e "meets WCAG 2.1"
+  test_case = "#{page}_#{mode}_#{standard}"
+  test_case = test_case.gsub(%r{^/}, '').gsub(%r{[/\s+]}, '-')
+
+  "tmp/capybara/screenshot_#{test_case}"
 end
 
 Capybara::Screenshot.autosave_on_failure = true

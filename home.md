@@ -1,11 +1,11 @@
 ---
 layout: page
-title: Just the Class
+title: Welcome!
 nav_exclude: true
-permalink: /:path/
+permalink: /
 seo:
   type: Course
-  name: Just the Class
+  name: Berkeley Class Site
 ---
 
 # UC Berkeley Class Site Template
