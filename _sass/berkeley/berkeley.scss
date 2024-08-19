@@ -21,7 +21,7 @@ body {
 // Link Colors
 a,
 .main-content .anchor-heading svg {
-  color: #FFF;
+  color: $link-color;
 
   &:hover,
   &:focus {
