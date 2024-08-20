@@ -118,10 +118,30 @@ defaults:
     values:
       layout: announcement
 
+
 ######################################################################
 # Just the Docs / Berkeley Class Site Common Config
 # Options below here will likely not need to be configured..
 ######################################################################
+# TODO(template): We should clean these up + standardize...
+# TODO(setup): You may want to add additional
+callouts_level: quiet # or loud
+callouts:
+  highlight:
+    color: yellow
+  important:
+    title: Important
+    color: blue
+  new:
+    title: New
+    color: green
+  note:
+    title: Note
+    color: purple
+  warning:
+    title: Warning
+    color: red
+
 # TODO(template): CSS compilations. Handle warnings...
 sass:
   style: expanded
@@ -190,5 +210,6 @@ exclude:
   - README.md
   - CONTRIBUTING.md
   - tmp/
+  - script/
   - spec/
   - node_modules/
