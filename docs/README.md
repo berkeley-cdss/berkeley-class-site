@@ -1,4 +1,17 @@
+---
+title: Documentation
+permalink: /docs/
+published: true
+layout: page
+has_children: true
+---
+
 # Berkeley Class Site
+
+{: .important-title }
+> Don't Publish These Docs
+>
+> This folder (`docs/`) is _published_ in the berkeley-class-site repo for readability, and to add as further test cases. It is recommended that you remove `docs/` from you local course websites, or set `published: false` on these files.
 
 The documentation here is a brief overview for course staff.
 Most

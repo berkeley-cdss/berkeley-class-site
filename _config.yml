@@ -191,5 +191,4 @@ exclude:
   - CONTRIBUTING.md
   - tmp/
   - spec/
-  - docs/
   - node_modules/
