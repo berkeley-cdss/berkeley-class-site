@@ -17,4 +17,4 @@ if [ -f Gemfile ]; then
     bundle install
 fi
 
-bundle exec jekyll serve --force-polling
+bundle exec jekyll serve --force-polling --baseurl=''
