@@ -5,8 +5,8 @@ description: Class schedule.
 nav_order: 2
 ---
 
-# Weekly Schedule
+# Weekly Calendar
 
-{% for schedule in site.schedules %}
-  {{ schedule }}
+{% for calendar in site.calendars %}
+  {{ calendar }}
 {% endfor %}

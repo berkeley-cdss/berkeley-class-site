@@ -62,7 +62,7 @@ collections:
   staffers:
     sort_by: name
   modules:
-  schedules:
+  calendars:
   announcements:
   labs:
     output: true
@@ -109,9 +109,9 @@ defaults:
       layout: module
   - scope:
       path: ''
-      type: schedules
+      type: calendars
     values:
-      layout: schedule
+      layout: calendar
   - scope:
       path: ''
       type: announcements
