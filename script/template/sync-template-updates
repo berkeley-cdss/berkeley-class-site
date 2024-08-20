@@ -1,0 +1,12 @@
+#! /usr/bin/env bash
+
+# This script syncs your repo to updates in the template.
+
+echo "Checking out new branch 'sync-template-updates'"
+git checkout -b sync-template-updates
+
+# Add the template remote, if not present
+git config remote.foo.url >&- || git remote add template git@github.com:berkeley-cdss/berkeley-class-site.git
+# Sync from the template
+git fetch --all
+git merge template/main --allow-unrelated-histories

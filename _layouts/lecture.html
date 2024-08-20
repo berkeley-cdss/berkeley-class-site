@@ -1,0 +1,61 @@
+---
+layout: default
+nav_exclude: true
+---
+
+<div class="lecture">
+  <h1 class="title">Lecture {{page.number}} - {{page.title}}</h1>
+  {% if page.presented_by or page.date %}
+  <div class="subhead mb-3">
+    Presented
+    {% if page.presented_by %}
+    by {{ page.presented_by }}
+    {% endif %}
+    {% if page.date %}
+    on {{ page.date | date_to_long_string: "ordinal", "US" }}
+    {% endif %}
+  </div>
+  {% endif %}
+
+  {% if page.recording %}
+  <span class="fs-5 m-1">
+    <a href="{{ page.recording }}" target="_blank" class="btn btn-blue">
+      <i class="fa-solid fa-video" aria-hidden="true"></i>
+      View Recording
+    </a>
+  </span>
+  {% endif %}
+
+  <section>
+    <h2>Materials</h2>
+    <ul>
+      {% if page.files.slides %}
+        <li><a href="{{ page.files.slides }}" target="_blank">Slides</a></li>
+      {% endif %}
+      {% if page.files.pdf_slides %}
+      <li><a href="{{ page.files.pdf_slides }}" target="_blank">Slides (PDF)</a></li>
+      {% endif %}
+      {% if page.files.notes %}
+      <li><a href="{{ page.files.notes }}" target="_blank">Notes</a></li>
+      {% endif %}
+      {% if page.files.code %}
+      <li><a href="{{ page.files.code }}">Code</a></li>
+      {% endif %}
+      {% if page.files.code_html %}
+      <li><a href="{{ page.files.code_html }}">Code (HTML)</a></li>
+      {% endif %}
+      {% if page.files.jupyter_notebook %}
+      <li><a href="{{ page.files.jupyter_notebook }}" target="_blank">Jupyter Notebook</a></li>
+      {% endif %}
+      {% if page.files.additional_files %}
+        {% for item in page.files.additional_files %}
+          {% if item.name and item.link %}
+          <li><a href="{{ item.link }}" target="{{ item.target }}">{{ item.name }}</a></li>
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    </ul>
+  </section>
+
+  {{ content }}
+</div>

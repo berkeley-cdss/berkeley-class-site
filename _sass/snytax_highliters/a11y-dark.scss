@@ -1,19 +1,21 @@
-/* a11y-light theme */
+/* a11y-dark theme */
 /* Based on the Tomorrow Night Eighties theme: https://github.com/isagalaev/highlight.js/blob/master/src/styles/tomorrow-night-eighties.css */
 /* @author: ericwbailey */
 /* Adapted to pygments/rouge by @cycomachead */
 
+$code-background-color: #2b2b2b;
+
 :root {
-  --pygments-a11y-bg-color: #fefefe;
-  --pygments-a11y-light-on-dark: #FFF; /* Used for errors */
-  --pygments-a11y-light-gray: #696969; /* comments */
-  --pygments-a11y-dark-gray: #545454;
-  --pygments-a11y-purple: #7928a1;
-  --pygments-a11y-blue: #007faa;
-  --pygments-a11y-green: #008000;
-  --pygments-a11y-yellow: #aa5d00; /* attributes */
-  --pygments-a11y-orange: #aa5d00;
-  --pygments-a11y-red: #d91e18;
+  --pygments-a11y-bg-color: $code-background-color;
+  --pygments-a11y-dark-on-light: #000; /* Used for errors */
+  --pygments-a11y-light-gray: #d4d0ab; /* comments */
+  --pygments-a11y-dark-gray: #f8f8f2;
+  --pygments-a11y-purple: #dcc6e0;
+  --pygments-a11y-blue: #00e0e0;
+  --pygments-a11y-green: #abe338;
+  --pygments-a11y-yellow: #ffd700; /* attributes */
+  --pygments-a11y-orange: #f5ab35;
+  --pygments-a11y-red: #ffa07a;
 }
 
 .highlight,
@@ -34,7 +36,7 @@ pre.highlight {
 }
 
 .highlight .err {
-  color: var(--pygments-a11y-light-on-dark);
+  color: var(--pygments-a11y-dark-on-light);
   background-color: var(--pygments-a11y-red);
 }
 
