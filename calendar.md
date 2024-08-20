@@ -1,12 +1,12 @@
 ---
 layout: page
 title: Calendar
-description: Listing of course modules and topics.
-nav_order: 1
+description: Class schedule.
+nav_order: 2
 ---
 
-# Calendar
+# Weekly Schedule
 
-{% for module in site.modules %}
-{{ module }}
+{% for schedule in site.schedules %}
+  {{ schedule }}
 {% endfor %}
