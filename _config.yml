@@ -38,7 +38,7 @@ gradescope_course_id: 123456 # you can find this in the Gradescope URL after /co
 bcourses_course_id: 123456 # Same as above, but for bCourses. Leave blank if not in use...
 ed_course_id: 123456 # Again, same as above.
 sememster: spYY | suYY | faYY # set for the current seemester
-#
+# TODO(template): We need to set this up.
 course_logo_path:
 # This should be one of eecs, dsus, stat
 # (Future) This will control some footer text, and later custom styling.
@@ -69,7 +69,6 @@ collections:
     sort_by: name
   modules:
   calendars:
-    output: false
   announcements:
   labs:
     output: true
@@ -142,7 +141,7 @@ callouts:
     color: yellow
   important:
     title: Important
-    color: "blue"
+    color: blue
   new:
     title: New
     color: green
