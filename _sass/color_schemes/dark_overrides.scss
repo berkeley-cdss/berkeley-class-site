@@ -1,0 +1,8 @@
+
+@mixin dark-mode-overrides {
+
+  p.important-title > p:first-child,
+  blockquote.important-title > p:first-child {
+    color: #8975FF;
+  }
+}

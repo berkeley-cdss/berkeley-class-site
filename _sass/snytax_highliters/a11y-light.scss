@@ -3,13 +3,17 @@
 /* @author: ericwbailey */
 /* Adapted to pygments/rouge by @cycomachead */
 
+// Todo this is a bit too light.
+// This needs to be set for other files.
+$code-background-color: #fafafa;
+
 :root {
-  --pygments-a11y-bg-color: #fefefe;
+  --pygments-a11y-bg-color: $code-background-color;
   --pygments-a11y-light-on-dark: #FFF; /* Used for errors */
   --pygments-a11y-light-gray: #696969; /* comments */
   --pygments-a11y-dark-gray: #545454;
   --pygments-a11y-purple: #7928a1;
-  --pygments-a11y-blue: #007faa;
+  --pygments-a11y-blue: #007f95;
   --pygments-a11y-green: #008000;
   --pygments-a11y-yellow: #aa5d00; /* attributes */
   --pygments-a11y-orange: #aa5d00;
@@ -17,9 +21,12 @@
 }
 
 .highlight,
-pre.highlight {
+.highlight pre,
+.highlight pre.highlight {
   background: var(--pygments-a11y-bg-color);
   color: var(--pygments-a11y-dark-gray);
+  border: 1px solid var(--pygments-a11y-dark-gray);
+  border-radius: 4px;
 }
 
 .highlight pre,

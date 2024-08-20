@@ -8,5 +8,11 @@
 @import '../just-the-class/just-the-class';
 @import '../berkeley/berkeley';
 
+@import '../color_schemes/dark_overrides';
+
+@if $color-scheme == dark {
+  @include dark-mode-overrides;
+}
+
 // Place all of your course-specific CSS here.
 @import './course_overrides';
