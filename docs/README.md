@@ -23,9 +23,9 @@ This website is built using [Jekyll][jekyll] and deployed to [GitHub Pages][gh_p
 
 ## Tasks for each semester:
 
-- [ ] Make a new respository.
+- Make a new respository.
   - Start by clicking "Use Template" on berkeley-class-site"
   - It is easiest to name it the semester shortcut, like `fa24`, i.e. the `baseurl` of your website.
-- [ ] Search the repo for `TODO(setup)`
-- [ ] Copy files from previous semester.
-- [ ] More to come.
+- Search the repo for `TODO(setup)`
+- Copy files from previous semester.
+- More to come.
