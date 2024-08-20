@@ -15,7 +15,7 @@
 # in the templates via {{ site.myvariable }}.
 
 # TODO(setup): Typically the course number, "DEPT XXX". it appears on nearly every page. Keep it short. :)
-title: Berkeley Class Site
+title: A Berkeley Course
 # TODO:(setup): This should be the extended title of your course. e.g. "Introduction to Data Science"
 tagline: A Jekyll template for course websites
 description: A modern, highly customizable, responsive Jekyll template for course websites
@@ -38,6 +38,8 @@ gradescope_course_id: 123456 # you can find this in the Gradescope URL after /co
 bcourses_course_id: 123456 # Same as above, but for bCourses. Leave blank if not in use...
 ed_course_id: 123456 # Again, same as above.
 sememster: spYY | suYY | faYY # set for the current seemester
+#
+course_logo_path:
 # This should be one of eecs, dsus, stat
 # (Future) This will control some footer text, and later custom styling.
 course_department: dsus
@@ -53,20 +55,29 @@ aux_links:
     - 'https://edstem.org'
   OH Queue:
     - 'https://oh.c88c.org'
-  Berkeley Class Site on GitHub:
+  View Template on GitHub:
     - 'https://github.com/berkeley-eecs/berkeley-class-site'
 
+# TODO(template): These need to be documented
+# TODO(semester): You may want to review these...
+berkeley_theme_options:
+  show_logo_in_sidebar: true
 
 # Collections for website data
 collections:
   staffers:
     sort_by: name
   modules:
-  schedules:
+  calendars:
+    output: false
   announcements:
   labs:
     output: true
     permalink: /:collection/:path/
+  lectures:
+    output: true
+    sort_by: number # Date could work...
+    permalink: /lectures/:path/
   hw:
     output: true
     permalink: /:collection/:path/
@@ -109,19 +120,39 @@ defaults:
       layout: module
   - scope:
       path: ''
-      type: schedules
+      type: calendars
     values:
-      layout: schedule
+      layout: calendar
   - scope:
       path: ''
       type: announcements
     values:
       layout: announcement
 
+
 ######################################################################
 # Just the Docs / Berkeley Class Site Common Config
 # Options below here will likely not need to be configured..
 ######################################################################
+# TODO(template): We should clean these up + standardize...
+# TODO(setup): You may want to add additional
+callouts_level: quiet # or loud
+callouts:
+  highlight:
+    color: yellow
+  important:
+    title: Important
+    color: blue
+  new:
+    title: New
+    color: green
+  note:
+    title: Note
+    color: purple
+  warning:
+    title: Warning
+    color: red
+
 # TODO(template): CSS compilations. Handle warnings...
 sass:
   style: expanded
@@ -190,6 +221,6 @@ exclude:
   - README.md
   - CONTRIBUTING.md
   - tmp/
+  - script/
   - spec/
-  - docs/
   - node_modules/
