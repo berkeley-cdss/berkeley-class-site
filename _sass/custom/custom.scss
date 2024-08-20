@@ -14,5 +14,13 @@
   @include dark-mode-overrides;
 }
 
+div.highlighter-rouge {
+  overflow-x: auto;
+}
+
+div.highlighter-rouge div.highlight {
+  overflow-x: unset;
+}
+
 // Place all of your course-specific CSS here.
 @import './course_overrides';

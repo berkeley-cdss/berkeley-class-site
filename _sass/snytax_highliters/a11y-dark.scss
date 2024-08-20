@@ -3,8 +3,10 @@
 /* @author: ericwbailey */
 /* Adapted to pygments/rouge by @cycomachead */
 
+$code-background-color: #2b2b2b;
+
 :root {
-  --pygments-a11y-bg-color: #2b2b2b;
+  --pygments-a11y-bg-color: $code-background-color;
   --pygments-a11y-dark-on-light: #000; /* Used for errors */
   --pygments-a11y-light-gray: #d4d0ab; /* comments */
   --pygments-a11y-dark-gray: #f8f8f2;
