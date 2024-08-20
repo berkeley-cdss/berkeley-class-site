@@ -84,6 +84,14 @@ collections:
     output: true
     permalink: /:collection/:path/
 
+# The sitemap **must** be enabled. It's published as /baseurl/sitemap.xml
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-github-metadata
+  - jekyll-include-cache
+  - jekyll-jupyter-notebook
+
 # Default layouts for each collection type
 defaults:
   - scope:
@@ -159,13 +167,6 @@ sass:
   sourcemap: always
   quiet_deps: true
   verbose: false
-
-# The sitemap **must** be enabled. It's published as /baseurl/sitemap.xml
-plugins:
-  - jekyll-sitemap
-  - jekyll-seo-tag
-  - jekyll-github-metadata
-  - jekyll-include-cache
 
 # Theme settings
 theme: just-the-docs
