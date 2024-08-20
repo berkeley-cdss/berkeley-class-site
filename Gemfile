@@ -11,6 +11,8 @@ gem 'webrick'
 group :jekyll_plugins do
   gem 'jekyll-github-metadata', '~> 2.16'
   gem 'jekyll-sitemap'
+  gem 'jekyll-redirect-from'
+  gem 'jemoji'
   gem 'just-the-docs'
 end
 

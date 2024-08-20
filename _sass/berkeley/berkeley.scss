@@ -100,9 +100,13 @@ summary {
   color: $body-lighter-color;
 }
 
-a[target="_blank"]::after {
+a[target="_blank"]:not(.btn)::after {
   font-family: 'Font Awesome 6 Free';
   font-weight: 900;
   content: "\f08e";
   padding: 0 0.25rem;
+}
+
+.lecture .subhead {
+  @extend h3
 }
