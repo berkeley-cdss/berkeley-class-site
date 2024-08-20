@@ -108,6 +108,8 @@ GEM
       octokit (>= 4, < 7, != 4.4.0)
     jekyll-include-cache (0.2.1)
       jekyll (>= 3.7, < 5.0)
+    jekyll-jupyter-notebook (0.0.6)
+      jekyll
     jekyll-redirect-from (0.16.0)
       jekyll (>= 3.3, < 5.0)
     jekyll-sass-converter (3.0.0)
@@ -258,6 +260,7 @@ DEPENDENCIES
   faraday-retry (~> 2.2)
   jekyll (~> 4)
   jekyll-github-metadata (~> 2.16)
+  jekyll-jupyter-notebook
   jekyll-redirect-from
   jekyll-sitemap
   jemoji
