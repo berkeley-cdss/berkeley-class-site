@@ -14,12 +14,19 @@
   @include dark-mode-overrides;
 }
 
+
 div.highlighter-rouge {
   overflow-x: auto;
 }
 
 div.highlighter-rouge div.highlight {
   overflow-x: unset;
+}
+
+// Wrap code blocks on small screens.
+pre.highlight > code {
+  white-space: pre-wrap;
+  word-break: break-all;
 }
 
 // Place all of your course-specific CSS here.
