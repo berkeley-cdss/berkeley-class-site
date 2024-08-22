@@ -87,10 +87,7 @@ plugins:
   - jekyll-include-cache
   - jekyll-jupyter-notebook
 
-# TODO(template):
-katex: true
-katex_macros:
-  # put macros here..
+# https://github.com/yagarea/jektex
 
 # Default layouts for each collection type
 defaults:
