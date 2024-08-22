@@ -87,6 +87,11 @@ plugins:
   - jekyll-include-cache
   - jekyll-jupyter-notebook
 
+# TODO(template):
+katex: true
+katex_macros:
+  # put macros here..
+
 # Default layouts for each collection type
 defaults:
   - scope:
@@ -190,6 +195,7 @@ compress_html:
   profile: false
 
 kramdown:
+  gfm_emojis: true
   math_engine: katex
   math_engine_opts:
   syntax_highlighter: rouge
