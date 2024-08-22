@@ -18,7 +18,6 @@
 
 require 'rspec'
 require 'rack'
-require 'yaml'
 require 'webrick'
 
 require 'capybara/rspec'
@@ -34,7 +33,8 @@ require_relative 'support/jekyll'
 
 # Used to set the path for a local webserver.
 # Update this if you move this file.
-REPO_ROOT = File.expand_path('../', __dir__)
+DESTINATION = 'tmp/_site_specs/'
+FILE_SERVER_ROOT = File.expand_path("../#{DESTINATION}", __dir__)
 
 Capybara.register_driver :chrome_headless do |app|
   options = Selenium::WebDriver::Chrome::Options.new
@@ -62,21 +62,22 @@ Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
   page = example.example_group.top_level_description.gsub(' is accessible', '')
   mode = example.example_group.description # i.e. light mode / dark mode
   standard = example.description.split.last # i.e "meets WCAG 2.1"
-  test_case = "#{page}_#{mode}_#{standard}"
-  test_case = test_case.gsub(%r{^/}, '').gsub(%r{[/\s+]}, '-')
-
-  "tmp/capybara/screenshot_#{test_case}"
+  test_case = "#{page}_#{mode}_#{standard}".gsub(%r{^/}, '').gsub(%r{[/\s+]}, '-')
+  "screenshot_#{test_case}"
 end
 
+Capybara.save_path = 'tmp/capybara/'
 Capybara::Screenshot.autosave_on_failure = true
 Capybara::Screenshot.append_timestamp = false
 Capybara::Screenshot.prune_strategy = :keep_last_run
 
-# Setup for Capybara to serve static files served by Rack
+# Use Rack to serve static files from within the build directory.
+# This supports "clean" URLs which serve /path/ from /path/index.html
 Capybara.server = :webrick
 Capybara.app = Rack::Builder.new do
   use Rack::Lint
-  run StaticSite.new(REPO_ROOT)
+  use Rack::Static, { urls: ['/'], root: FILE_SERVER_ROOT, index: 'index.html' }
+  run Rack::Files.new(FILE_SERVER_ROOT)
 end.to_app
 
 RSpec.configure do |config|
