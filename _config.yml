@@ -58,11 +58,6 @@ aux_links:
   View Template on GitHub:
     - 'https://github.com/berkeley-eecs/berkeley-class-site'
 
-# TODO(template): These need to be documented
-# TODO(semester): You may want to review these...
-berkeley_theme_options:
-  show_logo_in_sidebar: true
-
 # Collections for website data
 collections:
   staffers:
@@ -194,13 +189,16 @@ compress_html:
   blanklines: false
   profile: false
 
+kramdown:
+  math_engine: katex
+  math_engine_opts:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+
+
 # Native Jeykll build options
 # You likely shouldn't need to touch these, but they are documented here just in case.
 # https://jekyllrb.com/docs/configuration/options/
-
-# This makes it easier when pushing to a static directory.
-# The default false removes files in that directory, which is useful for when you unpublish pages.
-# keep_files: false
 
 # Likely not necessary, but a google default for Berkeley
 timezone: America/Los_Angeles
