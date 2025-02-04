@@ -38,8 +38,6 @@ gradescope_course_id: 123456 # you can find this in the Gradescope URL after /co
 bcourses_course_id: 123456 # Same as above, but for bCourses. Leave blank if not in use...
 ed_course_id: 123456 # Again, same as above.
 sememster: spYY | suYY | faYY # set for the current seemester
-# TODO(template): We need to set this up.
-course_logo_path:
 # This should be one of eecs, dsus, stat
 # (Future) This will control some footer text, and later custom styling.
 course_department: dsus
@@ -85,7 +83,8 @@ plugins:
   - jekyll-seo-tag
   - jekyll-github-metadata
   - jekyll-include-cache
-  - jekyll-jupyter-notebook
+  # - jekyll-jupyter-notebook
+  # - jetex # uses KaTeX
 
 # https://github.com/yagarea/jektex
 

@@ -33,7 +33,7 @@ end
 module Jekyll
   # Jekyll::ConfigValidator class definition (see docs at the top of file)
   class ConfigValidator
-    SEMESTER_REGEXP = /(wi|sp|su|fa)\d\d$/
+    SEMESTER_REGEXP = /\/?(wi|sp|su|fa)\d\d$/
     VALID_COURSE_DEPARTMENT = %w[eecs dsus stat].freeze
     VALID_COLOR_SCHEME = %w[light dark].freeze
 
@@ -67,7 +67,7 @@ module Jekyll
     end
 
     def validate_keys!
-      required_keys = %i[baseurl course_department]
+      required_keys = %i[baseurl plugins course_department]
       required_keys.each do |key|
         errors << "#{key} is missing from site config" unless @config.key?(key.to_s)
       end
@@ -100,6 +100,7 @@ end
 
 Jekyll::Hooks.register [:site], :after_init do |site|
   next if ENV['JEKYLL_ENV'] == 'production'
+  next if site.config['SKIP_CONFIG_VALIDATION'] == 'true'
 
   Jekyll::ConfigValidator.new(site.config).validate
 end

@@ -11,6 +11,7 @@ def site_config
     'destination' => DESTINATION,
     'url' => '',
     'baseurl' => '/',
+    'SKIP_CONFIG_VALIDATION' => 'true'.
     'sass' => { 'quiet_deps' => true },
   })
 end
