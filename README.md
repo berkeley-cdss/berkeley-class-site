@@ -7,6 +7,15 @@ A template for UC Berkeley class websites (with a focus on EECS/CS/DS courses).
 
 ## Installation
 
+### Install Ruby and Bundler
+**The berkeley-class-site template requires Ruby 3.3.7 or higher and bundler >= 2.6**
+Install Ruby before continuing. You can check your Ruby version by running:
+
+```bash
+ruby --version
+bundle --version
+```
+
 Prerequisites:
 
 - You have everything that [Jekyll requires](https://jekyllrb.com/docs/installation/)
@@ -18,6 +27,7 @@ Prerequisites:
 git clone git@github.com:YOUR_GITHUB_USERNAME/YOUR_REPO.git
 ```
 3. Install dependencies:
+
 ```
 cd YOUR_REPO
 bundle install
