@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+ruby file: '.tool-versions'
+
 source 'https://rubygems.org'
 
 # Gems at the top are used to build the site.
