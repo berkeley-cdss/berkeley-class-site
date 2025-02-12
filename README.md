@@ -41,6 +41,8 @@ To run the site locally, run:
 bundle exec jekyll serve
 ```
 
+Note that if you alter `_config.yml`, you will need to rerun the above command to see the changes reflected.
+
 Search throughout the repository for TODO items called `TODO(setup)` and complete them to customize the site for your course.
 
 ## Deployment
