@@ -1,7 +1,7 @@
 # Berkeley Class Site
 
 [![Pages Deployment](https://github.com/berkeley-cdss/berkeley-class-site/actions/workflows/jekyll.yml/badge.svg)](https://github.com/berkeley-cdss/berkeley-class-site/actions/workflows/jekyll.yml) •
-[![a11y specs](https://github.com/berkeley-eecs/berkeley-class-site/actions/workflows/rspec.yml/badge.svg)](https://github.com/berkeley-eecs/berkeley-class-site/actions/workflows/rspec.yml)
+[![a11y specs](https://github.com/berkeley-cdss/berkeley-class-site/actions/workflows/rspec.yml/badge.svg)](https://github.com/berkeley-cdss/berkeley-class-site/actions/workflows/rspec.yml)
 
 A template for UC Berkeley class websites (with a focus on EECS/CS/DS courses).
 
@@ -40,6 +40,8 @@ To run the site locally, run:
 ```
 bundle exec jekyll serve
 ```
+
+Note that if you alter `_config.yml`, you will need to rerun the above command to see the changes reflected.
 
 Search throughout the repository for TODO items called `TODO(setup)` and complete them to customize the site for your course.
 
