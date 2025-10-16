@@ -108,5 +108,12 @@ a[target="_blank"]:not(.btn)::after {
 }
 
 .lecture .subhead {
-  @extend h3
+  @extend h3;
+}
+
+// Full Calendar Overrides...
+// Kind of small font until we fix the calendar....
+.fc-v-event .fc-event-title,
+.fc-v-event .fc-event-time {
+  font-size: 0.8em;
 }

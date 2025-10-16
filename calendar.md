@@ -1,12 +1,20 @@
 ---
-layout: page
-title: Calendar
-description: Class schedule.
+layout: page 
+title: Calendar (Static)
+description: Lecture, Discussion and OH schedules
 nav_order: 2
 ---
 
-# Weekly Calendar
+# Calendar (Static)
+Use this calendar if you want a static version for your class. This works better if your class's schedule doesn't change from week to week and if you don't want to maintain a Google Calendar.
 
 {% for calendar in site.calendars %}
   {{ calendar }}
 {% endfor %}
+
+<!-- {: .fs-4}
+<a class="btn btn-blue" href="https://calendar.google.com/calendar?cid={{ site.google_calendar.google_calendar_id }}" target="_blank">Add to Google Calendar</a> -->
+
+
+<!-- This page must include an element with a #full-calendar id -->
+<!-- <div id="full-calendar" style="width: 100%"></div> -->
