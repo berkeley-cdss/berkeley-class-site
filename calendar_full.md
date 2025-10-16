@@ -1,5 +1,5 @@
 ---
-layout: fullcalendar
+layout: calendar_full
 title: Calendar (Google)
 description: Lecture, Discussion and OH schedules
 nav_order: 3
