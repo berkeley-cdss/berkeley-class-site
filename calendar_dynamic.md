@@ -1,6 +1,6 @@
 ---
 layout: calendar_dynamic
-title: Calendar (Google)
+title: Calendar (Dynamic)
 description: Lecture, Discussion and OH schedules
 nav_order: 3
 ---
