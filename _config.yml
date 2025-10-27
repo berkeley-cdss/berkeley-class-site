@@ -63,6 +63,54 @@ aux_links:
 berkeley_theme_options:
   show_logo_in_sidebar: true
 
+# TODO(template): Copy class information to the template.
+google_calendar:
+  # This can be found in the settings for the calendar.
+  # The calendar must be publicly readable.
+  google_calendar_id: data101@berkeley.edu
+  # You need to make this, once per course, ideally via a SPA
+  # TODO: Recommend adding link to Google cloud project here
+  google_api_key: AIzaSyD1Tw4oJZfxn7RvCEkubEspj2dsmD033Uw
+  # These are processed in order, top-to-bottom, first match applies
+  # The prefix/suffix matches the Google Calendar event *title*
+  # You may use only prefix OR suffix, see fullcalendar.js
+  event_types:
+    - suffix: Lecture
+      background_color: '9FD1FF' # Blue light
+      text_color: '000'
+      class: cal-lecture
+      icon: fa-school
+    - suffix: Tea Hours
+      background_color: 'FFE88D' # gold light
+      text_color: '000'
+      class: cal-tea-oh
+      icon: fa-mug-hot
+    - suffix: Faculty Office Hours
+      background_color: 'FFC31B' # gold medium
+      text_color: '000'
+      class: cal-tea-oh
+      icon: fa-person-circle-question
+    - suffix: Office Hours
+      background_color: 'D9CEFF' # purple light
+      text_color: '000000'
+      class: cal-oh
+      icon: fa-person-circle-question
+    - suffix: Tutoring Section
+      background_color: 'FFCFE5' # rose light
+      text_color: '000000'
+      class: cal-tutoring
+      icon: fa-people-group
+    - suffix: Section
+      background_color: '004AAE' # blue medium
+      text_color: 'FFFFFF'
+      class: cal-disc-section
+      icon: fa-person-chalkboard
+    - suffix: Exam
+      background_color: 'FA8072' # salmon red
+      text_color: '000000'
+      class: cal-tutoring
+      icon: fa-school
+
 # Collections for website data
 collections:
   staffers:
