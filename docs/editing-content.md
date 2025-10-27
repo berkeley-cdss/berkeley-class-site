@@ -31,7 +31,7 @@ As part of the Berkeley Class Site template, we provide various boilerplate Jeky
 
 Some tags you may find useful:
 
-- [`{% raw %}{% link <path> %}{% endraw %}`](https://jekyllrb.com/docs/liquid/tags/#links) to link to a particular page on the website
+- `{% raw %}{% link <path> %}{% endraw %}` to link to a particular page on the website ([docs](https://jekyllrb.com/docs/liquid/tags/#links))
 
 ## Just the Docs
 
