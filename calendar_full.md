@@ -8,7 +8,7 @@ nav_order: 3
 # Calendar (Google)
 Use this calendar if you want to integrate your class's Google Calendar into the website.
 
-### Directions
+## Directions
 1. In `_config.yml`: 
     1. Add your course's `google_calendar_id` (likely the course's Berkeley email)
     2. Create a `google_api_key`. This will involve creating a new [Google Cloud project](https://console.developers.google.com/) and following the directions [here](https://fullcalendar.io/docs/google-calendar).
