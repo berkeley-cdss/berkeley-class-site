@@ -1,0 +1,55 @@
+{
+  "name": "@fullcalendar/web-component",
+  "version": "6.1.19",
+  "title": "FullCalendar Web Component",
+  "description": "Custom Element for FullCalendar",
+  "keywords": [
+    "calendar",
+    "event",
+    "full-sized",
+    "fullcalendar",
+    "web-component",
+    "custom-element"
+  ],
+  "homepage": "https://fullcalendar.io/docs/web-component",
+  "peerDependencies": {
+    "@fullcalendar/core": "~6.1.19"
+  },
+  "type": "module",
+  "sideEffects": true,
+  "bugs": "https://fullcalendar.io/reporting-bugs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fullcalendar/fullcalendar.git",
+    "directory": "packages/web-component"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Adam Shaw",
+    "email": "arshaw@arshaw.com",
+    "url": "http://arshaw.com/"
+  },
+  "copyright": "2024 Adam Shaw",
+  "types": "./index.d.ts",
+  "main": "./index.cjs",
+  "module": "./index.js",
+  "unpkg": "./index.global.min.js",
+  "jsdelivr": "./index.global.min.js",
+  "exports": {
+    "./package.json": "./package.json",
+    "./index.cjs": "./index.cjs",
+    "./index.js": "./index.js",
+    ".": {
+      "types": "./index.d.ts",
+      "require": "./index.cjs",
+      "import": "./index.js"
+    },
+    "./global.cjs": "./global.cjs",
+    "./global.js": "./global.js",
+    "./global": {
+      "types": "./global.d.ts",
+      "require": "./global.cjs",
+      "import": "./global.js"
+    }
+  }
+}
