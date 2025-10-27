@@ -1,11 +1,11 @@
 ---
-layout: calendar_full
+layout: calendar_dynamic
 title: Calendar (Google)
 description: Lecture, Discussion and OH schedules
 nav_order: 3
 ---
 
-# Calendar (Google)
+# Calendar (Dynamic)
 Use this calendar if you want to integrate your class's Google Calendar into the website.
 
 ## Directions
