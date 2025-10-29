@@ -1,13 +1,14 @@
 ---
-title: Styleguide
-permalink: /docs/styleguide/
+title: Style Guide
+permalink: /docs/style-guide/
 published: true
 layout: page
 has_children: false
 parent: Documentation
+nav_order: 3
 ---
 
-# Styleguide
+# Style Guide
 
 **This page is a very large work in progress!**
 
