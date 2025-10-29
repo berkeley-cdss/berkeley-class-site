@@ -25,9 +25,9 @@ A template for static UC Berkeley class websites (with a focus on EECS/CS/DS cou
 
 ## Examples
 
-- [Data 6](https://data6.org/)
-- [Data 8](https://www.data8.org/)
-- [Data 100](https://ds100.org/)
-- [Data 101](https://data101.org/)
+- [Data 6](https://data6.org/fa25)
+- [Data 8](https://www.data8.org/fa25)
+- [Data 100](https://ds100.org/fa25)
+- [Data 101](https://data101.org/fa25)
 
 [jtd]: https://just-the-docs.com/
