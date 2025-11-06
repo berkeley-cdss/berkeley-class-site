@@ -24,7 +24,7 @@ To set up the calendar for the first time, we'll need to install npm and get the
         @fullcalendar/icalendar \ 
         fullcalendar
 ```
-4. When we want to move the updated packages to the website, we can run `npm install`, which uses the script below to move the relevant files from `./node_modules/` (not pushed, only for developers) to `./assets/vendor/` (pushed, accessible to all classess).
+4. When we want to move the updated packages to the website, we can run `npm install`, which uses the script from `packages.json` (shown below) to move the relevant files from `./node_modules/` (not pushed, only for developers) to `./assets/vendor/` (pushed, accessible to all classess).
 ```json
 "scripts": {
     "postinstall": "cp -r ./node_modules/fullcalendar/ ./assets/vendor/fullcalendar/dist && cp -r ./node_modules/@fullcalendar/ ./assets/vendor/fullcalendar/packages"
