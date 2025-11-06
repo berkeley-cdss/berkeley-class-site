@@ -35,3 +35,5 @@ Most of the installed files will not need to be touched. The ones most relevant 
 - `full-calendar.html`: Retrieves the html for the calendar (shouldn't need to touch).
 - `calendar_dynamic.md`: Student-facing page for the dynamic calendar.
 - `fullcalendar.js`: The **staff-generated JavaScript file** for the dynamic calendar. If you want to make any changes to how the calendar is generated or need to debug, you'll likely want to start here.
+
+**Note**: "fullcalendar" and "calendar-dynamic" both refer to documents that help implement the dynamic calendar. We renamed some of the most relevant files to "calendar-dynamic" to better fit the naming convention, but we unfortunately can't change all occurrances of "fullcalendar" to "calendar-dynamic" since the installed packages use `full-calendar` as an element id.
