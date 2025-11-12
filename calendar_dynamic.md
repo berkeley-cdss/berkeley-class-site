@@ -21,7 +21,7 @@ Use this calendar if you want to integrate your class's Google Calendar into the
 - `class`: Class ID of the event (e.g. `cal-lecture` for lecture events).
 - `icon`: Fontawesome icon placed on the event (e.g. `fa-school`), more can be found in `fontawesome/css`.
 
-**Note**: "fullcalendar" and "calendar_dynamic" both refer to the dynamic calendar. 
+**Note**: As you update the calendar, you'll find that some files use the phrase "fullcalendar" and some use "calendar_dynamic". Both refer to the dynamic calendar. 
 {: .fs-4}
 <a class="btn btn-blue" href="https://calendar.google.com/calendar?cid={{ site.google_calendar.google_calendar_id }}" target="_blank">Add to Google Calendar</a>
 
