@@ -90,6 +90,41 @@ div.highlighter-rouge div.highlight {
       color: white;
     }
   }
+  .btn-datahub {
+    @include btn-color($white, #FF8C00);
+  }
+  
+  .btn-ed {
+    @include btn-color($white, #9400D3);
+  }
+  
+  .btn-bcourses {
+    @include btn-color($white, #8C183B);
+  }
+  
+  .btn-gradescope {
+    @include btn-color($white, #055E8A);
+  }
+  
+  .btn-pensieve {
+    @include btn-color($white, #055E8A);
+  }
+
+  .btn-textbook {
+    @include btn-color($white, #1B1D1D);
+  }
+  
+  .btn-extensions {
+    @include btn-color($white, #523be7);
+  }
+  
+  .btn-zoom {
+    @include btn-color($white, #355F41);
+  }
+  
+  .btn-officehours{
+    @include btn-color($white, #1863c1);
+  }
 
 
 

@@ -44,23 +44,23 @@ Here is a list of the default buttons we have given you. The color and styling f
 **Lecture Participation**{: .label .label-lecture-participation }
 
 ## Buttons
-We also have buttons that you can place at the top of your course's page
+We also have buttons that you can place at the top of your course's page. These can also be found in `_sass/custom/custom.scss`.
 
 ```
-[Gradescope](https://www.gradescope.com){: .btn .btn-blue }
+[Gradescope](https://www.gradescope.com){: .btn .btn-gradescope }
 
-[EdStem](https://edstem.org/us/dashboard){: .btn .btn-purple }
-[Pensieve](https://www.pensieve.co){: .btn .btn-green }
-[Zoom](https://zoom.us){: .btn .btn-blue }
+[EdStem](https://edstem.org/us/dashboard){: .btn .btn-ed }
+[Pensieve](https://www.pensieve.co){: .btn .btn-bcourses }
+[Zoom](https://zoom.us){: .btn .btn-zoom }
 
-[Office Hours](https://calendar.google.com){: .btn }
-[Extensions](https://forms.gle/){: .btn .btn-outline }
+[Office Hours](https://calendar.google.com){: .btn .btn-officehours }
+[Extensions](https://forms.gle/){: .btn .btn-extensions }
 ```
-[Gradescope](https://www.gradescope.com){: .btn .btn-blue }
+[Gradescope](https://www.gradescope.com){: .btn .btn-gradescope }
 
-[EdStem](https://edstem.org/us/dashboard){: .btn .btn-purple }
-[Pensieve](https://www.pensieve.co){: .btn .btn-green }
-[Zoom](https://zoom.us){: .btn .btn-blue }
+[EdStem](https://edstem.org/us/dashboard){: .btn .btn-ed }
+[Pensieve](https://www.pensieve.co){: .btn .btn-bcourses }
+[Zoom](https://zoom.us){: .btn .btn-zoom }
 
-[Office Hours](https://calendar.google.com){: .btn }
-[Extensions](https://forms.gle/){: .btn .btn-outline }
+[Office Hours](https://calendar.google.com){: .btn .btn-officehours }
+[Extensions](https://forms.gle/){: .btn .btn-extensions }
