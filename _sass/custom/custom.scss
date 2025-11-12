@@ -22,5 +22,76 @@ div.highlighter-rouge div.highlight {
   overflow-x: unset;
 }
 
+.label {
+    border-radius: $border-radius;
+    margin-left: 0;
+    user-select: none;
+    background-color: $grey-lt-100;
+    color: $grey-dk-100;
+
+    &.label-lab {
+      background-color: #0B8460;
+      color: white;
+    }
+    &.label-homework {
+      background-color: #AE1313;
+      color: white;
+    }
+    &.label-homework-released {
+      background-color: #AE1313;
+      color: white;
+    }
+    &.label-homework-due {
+      background-color: #e07d7d;
+      color: rgb(0, 0, 0);
+    }
+    &.label-discussion {
+      background-color: #8D00C9;
+      color: white;
+    }
+    &.label-exam {
+      background-color: rgb(202, 12, 12);
+      color: white;
+    }
+    &.label-survey {
+      background-color: $blue-100;
+      color: white;
+    }
+    &.label-project {
+      background-color: $blue-100;
+      color: white;
+    }
+    &.label-section {
+      background-color: rgb(87, 87, 87);
+      color: white;
+    }
+    &.label-tutoring {
+      background-color: rgb(58, 84, 184);
+      color: white;
+    }
+    &.label-exam-prep {
+      background-color: rgb(186, 63, 18);
+      color: white;
+    }
+    &.label-reading {
+      background-color: rgb(31, 39, 191);
+      color: white;
+    }
+    &.label-quiz {
+      background-color: rgb(178, 77, 33);
+      color: white;
+    }
+    &.label-vitamin {
+      background-color: rgb(237, 149, 16);
+      color: black;
+    }
+    &.label-lecture-participation {
+      background-color: #5c5962;
+      color: white;
+    }
+  }
+
+
+
 // Place all of your course-specific CSS here.
 @import './course_overrides';
