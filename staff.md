@@ -18,10 +18,21 @@ photo: kevin.jpg
 pronouns: he/him
 section: Soda 380 Tue 3-4 PM
 office_hours: Warren Hall Tue 2-3 PM
-team: Pedagogy # Go to course_overrides to add colors for different team buttons
+team: Pedagogy # Go to course_overrides to add colors for different team badges
 access_email: true
 access_dsp: true
 ```
+
+To add a Pedagogy badge and change its color, we can add 
+```css
+.staffer-badge.label-Pedagogy {
+    background-color: #9C3848 !important;
+    color: white !important;
+  }
+```
+to `course_overrides`.
+
+
 Kevin's file is then generated below:
 
 ## Instructors
