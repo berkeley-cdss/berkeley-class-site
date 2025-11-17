@@ -7,8 +7,8 @@ parent: Documentation
 nav_order: 5
 ---
 
-# Calendar Documentation
-We currently have two implementations for the course calendar: One is a static version that won't change week to week, while the other is a dynamic version that uses a Google Calendar integration to display events. This page describes how to edit and update the Google Calendar version.
+# Calendar Documentation 
+We currently have two implementations for the course calendar: One is a [static version]({{ '/calendar/' | relative_url }}) that won't change week to week, while the other is a [dynamic version]({{ '/calendar_dynamic/' | relative_url }}) that uses a Google Calendar integration to display events. This page describes how to edit and update the Google Calendar version if you were to make changes to the template. If you only need to configure the dynamic calendar for your course, view the [instructions here]({{ '/calendar_dynamic/#directions' | relative_url }}).
 
 ## Set-Up
 To set up the calendar for the first time, we'll need to install npm and get the fullcalendar package, which is used as the template for the dynamic calendar. Run the following commands:
