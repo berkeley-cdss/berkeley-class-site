@@ -30,7 +30,7 @@ Labels are used on many course semester schedules/home pages to draw attention t
 **Project**{: .label .label-project }
 **Homework**{: .label .label-homework }
 **Homework Released**{: .label .label-homework-released }
-**Homework Due**{: .label .label-homework-due }
+**Homework Due**{: .label .label-homework }
 
 **Exam**{: .label .label-exam }
 **Exam Prep**{: .label .label-exam-prep }
@@ -75,3 +75,7 @@ The markdown for a button is like so:
 ## Just the Docs Defaults
 
 Just the Docs additionally has custom styling. [View the Documentation.](https://just-the-docs.com/docs/ui-components/) Not all elements may be accessible -- be sure to double check that all GitHub Actions pass after a commit!
+
+## Note on Colors
+
+You may find that colors that are accessible for the light color scheme may not be accessible for the dark color scheme and vice versa. In that case, we recommend defining a variable, once in `_sass/color-schemes/light.scss` to be accessible for the light color scheme and once again in `_sass/color-schemes/dark.scss` to be accessible for the dark color scheme. See `$hw-rel` for an example. 

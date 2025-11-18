@@ -50,10 +50,6 @@ div.highlighter-rouge div.highlight {
       color: $hw-rel;
       box-shadow: inset 0 0 0 2px #005d5d;
     }
-    &.label-homework-due {
-      background-color: #005d5d;
-      color: white;
-    }
     &.label-project {
       background-color: #198038;
       color: white;
@@ -119,7 +115,6 @@ div.highlighter-rouge div.highlight {
   .btn-extensions {
     @include btn-color($white, #6929c4);
   }
-  
   
   .btn-officehours{
     @include btn-color($white, #009d9a);
