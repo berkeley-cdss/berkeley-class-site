@@ -29,8 +29,13 @@ div.highlighter-rouge div.highlight {
     background-color: $grey-lt-100;
     color: $grey-dk-100;
 
+    &.label-lecture {
+      background-color: #004AAE;
+      color: white;
+    }
+
     &.label-lab {
-      background-color: #0B8460;
+      background-color: #018943;
       color: white;
     }
     &.label-homework {
@@ -46,7 +51,7 @@ div.highlighter-rouge div.highlight {
       color: rgb(0, 0, 0);
     }
     &.label-discussion {
-      background-color: #8D00C9;
+      background-color: #E7115E;
       color: white;
     }
     &.label-exam {
@@ -62,8 +67,8 @@ div.highlighter-rouge div.highlight {
       color: white;
     }
     &.label-section {
-      background-color: rgb(87, 87, 87);
-      color: white;
+      background-color: #FFC31B;
+      color: black;
     }
     &.label-tutoring {
       background-color: rgb(58, 84, 184);
@@ -74,7 +79,7 @@ div.highlighter-rouge div.highlight {
       color: white;
     }
     &.label-reading {
-      background-color: rgb(31, 39, 191);
+      background-color: #8236C7;
       color: white;
     }
     &.label-quiz {
@@ -82,8 +87,8 @@ div.highlighter-rouge div.highlight {
       color: white;
     }
     &.label-vitamin {
-      background-color: rgb(237, 149, 16);
-      color: black;
+      background-color: #5c5962;
+      color: white;
     }
     &.label-lecture-participation {
       background-color: #5c5962;
