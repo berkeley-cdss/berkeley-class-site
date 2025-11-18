@@ -10,10 +10,6 @@
 
 @import '../color_schemes/dark_overrides';
 
-@if $color-scheme == dark {
-  @include dark-mode-overrides;
-}
-
 div.highlighter-rouge {
   overflow-x: auto;
 }
@@ -30,60 +26,52 @@ div.highlighter-rouge div.highlight {
     color: $grey-dk-100;
 
     &.label-lecture {
-      background-color: #004AAE;
-      color: white;
-    }
-
-    &.label-lab {
-      background-color: #018943;
-      color: white;
-    }
-    &.label-homework {
-      background-color: #AE1313;
-      color: white;
-    }
-    &.label-homework-released {
-      background-color: #AE1313;
-      color: white;
-    }
-    &.label-homework-due {
-      background-color: #e07d7d;
-      color: rgb(0, 0, 0);
-    }
-    &.label-discussion {
-      background-color: #E7115E;
-      color: white;
-    }
-    &.label-exam {
-      background-color: rgb(202, 12, 12);
-      color: white;
-    }
-    &.label-survey {
-      background-color: $blue-100;
-      color: white;
-    }
-    &.label-project {
-      background-color: $blue-100;
+      background-color: #0072c3;
       color: white;
     }
     &.label-section {
-      background-color: #FFC31B;
+      background-color: #ff7eb6;
       color: black;
     }
-    &.label-tutoring {
-      background-color: rgb(58, 84, 184);
+    &.label-lab {
+      background-color: #ffafd2;
+      color: black;
+    }
+    &.label-discussion {
+      background-color: #ff8389;
+      color: black;
+    }
+    &.label-homework {
+      background-color: #005d5d;
       color: white;
     }
-    &.label-exam-prep {
-      background-color: rgb(186, 63, 18);
+    &.label-homework-released {
+      background-color: transparent;
+      color: $hw-rel;
+      box-shadow: inset 0 0 0 2px #005d5d;
+    }
+    &.label-homework-due {
+      background-color: #005d5d;
       color: white;
     }
-    &.label-reading {
-      background-color: #8236C7;
+    &.label-project {
+      background-color: #198038;
+      color: white;
+    }
+    &.label-exam {
+      background-color: #CA0C0C;
       color: white;
     }
     &.label-quiz {
-      background-color: rgb(178, 77, 33);
+      background-color: #D14715;
+      color: white;
+    }
+    &.label-exam-prep {
+      background-color: #FFC31B;
+      color: black;
+    }
+    &.label-reading {
+      background-color: #8a3ffc;
       color: white;
     }
     &.label-vitamin {
@@ -95,8 +83,17 @@ div.highlighter-rouge div.highlight {
       color: white;
     }
   }
+
+  .btn-gradescope {
+    @include btn-color($white, #1863c1);
+  }
+  
+  .btn-pensieve {
+    @include btn-color($white, #1863c1);
+  }
+
   .btn-datahub {
-    @include btn-color($white, #FF8C00);
+    @include btn-color($white, #355F41);
   }
   
   .btn-ed {
@@ -106,13 +103,13 @@ div.highlighter-rouge div.highlight {
   .btn-bcourses {
     @include btn-color($white, #8C183B);
   }
-  
-  .btn-gradescope {
-    @include btn-color($white, #055E8A);
+
+  .btn-zoom {
+    @include btn-color($white, #FF8C00);
   }
-  
-  .btn-pensieve {
-    @include btn-color($white, #055E8A);
+
+  .btn-lectures {
+    @include btn-color($white, #d02670);
   }
 
   .btn-textbook {
@@ -120,18 +117,17 @@ div.highlighter-rouge div.highlight {
   }
   
   .btn-extensions {
-    @include btn-color($white, #523be7);
+    @include btn-color($white, #6929c4);
   }
   
-  .btn-zoom {
-    @include btn-color($white, #355F41);
-  }
   
   .btn-officehours{
-    @include btn-color($white, #1863c1);
+    @include btn-color($white, #009d9a);
   }
 
-
+@if $color-scheme == dark {
+  @include dark-mode-overrides;
+}
 
 // Place all of your course-specific CSS here.
 @import './course_overrides';

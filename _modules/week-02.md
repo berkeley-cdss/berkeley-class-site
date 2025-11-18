@@ -3,21 +3,20 @@ title: Basic Data Structures
 ---
 
 Oct 5
-: [Linked Lists & Encapsulation](#)
-  : [3.1](#), [2.2](#), [2.3](#)
+: **Lecture**{: .label .label-lecture} [Linked Lists & Encapsulation](#)
+  : **Reading**{: .label .label-reading} [3.1](#), [2.2](#), [2.3](#)
 
 Oct 6
-: **Section**{: .label .label-purple }[Linked Lists](#)
+: **Discussion**{: .label .label-discussion }[Linked Lists](#)
   : [Solution](#)
 
 Oct 7
-: [Resizing Arrays](#)
-  : [2.4](#), [2.5](#)
+: **Lecture**{: .label .label-lecture} [Resizing Arrays](#)
+  : **Reading**{: .label .label-reading} [2.4](#), [2.5](#)
 
 Oct 8
-: **Project**{: .label .label-green } [Project 1: Ants vs. Some Bees]({% link _projects/proj01.md %})
+: **Project**{: .label .label-project } [Project 1: Ants vs. Some Bees]({% link _projects/proj01.md %})
 
 Oct 9
-: [Runtime Analysis](#)
-  : [8.1](#), [8.2](#), [8.3](#), [8.4](#)
-: **HW 2 due**{: .label .label-red }
+: **Lecture**{: .label .label-lecture} [Runtime Analysis](#)
+  : **Reading**{: .label .label-reading} [8.1](#), [8.2](#), [8.3](#), [8.4](#)
