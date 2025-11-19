@@ -6,7 +6,7 @@ nav_order: 2
 ---
 
 # Calendar (Static)
-Use this calendar if you want a static version for your class. This works better if your class's schedule doesn't change from week to week and if you don't want to maintain a Google Calendar.
+Use this calendar if you want a static version for your class. This works best if your class's schedule doesn't change from week to week and if you don't want to maintain a Google Calendar.
 
 ## Directions
 To add events, go to `weekly.md` and include the name, start/end times, and location.

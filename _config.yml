@@ -67,10 +67,10 @@ berkeley_theme_options:
 google_calendar:
   # This can be found in the settings for the calendar.
   # The calendar must be publicly readable.
-  google_calendar_id: data101@berkeley.edu
+  google_calendar_id: c_134c9c007d75a399b5e7b39377d2f4e45c9db648f2df4417f8c9a490cb0726d1@group.calendar.google.com
   # You need to make this, once per course, ideally via a SPA
   # TODO: Recommend adding link to Google cloud project here
-  google_api_key: AIzaSyD1Tw4oJZfxn7RvCEkubEspj2dsmD033Uw
+  google_api_key: AIzaSyBombNhLEEZRjCfG4Fp5PpmICYBZO3PvY8
   # These are processed in order, top-to-bottom, first match applies
   # The prefix/suffix matches the Google Calendar event *title*
   # You may use only prefix OR suffix, see fullcalendar.js
