@@ -221,6 +221,9 @@ sass:
   quiet_deps: true
   verbose: false
 
+mermaid:
+  version: "10.9.0"
+
 # Theme settings
 theme: just-the-docs
 search_enabled: true
