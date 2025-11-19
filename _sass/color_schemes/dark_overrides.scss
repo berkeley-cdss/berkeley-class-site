@@ -1,6 +1,6 @@
 @mixin dark-mode-overrides {
 
-p.important-title > p:first-child,
+  p.important-title > p:first-child,
   blockquote.important-title > p:first-child {
     color: #8975FF;
   }
@@ -9,9 +9,8 @@ p.important-title > p:first-child,
     background-color: #3D3D3D;  /* Light background for cells */
     color: #FFFFFF; /* Light text color for readability */
   }
-  
+
   table td a, table th a {
     color: #9ECCF0;  /* Default link color */
   }
 }
-
