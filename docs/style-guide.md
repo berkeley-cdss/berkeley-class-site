@@ -14,7 +14,7 @@ The purpose of this page is to show the reasonable default for various stylings.
 
 ## Labels
 
-Labels are used on many course semester schedules/home pages to draw attention to important calendar events. 
+Labels are used on many course semester schedules/home pages to draw attention to important calendar events.
 
 **Lecture**{: .label .label-lecture }
 **Lecture Participation**{: .label .label-lecture-participation }
@@ -78,4 +78,4 @@ Just the Docs additionally has custom styling. [View the Documentation.](https:/
 
 ## Note on Colors
 
-You may find that colors that are accessible for the light color scheme may not be accessible for the dark color scheme and vice versa. In that case, we recommend defining a variable, once in `_sass/color-schemes/light.scss` to be accessible for the light color scheme and once again in `_sass/color-schemes/dark.scss` to be accessible for the dark color scheme. See `$hw-rel` for an example. 
+You may find that colors that are accessible for the light color scheme may not be accessible for the dark color scheme and vice versa. In that case, we recommend defining a variable, once in `_sass/color-schemes/light.scss` to be accessible for the light color scheme and once again in `_sass/color-schemes/dark.scss` to be accessible for the dark color scheme. See `$hw-rel` for an example.
