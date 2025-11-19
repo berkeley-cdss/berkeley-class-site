@@ -48,6 +48,11 @@ course_department: dsus
 # If you have no archive page, comment this line out or leave blank.
 class_archive_path: /
 
+# TODO(setup): Remove this line if your favicon is named favicon.ico and is in the root directory,
+# otherwise set this to the path to your favicon.
+# favicons can be course specific or you can use the default Berkeley one that comes with the template.
+favicon_ico: "/favicon.png"
+
 # TODO(setup): Set these auxiliary links as you wish - they show up on the top right
 aux_links:
   # TODO(template): Move this to be built-in.
