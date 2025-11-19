@@ -1,7 +1,6 @@
-
 @mixin dark-mode-overrides {
 
-  p.important-title > p:first-child,
+p.important-title > p:first-child,
   blockquote.important-title > p:first-child {
     color: #8975FF;
   }
@@ -15,3 +14,4 @@
     color: #9ECCF0;  /* Default link color */
   }
 }
+

@@ -7,7 +7,33 @@ nav_order: 4
 
 # Staff
 
-Staff information is stored in the `_staffers` directory and rendered according to the layout file, `_layouts/staffer.html`.
+Staff information is stored in the `_staffers` directory and rendered according to the layout file, `_layouts/staffer.html`. In `staffer.html`, to reference an attribute from a staff member's md file, we use the syntax `page.{attribute}`. For example, if we write `role: Instructor`, then `page.role` will be assigned to `Instructor`. Below is an example md file for a staff member named Kevin Lin:
+
+```yaml
+name: Kevin Lin
+role: Instructor
+email: me@example.com
+website: https://kevinl.info
+photo: kevin.jpg
+pronouns: he/him
+section: Soda 380 Tue 3-4 PM
+office_hours: Warren Hall Tue 2-3 PM
+team: Pedagogy # Go to course_overrides to add colors for different team badges
+access_email: true
+access_dsp: true
+```
+
+To add a Pedagogy badge and change its color, we can add 
+```css
+.staffer-badge.label-Pedagogy {
+    background-color: #9C3848 !important;
+    color: white !important;
+  }
+```
+to `course_overrides`.
+
+
+Kevin's file is then generated below:
 
 ## Instructors
 
