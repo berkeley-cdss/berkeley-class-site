@@ -3,10 +3,10 @@
 // You probably want to add files to _sass/custom/custom.scss
 
 // Just the Class dependencies
-@import 'card';
+@use 'card';
 
 // Just the Class styles
-@import 'announcement';
-@import 'module';
-@import 'schedule';
-@import 'staffer';
+@use 'announcement';
+@use 'module';
+@use 'schedule';
+@use 'staffer';

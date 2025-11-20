@@ -20,7 +20,7 @@ $search-result-preview-color: $grey-dk-000;
 $border-color: $grey-dk-200;
 /////////////////// Add modifications below
 
-@import '../syntax-highlighters/a11y-dark';
+@use '../syntax-highlighters/a11y-dark';
 
 // Override dark-mode variables here
 $berkeley-blue: #002676; // rgb(0, 38, 118);

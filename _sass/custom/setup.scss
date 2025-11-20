@@ -1,7 +1,8 @@
 // Use this file to customize SASS variables.
-// You will likely want to review the Jst the Docs CSS
+// You will likely want to review the Just the Docs documentation:
+// https://just-the-docs.com/docs/customization/#override-and-define-new-variables
 // This file is loaded *early* in the SASS compilation process.
 
 // Load berkeley variable customizations
 // These are loaded before berkeley_light and berkeley_dark themes
-@import '../berkeley/variables';
+@use '../berkeley/variables';

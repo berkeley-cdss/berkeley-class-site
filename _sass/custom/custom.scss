@@ -1,14 +1,16 @@
 // You may want to add CSS in additional files.
+// You will likely want to review the Just the Docs documentation:
+// https://just-the-docs.com/docs/customization/#override-and-define-new-variables
 // It's best to not edit this file too much.
 // "course_overrides.scss" is designed for each course's customizations.
 // You can make additional files as necessary.
-// You would then add `@import "file"; to this file.
+// You would then add `@use "file"; to this file.
 
 // Just the Class customizations are all loaded in one file.
-@import '../just-the-class/just-the-class';
-@import '../berkeley/berkeley';
+@use '../just-the-class/just-the-class';
+@use '../berkeley/berkeley';
 
-@import '../color_schemes/dark_overrides';
+@use '../color_schemes/dark_overrides';
 
 div.highlighter-rouge {
   overflow-x: auto;
@@ -83,7 +85,7 @@ div.highlighter-rouge div.highlight {
   .btn-gradescope {
     @include btn-color($white, #1863c1);
   }
-  
+
   .btn-pensieve {
     @include btn-color($white, #1863c1);
   }
@@ -91,11 +93,11 @@ div.highlighter-rouge div.highlight {
   .btn-datahub {
     @include btn-color($white, #355F41);
   }
-  
+
   .btn-ed {
     @include btn-color($white, #9400D3);
   }
-  
+
   .btn-bcourses {
     @include btn-color($white, #8C183B);
   }
@@ -111,11 +113,11 @@ div.highlighter-rouge div.highlight {
   .btn-textbook {
     @include btn-color($white, #1B1D1D);
   }
-  
+
   .btn-extensions {
     @include btn-color($white, #6929c4);
   }
-  
+
   .btn-officehours{
     @include btn-color($white, #009d9a);
   }
@@ -125,4 +127,4 @@ div.highlighter-rouge div.highlight {
 }
 
 // Place all of your course-specific CSS here.
-@import './course_overrides';
+@use './course_overrides';
