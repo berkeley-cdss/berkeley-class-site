@@ -24,7 +24,7 @@ access_email: true
 access_dsp: true
 ```
 
-To add a Pedagogy badge and change its color, we can add
+To add a Pedagogy badge and change its color, we can add the following to `_sass/custom/course_overrides.scss`.
 
 ```scss
 .staffer-badge.label-Pedagogy {
@@ -32,8 +32,6 @@ To add a Pedagogy badge and change its color, we can add
   color: white !important;
 }
 ```
-
-to `course_overrides`.
 
 All of the content after the front matter will be rendered in the bio section for that staffer.
 Typically this will be text, but you are free to use other UI elements, such as buttons.
