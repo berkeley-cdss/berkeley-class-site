@@ -44,13 +44,12 @@ Here are a few examples of how to use labels in your markdown:
 **Lecture**{: .label .label-lecture }
 ```
 
-`**Section**` controls the text of the label. `{: .label }` designates that it should be a label. `{: .label-section }` controls the color of the label as defined in `_sass/custom/custom.scss`. There is nothing technically preventing you from doing something like `**Section**{: .label .label-discussion }`. We recommend you take advantage of this if your course uses different wording for a basic element, for example above `Reading` `Guide` and `Course Notes` all use the same label: `{: .label .label-reading }`.
+`**Section**` controls the text of the label. `{: .label }` designates that it should be a label. `{: .label-section }` controls the color of the label as defined in `_sass/custom/custom.scss`. There is nothing technically preventing you from doing something like `**Section**{: .label .label-discussion }`. We recommend you take advantage of this if your course uses different wording for a basic element, for example above `Reading`, `Guide`, and `Course Notes` all use the same label: `{: .label .label-reading }`.
 
-
-You can find labels defined in `_sass/custom/custom.scss`. If you would like to change any of the default colors, please place your updates in `_sass/custom/course_overrides.scss`. You don't need to delete the original definitions in  `_sass/custom/custom.scss`; the course overrides will take precedent.
-
+The styling of each label is defined in `_sass/custom/custom.scss`. If you would like to change any of the default colors, please place your updates in `_sass/custom/course_overrides.scss`. You don't need to delete the original definitions in  `_sass/custom/custom.scss`; the course overrides will take precedent.
 
 ## Buttons
+
 We also provide buttons that you can place at the top of your course's page. These can also be found in `_sass/custom/custom.scss`. Again, if you want to change these, please place your updates in `_sass/custom/course_overrides.scss` which will take precedent over the original definitons.
 
 The markdown for a button is like so:
@@ -72,9 +71,9 @@ The markdown for a button is like so:
 [Office Hours](https://calendar.google.com){: .btn .btn-officehours }
 [Extensions](https://forms.gle/){: .btn .btn-extensions }
 
-## Just the Docs Defaults
+## Just the Docs UI Components
 
-Just the Docs additionally has custom styling. [View the Documentation.](https://just-the-docs.com/docs/ui-components/) Not all elements may be accessible -- be sure to double check that all GitHub Actions pass after a commit!
+Just the Docs additionally has [UI components](https://just-the-docs.com/docs/ui-components/) you can use out of the box. Not all elements may be [accessible]({% link docs/a11y.md %}) -- be sure to double check that all [GitHub Actions]({% link docs/continuous-integration.md %}) pass after a commit!
 
 ## Note on Colors
 
