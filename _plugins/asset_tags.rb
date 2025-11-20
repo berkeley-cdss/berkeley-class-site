@@ -48,22 +48,24 @@ module Jekyll
       lecture_url = lecture.url
       # Directly grab the date string from the lecture data
       date_parts = lecture['date'].to_s.split('-')
-    #   time_parts = lecture['time'].to_s.split(':')
-      Jekyll.logger.info "DEBUG", "Time is #{lecture['time']}"
-    #   Jekyll.logger.info "DEBUG", "Lecture info is #{lecture}"
       year = date_parts[0].to_i
       month = date_parts[1].to_i
       day = date_parts[2].to_i
-      hour = lecture['time'] / 60
-      minute = lecture['time'] % 60
+      if !lecture['time'].nil?
+        hour = lecture['time'] / 60 # lecture['time'] is expressed in minutes (i.e. 10:40 is 640)
+        minute = lecture['time'] % 60
+      else
+        hour = 0
+        minute = 0
+    end
       # Construct the date manually
-      lecture_date = Time.new(year, month, day, hour, minute)
-      Jekyll.logger.info "DEBUG", "Date is #{lecture_date}"
+      lecture_time = Time.new(year, month, day, hour, minute)
+      Jekyll.logger.info "DEBUG", "Time is #{lecture_time}"
 
-      current_date = Time.now
-      Jekyll.logger.info "DEBUG", "Current Date is #{current_date}"
+      current_time = Time.now
+      Jekyll.logger.info "DEBUG", "Current Time is #{current_time}"
 
-      return "**Lecture #{@number}**{: .label .label-lec } #{lecture_title}" if lecture_date > current_date
+      return "**Lecture #{@number}**{: .label .label-lec } #{lecture_title}" if lecture_time > current_time
 
       # Current approach: relative URL (cleaner, automatically handles baseurl)
       "**Lecture #{@number}**{: .label .label-lec } [#{lecture_title}](../lectures/#{@number_updated})" # TODO: remove the .. depending if the homepage is on the /schedules/ directory or not.
