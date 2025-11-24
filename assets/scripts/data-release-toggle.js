@@ -27,17 +27,6 @@
 		a.classList.add('unreleased');
 		a.setAttribute('aria-disabled', 'true');
 		a.setAttribute('tabindex', '-1');
-
-		// make the link look like surrounding text by copying computed color
-		try {
-			const parent = a.parentElement || document.body;
-			const normalColor = window.getComputedStyle(parent).color || '';
-			a.style.color = normalColor;
-			a.style.textDecoration = 'none';
-			a.style.cursor = 'default';
-		} catch (e) {
-			// ignore if computed style is not available
-		}
 	}
 
 	function enableAnchor(a) {
@@ -60,11 +49,6 @@
 
 		a.classList.remove('unreleased');
 		a.removeAttribute('aria-disabled');
-
-		// remove inline styles we added
-		a.style.color = '';
-		a.style.textDecoration = '';
-		a.style.cursor = '';
 	}
 
 	function refresh() {
