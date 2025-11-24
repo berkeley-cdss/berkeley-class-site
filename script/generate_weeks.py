@@ -51,13 +51,57 @@ TEMPLATE_DAY_BLOCK = "{date}\n: **{event_label}**{{: .label .label-{event_class}
 
 def parse_args():
     p = argparse.ArgumentParser(description="Generate week markdown files for course schedule")
-    p.add_argument("--start", required=True, help="Start date (YYYY-MM-DD or 'Aug 24' or 'Aug 24 2025')")
+    p.add_argument("--start", help="Start date (YYYY-MM-DD or 'Aug 24' or 'Aug 24 2025'); if omitted the script will prompt interactively")
     p.add_argument("--year", type=int, help="Year when start date omits year")
     p.add_argument("--weeks", type=int, default=17, help="Number of weeks to generate")
     p.add_argument("--outdir", default="_modules", help="Output directory (default: _modules)")
     p.add_argument("--hw-start", type=int, default=1, help="Starting homework number (default 1)")
     p.add_argument("--map", help="Optional mapping like 'Mon:Discussion;Wed:Homework' to override defaults")
     return p.parse_args()
+
+
+def interactive_fill(args):
+    """Prompt the user for missing arguments interactively."""
+    def ask(prompt: str, default: str | None = None) -> str:
+        if default is None:
+            while True:
+                v = input(f"{prompt}: ").strip()
+                if v:
+                    return v
+        else:
+            v = input(f"{prompt} [{default}]: ").strip()
+            return v if v else default
+
+    if not args.start:
+        args.start = ask("Start date (YYYY-MM-DD or 'Aug 24' or 'Aug 24 2025')")
+    # if start lacks year and year not provided, prompt for year
+    tokens = args.start.split()
+    if len(tokens) == 2 and not args.year:
+        year_str = ask("Year for the start date (e.g. 2025)")
+        try:
+            args.year = int(year_str)
+        except Exception:
+            print("Invalid year entered; continuing without explicit year.")
+
+    # other options
+    if args.weeks is None:
+        args.weeks = int(ask("Number of weeks to generate", "17"))
+    else:
+        # offer to confirm or change
+        val = ask("Number of weeks to generate", str(args.weeks))
+        try:
+            args.weeks = int(val)
+        except Exception:
+            pass
+
+    args.outdir = ask("Output directory", args.outdir)
+    hw_val = ask("Starting homework number", str(args.hw_start))
+    try:
+        args.hw_start = int(hw_val)
+    except Exception:
+        pass
+    map_val = ask("Optional mapping (e.g. 'Mon:Discussion;Wed:Homework') or leave blank", args.map or "")
+    args.map = map_val if map_val.strip() else None
 
 
 def parse_start_date(s: str, default_year: int | None) -> datetime.date:
@@ -127,6 +171,7 @@ def event_class_for_label(label: str) -> str:
 def event_link_for(label: str, week_num: int, hw_counter: int) -> Tuple[str, int]:
     """Return (link_markdown, possibly_updated_hw_counter)"""
     label_lower = label.lower()
+    week_num = 1
     if label_lower.startswith('discussion'):
         return "[Discussion](#)", hw_counter
     if label_lower.startswith('homework') or label_lower.startswith('hw'):
@@ -135,7 +180,7 @@ def event_link_for(label: str, week_num: int, hw_counter: int) -> Tuple[str, int
         # Use doubled braces so Python .format treats them as literal braces
         link = "[HW {}]({{% link _hw/hw{}.md %}})".format(hw_num, hw_padded)
         # above uses raw markers to avoid evaluating liquid when this script runs
-        return link, hw_counter + 1
+        return link, hw_counter
     if label_lower.startswith('lecture'):
         lec_num = zero_pad(week_num)
         link = "[Lecture {}]({{% link _lectures/{}.md %}})".format(week_num, lec_num)
@@ -198,6 +243,8 @@ def write_week_file(outdir: str, week_index: int, content: str):
 
 def main():
     args = parse_args()
+    if not args.start:
+        interactive_fill(args)
     try:
         start_date = parse_start_date(args.start, args.year)
     except ValueError as e:
