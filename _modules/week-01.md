@@ -1,24 +1,17 @@
 ---
-title: Introduction to Java
+title: Week 01
 ---
 
-Sep 28
-: **Lecture**{: .label .label-lecture} [Java & Git](#)
-  : **Reading**{: .label .label-reading} [1.1](#)
-: **Homework**{: .label .label-homework} [HW 1: Recursion]({% link _hw/hw01.md %})
+Aug 20
+: **Homework**{: .label .label-homework } [HW 1]({% link _hw/hw01.md %})
 
-Sep 29
-: **Discussion**{: .label .label-discussion }[Intro to Java](#)
-  : [Solution](#)
+Aug 21
+: **Lecture**{: .label .label-lecture } [Lecture 1]({% link _lectures/01.md %})
 
-Sep 30
-: **Lecture**{: .label .label-lecture} [Variables & Objects](#)
-  : **Reading**{: .label .label-reading} [1.2](#), [2.1](#)
+Aug 22
+: **Lab**{: .label .label-lab } [Lab 1]({% link _labs/lab01.md %})
 
-Oct 1
-: **Lab**{: .label .label-lab } [Lab 1: Control and Functions]({% link _labs/lab01.md %})
-
-Oct 2
-: **Lecture**{: .label .label-lecture} [Tracing, IntLists, & Recursion](#)
-  : **Reading**{: .label .label-reading} [2.1](#)
-: **Homework due**{: .label .label-homework } [HW 1: Recursion]({% link _hw/hw01.md %})
+Aug 23
+:
+Aug 24
+:
