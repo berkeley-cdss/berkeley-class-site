@@ -10,16 +10,118 @@
 
 @import '../color_schemes/dark_overrides';
 
-@if $color-scheme == dark {
-  @include dark-mode-overrides;
-}
-
 div.highlighter-rouge {
   overflow-x: auto;
 }
 
 div.highlighter-rouge div.highlight {
   overflow-x: unset;
+}
+
+.label {
+    border-radius: $border-radius;
+    margin-left: 0;
+    user-select: none;
+    background-color: $grey-lt-100;
+    color: $grey-dk-100;
+
+    &.label-lecture {
+      background-color: #0072c3;
+      color: white;
+    }
+    &.label-section {
+      background-color: #ff7eb6;
+      color: black;
+    }
+    &.label-lab {
+      background-color: #ffafd2;
+      color: black;
+    }
+    &.label-discussion {
+      background-color: #ff8389;
+      color: black;
+    }
+    &.label-homework {
+      background-color: #005d5d;
+      color: white;
+    }
+    &.label-homework-released {
+      background-color: transparent;
+      color: $hw-rel;
+      box-shadow: inset 0 0 0 2px #005d5d;
+    }
+    &.label-project {
+      background-color: #198038;
+      color: white;
+    }
+    &.label-exam {
+      background-color: #CA0C0C;
+      color: white;
+    }
+    &.label-quiz {
+      background-color: #D14715;
+      color: white;
+    }
+    &.label-exam-prep {
+      background-color: #FFC31B;
+      color: black;
+    }
+    &.label-reading {
+      background-color: #8a3ffc;
+      color: white;
+    }
+    &.label-vitamin {
+      background-color: #5c5962;
+      color: white;
+    }
+    &.label-lecture-participation {
+      background-color: #5c5962;
+      color: white;
+    }
+  }
+
+  .btn-gradescope {
+    @include btn-color($white, #1863c1);
+  }
+  
+  .btn-pensieve {
+    @include btn-color($white, #1863c1);
+  }
+
+  .btn-datahub {
+    @include btn-color($white, #355F41);
+  }
+  
+  .btn-ed {
+    @include btn-color($white, #9400D3);
+  }
+  
+  .btn-bcourses {
+    @include btn-color($white, #8C183B);
+  }
+
+  .btn-zoom {
+    @include btn-color($white, #FF8C00);
+  }
+
+  .btn-lectures {
+    @include btn-color($white, #d02670);
+  }
+
+  .btn-textbook {
+    @include btn-color($white, #1B1D1D);
+  }
+  
+  .btn-extensions {
+    @include btn-color($white, #6929c4);
+  }
+  
+  .btn-officehours{
+    @include btn-color($white, #009d9a);
+  }
+
+@if $color-scheme == dark {
+  @include dark-mode-overrides;
 }
 
 // Place all of your course-specific CSS here.
