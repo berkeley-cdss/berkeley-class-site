@@ -17,7 +17,7 @@ Oct 7
 Oct 8
 : **Project**{: .label .label-green } [Project 1: Ants vs. Some Bees]({% link _projects/proj01.md %})
 
-Nov 17
+Oct 9
 : {% lec 8 %}
   : [8.1](#), [8.2](#), [8.3](#), [8.4](#)
 : **HW 2 due**{: .label .label-red }

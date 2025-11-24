@@ -60,15 +60,16 @@ module Jekyll
     end
       # Construct the date manually
       lecture_time = Time.new(year, month, day, hour, minute)
-      Jekyll.logger.info "DEBUG", "Time is #{lecture_time}"
+  Jekyll.logger.info "DEBUG", "Time is #{lecture_time}"
 
-      current_time = Time.now
-      Jekyll.logger.info "DEBUG", "Current Time is #{current_time}"
+  current_time = Time.now
+  Jekyll.logger.info "DEBUG", "Current Time is #{current_time}"
 
-      return "**Lecture #{@number}**{: .label .label-lec } #{lecture_title}" if lecture_time > current_time
-
-      # Current approach: relative URL (cleaner, automatically handles baseurl)
-      "**Lecture #{@number}**{: .label .label-lec } [#{lecture_title}](../lectures/#{@number_updated})" # TODO: remove the .. depending if the homepage is on the /schedules/ directory or not.
+  # Always render an anchor so client-side JS can toggle links in real time.
+  # Attach a machine-readable ISO timestamp in `data-release`.
+  release_iso = lecture_time.utc.iso8601
+  # Use the lecture's URL (Jekyll document.url) and include the data-release attribute.
+  "**Lecture #{@number}**{: .label .label-lec } <a href=\"..#{lecture_url}\" data-release=\"#{release_iso}\">#{lecture_title}</a>"
       
     end
   end
