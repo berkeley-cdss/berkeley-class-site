@@ -7,7 +7,7 @@ Oct 5
   : [3.1](#), [2.2](#), [2.3](#)
 
 Oct 6
-: **Section**{: .label .label-purple }[Linked Lists](#)
+: **Discussion**{: .label .label-discussion }[Linked Lists](#)
   : [Solution](#)
 
 Oct 7
@@ -15,7 +15,7 @@ Oct 7
   : [2.4](#), [2.5](#)
 
 Oct 8
-: **Project**{: .label .label-green } [Project 1: Ants vs. Some Bees]({% link _projects/proj01.md %})
+: **Project**{: .label .label-project } [Project 1: Ants vs. Some Bees]({% link _projects/proj01.md %})
 
 Oct 9
 : {% lec 6 %} <!-- Right now, the asset tag for lectures is created in asset_tags.rb -- maybe this can be changed later -->

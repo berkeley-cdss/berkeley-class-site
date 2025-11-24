@@ -48,6 +48,11 @@ course_department: dsus
 # If you have no archive page, comment this line out or leave blank.
 class_archive_path: /
 
+# TODO(setup): Remove this line if your favicon is named favicon.ico and is in the root directory,
+# otherwise set this to the path to your favicon.
+# favicons can be course specific or you can use the default Berkeley one that comes with the template.
+favicon_ico: "/favicon.png"
+
 # TODO(setup): Set these auxiliary links as you wish - they show up on the top right
 aux_links:
   # TODO(template): Move this to be built-in.
@@ -67,10 +72,10 @@ berkeley_theme_options:
 google_calendar:
   # This can be found in the settings for the calendar.
   # The calendar must be publicly readable.
-  google_calendar_id: data101@berkeley.edu
+  google_calendar_id: c_134c9c007d75a399b5e7b39377d2f4e45c9db648f2df4417f8c9a490cb0726d1@group.calendar.google.com
   # You need to make this, once per course, ideally via a SPA
   # TODO: Recommend adding link to Google cloud project here
-  google_api_key: AIzaSyD1Tw4oJZfxn7RvCEkubEspj2dsmD033Uw
+  google_api_key: AIzaSyBombNhLEEZRjCfG4Fp5PpmICYBZO3PvY8
   # These are processed in order, top-to-bottom, first match applies
   # The prefix/suffix matches the Google Calendar event *title*
   # You may use only prefix OR suffix, see fullcalendar.js
