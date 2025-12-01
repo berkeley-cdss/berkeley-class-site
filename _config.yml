@@ -188,6 +188,11 @@ defaults:
       type: announcements
     values:
       layout: announcement
+  - scope:
+      path: ''
+      type: lectures
+    values:
+      time: 10:00 # Default release time of lectures is currently set to 10:00 AM 
 
 
 ######################################################################

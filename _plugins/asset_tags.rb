@@ -60,7 +60,7 @@ module Jekyll
       end
       # Construct the date manually
       lecture_time = Time.new(year, month, day, hour, minute)
-      Jekyll.logger.info 'DEBUG', "Time is #{lecture_time}"
+      Jekyll.logger.info 'DEBUG', "#{lecture_title}: Release Time is #{lecture_time}"
 
       current_time = Time.now
       Jekyll.logger.info 'DEBUG', "Current Time is #{current_time}"
