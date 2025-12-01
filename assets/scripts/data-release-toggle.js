@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
 
-	const intervalMs = 1000; // check every second for real-time updates
+	const intervalMs = 60000; // check every minute for real-time updates
 
 	function parseDate(d) {
 		if (!d) return null;
@@ -11,7 +11,7 @@
 
 	function disableAnchor(a) {
 		if (!a) return;
-		if (a.hasAttribute('data-href')) return; // already disabled
+		if (a.classList.contains('unreleased')) return; // already disabled
 
 		// store original href
 		const href = a.getAttribute('href');
@@ -31,7 +31,7 @@
 
 	function enableAnchor(a) {
 		if (!a) return;
-		if (a.hasAttribute('href')) return; // already enabled
+		if (!a.classList.contains('unreleased')) return; // already enabled
 
 		const stored = a.getAttribute('data-href');
 		if (stored) {
