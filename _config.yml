@@ -193,7 +193,7 @@ defaults:
       type: lectures
     values:
       layout: lecture
-      time: 10:00 # Default release time of lectures is currently set to 10:00 AM 
+      time: 00:00 # Default release time of lectures is currently set to 12:00 AM 
 
 
 ######################################################################
