@@ -60,10 +60,8 @@ module Jekyll
       end
       # Construct the date manually
       lecture_time = Time.new(year, month, day, hour, minute)
-      Jekyll.logger.info 'DEBUG', "#{lecture_title}: Release Time is #{lecture_time}"
 
       current_time = Time.now
-      Jekyll.logger.info 'DEBUG', "Current Time is #{current_time}"
 
       # Always render an anchor so client-side JS can toggle links in real time.
       # Attach a machine-readable ISO timestamp in `data-release`.
