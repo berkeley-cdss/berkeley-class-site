@@ -33,6 +33,8 @@ Some tags you may find useful:
 
 - `{% raw %}{% link <path> %}{% endraw %}` to link to a particular page on the website ([docs](https://jekyllrb.com/docs/liquid/tags/#links))
 
+Also see [Asset Tags]({% link docs/asset-tags.md %}) for custom tags we provide to link to various types of assets.
+
 ## Just the Docs
 
 For most website content edits, we recommend looking at the different UI components and colors offered by the [Just the Docs][jtd] theme.

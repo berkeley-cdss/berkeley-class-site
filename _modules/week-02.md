@@ -3,7 +3,7 @@ title: Basic Data Structures
 ---
 
 Oct 5
-: **Lecture**{: .label .label-lecture} [Linked Lists & Encapsulation](#)
+: {% lec 4 %}
   : **Reading**{: .label .label-reading} [3.1](#), [2.2](#), [2.3](#)
 
 Oct 6
@@ -11,12 +11,12 @@ Oct 6
   : [Solution](#)
 
 Oct 7
-: **Lecture**{: .label .label-lecture} [Resizing Arrays](#)
+: {% lec 5 %}
   : **Reading**{: .label .label-reading} [2.4](#), [2.5](#)
 
 Oct 8
 : **Project**{: .label .label-project } [Project 1: Ants vs. Some Bees]({% link _projects/proj01.md %})
 
 Oct 9
-: **Lecture**{: .label .label-lecture} [Runtime Analysis](#)
+: {% lec 6 %}
   : **Reading**{: .label .label-reading} [8.1](#), [8.2](#), [8.3](#), [8.4](#)
