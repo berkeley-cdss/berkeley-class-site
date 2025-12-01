@@ -33,6 +33,7 @@ a:not([class]):hover {
   text-decoration-color: lighten($link-color, 20%);
 }
 
+/* For lectures that haven't been released yet */
 a.unreleased {
   color: inherit;
   text-decoration: none;
