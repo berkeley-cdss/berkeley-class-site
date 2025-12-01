@@ -192,6 +192,7 @@ defaults:
       path: ''
       type: lectures
     values:
+      layout: lecture
       time: 10:00 # Default release time of lectures is currently set to 10:00 AM 
 
 
