@@ -19,6 +19,6 @@ Oct 1
 : **Lab**{: .label .label-lab } [Lab 1: Control and Functions]({% link _labs/lab01.md %})
 
 Oct 2
-: **Lecture**{: .label .label-lecture} [Tracing, IntLists, & Recursion](../lectures/03/)
+: {% lec 3 %}
   : **Reading**{: .label .label-reading} [2.1](#)
 : **Homework due**{: .label .label-homework } [HW 1: Recursion]({% link _hw/hw01.md %})
