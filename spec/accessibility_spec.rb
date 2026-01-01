@@ -11,7 +11,7 @@ require 'spec_helper'
 # Tests are segmented in 2.0, 2.1 and 2.2+
 # In most places WCAG 2.1AA is the minimum requirement, but 2.2 is the current WCAG Standard.
 required_a11y_standards = %i[wcag2a wcag2aa wcag21a wcag21aa]
-complete_a11y_standards = %i[wcag22aa best-practice secion508]
+complete_a11y_standards = %i[wcag22aa best-practice section508]
 
 # axe-core rules that are not required to be accessible / do not apply
 # You may temporarily want to add rules here during development.
