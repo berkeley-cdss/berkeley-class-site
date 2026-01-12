@@ -2,7 +2,7 @@
 
 # Install the version of Ruby specified in .ruby-version.
 if [ -f .ruby-version ]; then
-    rvm install -s ruby-$(cat .ruby-version)
+    rvm install ruby-$(cat .ruby-version)
     rvm use $(cat .ruby-version)
 fi
 
@@ -17,4 +17,4 @@ if [ -f Gemfile ]; then
     bundle install
 fi
 
-bundle exec jekyll serve --force-polling --baseurl=''
+bundle exec jekyll serve --force-polling
