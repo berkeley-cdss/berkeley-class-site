@@ -12,6 +12,10 @@ seo:
 
 A template for static UC Berkeley class websites (with a focus on EECS/CS/DS courses) built with [Jekyll](https://jekyllrb.com/), [Just the Docs](jtd), and [Just the Class](https://kevinl.info/just-the-class/).
 
+- [announcements](announcements),
+- a [course calendar](calendar),
+- a [staff](staff) page,
+- and a weekly [schedule](schedule).
 **Ready to get started? See our [documentation]({% link docs/index.md %}).**
 
 ## Features
