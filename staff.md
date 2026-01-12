@@ -7,7 +7,7 @@ nav_order: 4
 
 # Staff
 
-Staff information is stored in the `_staffers` directory and rendered according to the layout file, `_layouts/staffer.html`.
+To learn how this page works, see the [documentation]({% link docs/staff.md %}).
 
 ## Instructors
 
@@ -42,6 +42,16 @@ Staff information is stored in the `_staffers` directory and rendered according 
 ## Tutors
 
 {% for staffer in tutors %}
+{{ staffer }}
+{% endfor %}
+{% endif %}
+
+{% assign readers = site.staffers | where: 'role', 'Reader' %}
+{% assign num_readers = readers | size %}
+{% if num_readers != 0 %}
+## Readers
+
+{% for staffer in readers %}
 {{ staffer }}
 {% endfor %}
 {% endif %}

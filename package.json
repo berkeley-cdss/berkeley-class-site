@@ -1,0 +1,30 @@
+{
+  "name": "berkeley-class-site",
+  "version": "1.0.0",
+  "description": "A template for Berkeley CS and Data Science Classes",
+  "homepage": "https://github.com/berkeley-cdss/berkeley-class-site#readme",
+  "bugs": {
+    "url": "https://github.com/berkeley-cdss/berkeley-class-site/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/berkeley-cdss/berkeley-class-site.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "postinstall": "cp -r ./node_modules/fullcalendar/ ./assets/vendor/fullcalendar/dist && cp -r ./node_modules/@fullcalendar/ ./assets/vendor/fullcalendar/packages"
+  },
+  "dependencies": {
+    "@fullcalendar/core": "^6.1.19",
+    "@fullcalendar/icalendar": "^6.1.19",
+    "@fullcalendar/timegrid": "^6.1.19",
+    "@fullcalendar/web-component": "^6.1.19",
+    "fullcalendar": "^6.1.19"
+  }
+}

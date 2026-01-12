@@ -3,11 +3,8 @@ name: Run all page tests
 # Run when a PR is opened, any branch is pushed
 # Also allow manually triggering workflows, and running if a release is created.
 on:
-  - pull_request
   - push
   - workflow_dispatch
-  - deployment
-  - release
 
 jobs:
   build:

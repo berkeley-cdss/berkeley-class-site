@@ -48,6 +48,11 @@ course_department: dsus
 # If you have no archive page, comment this line out or leave blank.
 class_archive_path: /
 
+# TODO(setup): Remove this line if your favicon is named favicon.ico and is in the root directory,
+# otherwise set this to the path to your favicon.
+# favicons can be course specific or you can use the default Berkeley one that comes with the template.
+favicon_ico: "/favicon.png"
+
 # TODO(setup): Set these auxiliary links as you wish - they show up on the top right
 aux_links:
   # TODO(template): Move this to be built-in.
@@ -62,6 +67,54 @@ aux_links:
 # TODO(semester): You may want to review these...
 berkeley_theme_options:
   show_logo_in_sidebar: true
+
+# TODO(template): Copy class information to the template.
+google_calendar:
+  # This can be found in the settings for the calendar.
+  # The calendar must be publicly readable.
+  google_calendar_id: c_134c9c007d75a399b5e7b39377d2f4e45c9db648f2df4417f8c9a490cb0726d1@group.calendar.google.com
+  # You need to make this, once per course, ideally via a SPA
+  # TODO: Recommend adding link to Google cloud project here
+  google_api_key: AIzaSyBombNhLEEZRjCfG4Fp5PpmICYBZO3PvY8
+  # These are processed in order, top-to-bottom, first match applies
+  # The prefix/suffix matches the Google Calendar event *title*
+  # You may use only prefix OR suffix, see fullcalendar.js
+  event_types:
+    - suffix: Lecture
+      background_color: '9FD1FF' # Blue light
+      text_color: '000'
+      class: cal-lecture
+      icon: fa-school
+    - suffix: Tea Hours
+      background_color: 'FFE88D' # gold light
+      text_color: '000'
+      class: cal-tea-oh
+      icon: fa-mug-hot
+    - suffix: Faculty Office Hours
+      background_color: 'FFC31B' # gold medium
+      text_color: '000'
+      class: cal-tea-oh
+      icon: fa-person-circle-question
+    - suffix: Office Hours
+      background_color: 'D9CEFF' # purple light
+      text_color: '000000'
+      class: cal-oh
+      icon: fa-person-circle-question
+    - suffix: Tutoring Section
+      background_color: 'FFCFE5' # rose light
+      text_color: '000000'
+      class: cal-tutoring
+      icon: fa-people-group
+    - suffix: Section
+      background_color: '004AAE' # blue medium
+      text_color: 'FFFFFF'
+      class: cal-disc-section
+      icon: fa-person-chalkboard
+    - suffix: Exam
+      background_color: 'FA8072' # salmon red
+      text_color: '000000'
+      class: cal-tutoring
+      icon: fa-school
 
 # Collections for website data
 collections:
@@ -135,6 +188,12 @@ defaults:
       type: announcements
     values:
       layout: announcement
+  - scope:
+      path: ''
+      type: lectures
+    values:
+      layout: lecture
+      time: 00:00 # Default release time of lectures is currently set to 12:00 AM 
 
 
 ######################################################################
@@ -204,6 +263,7 @@ compress_html:
 
 # Likely not necessary, but a google default for Berkeley
 timezone: America/Los_Angeles
+future: true
 
 # Note: dotfiles are excluded by default. .htaccess is included as a common case.
 include:
