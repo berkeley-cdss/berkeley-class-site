@@ -12,7 +12,10 @@ We include a script that defines a set of custom [Liquid](https://shopify.github
 
 ## Lecture
 
-`{% lec n %}` where n is the lecture number defined in the frontmatter.
+{% raw %}
+{% lec n %}
+{% endraw %}
+where n is the lecture number defined in the frontmatter.
 
 The lecture tag is the most built out tag at this time. You can use this tag to reference lectures automatically linking to the correct lecture page. The tag includes the lecture label. The lecture tag enables you to set the release date and time for when links to lecture pages should appear. For example if you set the front matter of the lecture `.md` file to be:
 ```yaml
