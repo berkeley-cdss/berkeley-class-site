@@ -1,9 +1,10 @@
 ---
 title: Staff
-permalink: /docs/staff/
+permalink: /docs/collections/staff/
 published: true
 layout: page
-parent: Documentation
+parent: Collections
+nav_order: 2
 ---
 
 # Staff
