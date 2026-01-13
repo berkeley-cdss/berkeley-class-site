@@ -27,8 +27,6 @@ excluded_elements = [
 # We must call this to ensure the build it up-to-date.
 build_jekyll_site!
 ALL_PAGES = load_sitemap
-puts "Running tests on #{ALL_PAGES.count} pages."
-puts "  - #{ALL_PAGES.join("\n  - ")}\n\n"
 
 RSpec.shared_examples 'a11y tests' do
   it 'meets WCAG 2.1' do
