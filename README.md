@@ -7,7 +7,65 @@ A template for UC Berkeley class websites (with a focus on EECS/CS/DS courses).
 
 ## Installation
 
-### Install Ruby and Bundler
+To get started on development, please setup your environment using one of two methods.
+
+### Method 1: VSCode and devcontainers (Docker)
+
+In this setup, we will use Visual Studio Code's ("VSCode") "devcontainers" feature to setup and install required project dependencies.
+
+In short, "devcontainers" is a VSCode extension that enables convenient integration between VSCode and Docker.
+
+In this repo, we have set up a `.devcontainer/devcontainer.json` file.
+This json file tells VSCode how to build the Docker container used in this project.
+To learn more about this json file, see the devcontainer docs: ["Create a devcontainer.json file"](https://code.visualstudio.com/docs/devcontainers/containers#_create-a-devcontainerjson-file)
+
+To learn more about devcontainers, see these [VSCode docs](https://code.visualstudio.com/docs/devcontainers/containers), and/or follow this VSCode ["Dev Containers tutorial](https://code.visualstudio.com/docs/devcontainers/tutorial).
+But, for now, we can follow this quick tutorial to get set up.
+
+#### Prerequisites: install required software
+
+First, install [VSCode](https://code.visualstudio.com/download) for your platform (Windows, Linux, MacOS).
+
+Tip: while VSCode may seem that it's only for Windows, as of 2026 VSCode is very effective on other OS's like MacOS, and is widely used in industry for software development (including on MacOS).
+
+Next, install [Docker Desktop](https://www.docker.com/products/docker-desktop).
+
+Next, install the ["Dev Containers"](vscode:extension/ms-vscode-remote.remote-containers) VSCode extension.
+
+#### Open berkeley-class-site devcontainer in VSCode
+
+Open the `berkeley-class-site` folder in VSCode.
+
+**Windows**: one easy way is to right-click the folder, and click the "Open with Code" context action.
+
+![Open folder in VSCode in Windows](docs/images/vscode_open_folder_windows.png "Open folder in VSCode in Windows")
+
+**MacOS**: see these [docs](https://code.visualstudio.com/docs/setup/mac).
+
+Next, VSCode's devcontainer extension will autodetect that this folder has a `.devcontainer/devcontainer.json` file, and will ask you if you'd like to enter the Docker container:
+
+![Open project devcontainer in VSCode](docs/images/vscode_devcontainers_reopen_in_container.png "Open project devcontainer in VSCode")
+
+Click the "Reopen in Container" button (lower-right corner), and this will build the Docker container (specified in `.devcontainer/devcontainer.json`) and, once it's done, will open a terminal inside of the Docker container.
+
+Further: since the `.devcontainer/devcontainer.json` specifies a `post-create.sh` script, it will also run this script, which will run jekyll to build + serve the website locally:
+
+![VScode devcontainer running](docs/images/vscode_devcontainer_running.png "VSCode devcontainer running")
+
+From here, you can make changes to the website, and `jekyll` will autodetect changes and regenerate the site.
+
+Note: if you see VSCode dialog come up with a message like this:
+```
+Automatic Ruby environment activation with rbenv failed: Command failed: rbenv exec ruby -E
+```
+This seems to be a false positive.
+I'm not sure why it does this, but it doesn't seem to interfere with local builds.
+
+### Method 2: Local install
+
+Rather than using Docker containers (and VSCode's devcontainer extension), instead we will install our project dependencies "locally".
+
+#### Install Ruby and Bundler
 **The berkeley-class-site template requires Ruby 3.3.7 or higher and bundler >= 2.6**
 Install Ruby before continuing. You can check your Ruby version by running:
 
