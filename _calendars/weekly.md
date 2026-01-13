@@ -49,6 +49,11 @@ schedule:
         end: 2:00 PM
         location: 271 Soda
   - name: Thursday
+    events:
+      - name: Drop In's
+        start: 1:00 PM
+        end: 3:00 PM
+        location: 271 Soda
   - name: Friday
     events:
       - name: Lecture
