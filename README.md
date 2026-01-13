@@ -61,6 +61,12 @@ Automatic Ruby environment activation with rbenv failed: Command failed: rbenv e
 This seems to be a false positive.
 I'm not sure why it does this, but it doesn't seem to interfere with local builds.
 
+**Important**: for now, if you exit VSCode, reopen VSCode at a later time, and re-enter the devcontainer, VScode will open up a terminal within the devcontainer **without running .devcontainer/post-create.sh**.
+This means that (among other things) `jekyll` is not set up correctly.
+The workaround is to run `./.devcontainer/post-create.sh` from the terminal, which will begin locally serving the website via `jekyll` as expected.
+
+TODO: we should modify the devcontainer setup (eg devcontainer.json, post-create.sh) to improve dev QoL.
+
 ### Method 2: Local install
 
 Rather than using Docker containers (and VSCode's devcontainer extension), instead we will install our project dependencies "locally".
