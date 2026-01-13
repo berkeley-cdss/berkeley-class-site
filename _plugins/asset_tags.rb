@@ -61,7 +61,7 @@ module Jekyll
       # Construct the date manually
       lecture_time = Time.new(year, month, day, hour, minute)
 
-      current_time = Time.now
+      Time.now
 
       # Always render an anchor so client-side JS can toggle links in real time.
       # Attach a machine-readable ISO timestamp in `data-release`.

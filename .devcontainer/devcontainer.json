@@ -1,6 +1,6 @@
 {
   "name": "Jekyll",
-  "image": "mcr.microsoft.com/devcontainers/jekyll:latest",
+  "image": "mcr.microsoft.com/devcontainers/jekyll:2.2.1-3.3-bookworm",
 
   "features": {},
 

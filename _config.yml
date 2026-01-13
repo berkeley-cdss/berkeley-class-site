@@ -226,6 +226,7 @@ sass:
   sourcemap: always
   quiet_deps: true
   verbose: false
+  silence_deprecations: ["import"]
 
 # Theme settings
 theme: just-the-docs
