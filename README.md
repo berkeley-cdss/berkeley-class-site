@@ -34,25 +34,25 @@ Next, install the ["Dev Containers"](vscode:extension/ms-vscode-remote.remote-co
 
 #### Open berkeley-class-site devcontainer in VSCode
 
-Open the `berkeley-class-site` folder in VSCode.
+After cloning the repository (or your fork of it), open the `berkeley-class-site` folder in VSCode.
 
 **Windows**: one easy way is to right-click the folder, and click the "Open with Code" context action.
 
-![Open folder in VSCode in Windows](docs/images/vscode_open_folder_windows.png "Open folder in VSCode in Windows")
+![Open folder in VSCode in Windows](assets/images/vscode_open_folder_windows.png "Open folder in VSCode in Windows")
 
 **MacOS**: see these [docs](https://code.visualstudio.com/docs/setup/mac).
 
 Next, VSCode's devcontainer extension will autodetect that this folder has a `.devcontainer/devcontainer.json` file, and will ask you if you'd like to enter the Docker container:
 
-![Open project devcontainer in VSCode](docs/images/vscode_devcontainers_reopen_in_container.png "Open project devcontainer in VSCode")
+![Open project devcontainer in VSCode](assets/images/vscode_devcontainers_reopen_in_container.png "Open project devcontainer in VSCode")
 
 Click the "Reopen in Container" button (lower-right corner), and this will build the Docker container (specified in `.devcontainer/devcontainer.json`) and, once it's done, will open a terminal inside of the Docker container.
 
 Further: since the `.devcontainer/devcontainer.json` specifies a `post-create.sh` script, it will also run this script, which will run jekyll to build + serve the website locally:
 
-![VScode devcontainer running](docs/images/vscode_devcontainer_running.png "VSCode devcontainer running")
+![VScode devcontainer running](assets/images/vscode_devcontainer_running.png "VSCode devcontainer running")
 
-From here, you can make changes to the website, and `jekyll` will autodetect changes and regenerate the site.
+From here, you can make changes to the website, and `jekyll` will autodetect changes and regenerate the site. Unless you change `_config.yml`, you do not need to restart the `jekyll` server.
 
 Note: if you see VSCode dialog come up with a message like this:
 ```
@@ -72,7 +72,7 @@ TODO: we should modify the devcontainer setup (eg devcontainer.json, post-create
 Rather than using Docker containers (and VSCode's devcontainer extension), instead we will install our project dependencies "locally".
 
 #### Install Ruby and Bundler
-**The berkeley-class-site template requires Ruby 3.3.7 or higher and bundler >= 2.6**
+**The berkeley-class-site template requires Ruby 3.3.9 or higher and bundler >= 2.6**
 Install Ruby before continuing. You can check your Ruby version by running:
 
 ```bash
@@ -107,7 +107,7 @@ bundle exec jekyll serve
 
 Note that if you alter `_config.yml`, you will need to rerun the above command to see the changes reflected.
 
-Search throughout the repository for TODO items called `TODO(setup)` and complete them to customize the site for your course.
+Search throughout the repository for TODO items called `TODO(setup)` and complete them to customize the site for your course. We recommend deleting the `docs/` directory for a semesterly course website. `docs/` contains developer docs and is visible on the [deployed template website](https://berkeley-cdss.github.io/berkeley-class-site/).
 
 ## Deployment
 
