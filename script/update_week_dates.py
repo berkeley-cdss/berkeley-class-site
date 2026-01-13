@@ -54,7 +54,9 @@ def parse_start_date(s: str, default_year: int | None) -> datetime.date:
             return datetime.datetime.strptime(s, "%b %d %Y").date()
         elif len(parts) == 2:
             if default_year is None:
-                raise ValueError("Year required when providing month/day without year; use --year")
+                raise ValueError(
+                    "Year required when providing month/day without year; use --year"
+                )
             return datetime.datetime.strptime(f"{s} {default_year}", "%b %d %Y").date()
     except Exception as e:
         raise ValueError(f"Could not parse start date: {s}: {e}")
@@ -63,7 +65,7 @@ def parse_start_date(s: str, default_year: int | None) -> datetime.date:
 def format_date_for_md(d: datetime.date) -> str:
     # Use platform-safe day formatting: no leading zero
     # %e isn't portable; use day int
-    return d.strftime('%b ') + str(d.day)
+    return d.strftime("%b ") + str(d.day)
 
 
 def find_week_files(dirpath: str, pattern: str) -> List[Tuple[int, str]]:
@@ -81,11 +83,13 @@ def find_week_files(dirpath: str, pattern: str) -> List[Tuple[int, str]]:
     return results
 
 
-def update_file_dates(path: str, week_start: datetime.date, dry_run: bool = False, backup: bool = False) -> Tuple[bool, int]:
+def update_file_dates(
+    path: str, week_start: datetime.date, dry_run: bool = False, backup: bool = False
+) -> Tuple[bool, int]:
     """Update up to five date lines in file at path to Mon..Fri starting at week_start.
     Returns (changed, count_replaced).
     """
-    with open(path, 'r', encoding='utf-8') as f:
+    with open(path, "r", encoding="utf-8") as f:
         lines = f.readlines()
 
     new_lines: List[str] = []
@@ -112,11 +116,11 @@ def update_file_dates(path: str, week_start: datetime.date, dry_run: bool = Fals
         return True, replaced
 
     if backup:
-        bak = path + '.bak'
-        with open(bak, 'w', encoding='utf-8') as f:
+        bak = path + ".bak"
+        with open(bak, "w", encoding="utf-8") as f:
             f.writelines(lines)
 
-    with open(path, 'w', encoding='utf-8') as f:
+    with open(path, "w", encoding="utf-8") as f:
         f.writelines(new_lines)
 
     return True, replaced
@@ -152,14 +156,18 @@ def main():
 
     for week_num, path in files:
         week_start = start_date + datetime.timedelta(weeks=week_num - 1)
-        changed, replaced = update_file_dates(path, week_start, dry_run=args.dry_run, backup=args.backup)
+        changed, replaced = update_file_dates(
+            path, week_start, dry_run=args.dry_run, backup=args.backup
+        )
         if changed:
             total_changed += 1
         total_replaced += replaced
-        print(f"Processed {os.path.basename(path)}: replaced {replaced} date lines{' (updated)' if changed else ''}")
+        print(
+            f"Processed {os.path.basename(path)}: replaced {replaced} date lines{' (updated)' if changed else ''}"
+        )
 
     print(f"Done. {total_changed} files updated, {total_replaced} date lines replaced.")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

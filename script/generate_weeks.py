@@ -36,7 +36,15 @@ import os
 import sys
 from typing import Dict, List, Tuple
 
-WEEKDAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+WEEKDAYS = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+]
 
 DEFAULT_MAPPING = {
     "Monday": ["Discussion"],
@@ -46,17 +54,31 @@ DEFAULT_MAPPING = {
     "Friday": ["Lab"],
 }
 
-TEMPLATE_DAY_BLOCK = "{date}\n: **{event_label}**{{: .label .label-{event_class} }} {link}\n"
+TEMPLATE_DAY_BLOCK = (
+    "{date}\n: **{event_label}**{{: .label .label-{event_class} }} {link}\n"
+)
 
 
 def parse_args():
-    p = argparse.ArgumentParser(description="Generate week markdown files for course schedule")
-    p.add_argument("--start", help="Start date (YYYY-MM-DD or 'Aug 24' or 'Aug 24 2025'); if omitted the script will prompt interactively")
+    p = argparse.ArgumentParser(
+        description="Generate week markdown files for course schedule"
+    )
+    p.add_argument(
+        "--start",
+        help="Start date (YYYY-MM-DD or 'Aug 24' or 'Aug 24 2025'); if omitted the script will prompt interactively",
+    )
     p.add_argument("--year", type=int, help="Year when start date omits year")
     p.add_argument("--weeks", type=int, default=17, help="Number of weeks to generate")
-    p.add_argument("--outdir", default="_modules", help="Output directory (default: _modules)")
-    p.add_argument("--hw-start", type=int, default=1, help="Starting homework number (default 1)")
-    p.add_argument("--map", help="Optional mapping like 'Mon:Discussion;Wed:Homework' to override defaults")
+    p.add_argument(
+        "--outdir", default="_modules", help="Output directory (default: _modules)"
+    )
+    p.add_argument(
+        "--hw-start", type=int, default=1, help="Starting homework number (default 1)"
+    )
+    p.add_argument(
+        "--map",
+        help="Optional mapping like 'Mon:Discussion;Wed:Homework' to override defaults",
+    )
     return p.parse_args()
 
 
@@ -100,7 +122,10 @@ def interactive_fill(args):
         args.hw_start = int(hw_val)
     except Exception:
         pass
-    map_val = ask("Optional mapping (e.g. 'Mon:Discussion;Wed:Homework') or leave blank", args.map or "")
+    map_val = ask(
+        "Optional mapping (e.g. 'Mon:Discussion;Wed:Homework') or leave blank",
+        args.map or "",
+    )
     args.map = map_val if map_val.strip() else None
 
 
@@ -131,15 +156,15 @@ def build_mapping(map_arg: str | None) -> Dict[str, List[str]]:
     if not map_arg:
         return mapping
     # map_arg format: 'Mon:Discussion;Wed:Homework'
-    entries = [e.strip() for e in map_arg.split(';') if e.strip()]
+    entries = [e.strip() for e in map_arg.split(";") if e.strip()]
     for e in entries:
-        if ':' not in e:
+        if ":" not in e:
             continue
-        k, v = e.split(':', 1)
+        k, v = e.split(":", 1)
         # Normalize weekday names to full name if short provided
         k = k.strip()
         k_full = normalize_weekday_name(k)
-        mapping[k_full] = [x.strip() for x in v.split(',') if x.strip()]
+        mapping[k_full] = [x.strip() for x in v.split(",") if x.strip()]
     return mapping
 
 
@@ -157,7 +182,7 @@ def mkdir_p(path: str):
 
 def format_date_for_md(d: datetime.date) -> str:
     # e.g. Aug 24 (no leading zero)
-    return d.strftime('%b %-d') if sys.platform != 'win32' else d.strftime('%b %#d')
+    return d.strftime("%b %-d") if sys.platform != "win32" else d.strftime("%b %#d")
 
 
 def zero_pad(n: int, width: int = 2) -> str:
@@ -165,27 +190,27 @@ def zero_pad(n: int, width: int = 2) -> str:
 
 
 def event_class_for_label(label: str) -> str:
-    return label.lower().replace(' ', '-')
+    return label.lower().replace(" ", "-")
 
 
 def event_link_for(label: str, week_num: int, hw_counter: int) -> Tuple[str, int]:
     """Return (link_markdown, possibly_updated_hw_counter)"""
     label_lower = label.lower()
     week_num = 1
-    if label_lower.startswith('discussion'):
+    if label_lower.startswith("discussion"):
         return "[Discussion](#)", hw_counter
-    if label_lower.startswith('homework') or label_lower.startswith('hw'):
+    if label_lower.startswith("homework") or label_lower.startswith("hw"):
         hw_num = hw_counter
         hw_padded = zero_pad(hw_num)
         # Use doubled braces so Python .format treats them as literal braces
         link = "[HW {}]({{% link _hw/hw{}.md %}})".format(hw_num, hw_padded)
         # above uses raw markers to avoid evaluating liquid when this script runs
         return link, hw_counter
-    if label_lower.startswith('lecture'):
+    if label_lower.startswith("lecture"):
         lec_num = zero_pad(week_num)
         link = "[Lecture {}]({{% link _lectures/{}.md %}})".format(week_num, lec_num)
         return link, hw_counter
-    if label_lower.startswith('lab'):
+    if label_lower.startswith("lab"):
         # attempt to link to labs by week_num if desired
         lab_name = f"lab{zero_pad(week_num)}"
         link = "[Lab {}]({{% link _labs/{}.md %}})".format(week_num, lab_name)
@@ -194,27 +219,32 @@ def event_link_for(label: str, week_num: int, hw_counter: int) -> Tuple[str, int
     return "(#)", hw_counter
 
 
-def generate_week_content(week_index: int, start_date: datetime.date, mapping: Dict[str, List[str]], hw_counter_start: int) -> Tuple[str, int]:
+def generate_week_content(
+    week_index: int,
+    start_date: datetime.date,
+    mapping: Dict[str, List[str]],
+    hw_counter_start: int,
+) -> Tuple[str, int]:
     """Generate markdown content for a single week (1-based week_index). Returns (content, next_hw_counter)."""
     week_start = start_date + datetime.timedelta(weeks=week_index - 1)
     content_lines: List[str] = []
     # Front matter
     title = f"Week {zero_pad(week_index)}"
-    content_lines.append('---')
-    content_lines.append(f'title: {title}')
-    content_lines.append('---')
-    content_lines.append('')
+    content_lines.append("---")
+    content_lines.append(f"title: {title}")
+    content_lines.append("---")
+    content_lines.append("")
 
     hw_counter = hw_counter_start
     # iterate Monday..Friday
     for i in range(5):
         day = week_start + datetime.timedelta(days=i)
-        day_name = day.strftime('%A')
+        day_name = day.strftime("%A")
         date_str = format_date_for_md(day)
         if day_name not in mapping:
             # no events for this day - still print the date
             content_lines.append(date_str)
-            content_lines.append(':')
+            content_lines.append(":")
             continue
         events = mapping[day_name]
         # Print the date once, then each event on its own indented line
@@ -223,20 +253,20 @@ def generate_week_content(week_index: int, start_date: datetime.date, mapping: D
         for ev in events:
             link, hw_counter = event_link_for(ev, week_index, hw_counter)
             ev_class = event_class_for_label(ev)
-            prefix = ': ' if first else '  : '
+            prefix = ": " if first else "  : "
             line = f"{prefix}**{ev}**{{: .label .label-{ev_class} }} {link}"
             content_lines.append(line)
             first = False
         # blank line after the day's events for readability
-        content_lines.append('')
-    body = '\n'.join(content_lines)
+        content_lines.append("")
+    body = "\n".join(content_lines)
     return body, hw_counter
 
 
 def write_week_file(outdir: str, week_index: int, content: str):
     mkdir_p(outdir)
     filename = os.path.join(outdir, f"week-{zero_pad(week_index)}.md")
-    with open(filename, 'w', encoding='utf-8') as f:
+    with open(filename, "w", encoding="utf-8") as f:
         f.write(content)
     print(f"Wrote {filename}")
 
@@ -258,8 +288,8 @@ def main():
         content, hw_counter = generate_week_content(w, start_date, mapping, hw_counter)
         write_week_file(args.outdir, w, content)
 
-    print('Done.')
+    print("Done.")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
