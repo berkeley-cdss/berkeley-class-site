@@ -10,9 +10,9 @@ gem 'jekyll', '~> 4'
 gem 'faraday-retry', '~> 2.2'
 gem 'kramdown-parser-gfm'
 
-gem "webrick"
-gem "base64"
-gem "bigdecimal"
+gem 'base64'
+gem 'bigdecimal'
+gem 'webrick'
 
 group :jekyll_plugins do
   gem 'jekyll-github-metadata', '~> 2.16'
