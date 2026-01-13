@@ -7,9 +7,6 @@ nav_order: 4
 
 # Staff
 
-{: .note }
-If sections already exist, reimporting them will result in [duplicate sections](https://github.com/Cal-CS-61A-Staff/berkeley-cs61a/issues/7788). See [Updating existing sections](#updating-existing-sections).
-
 To learn how this page works, see the [documentation]({% link docs/staff.md %}).
 
 ## Instructors
