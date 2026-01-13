@@ -20,61 +20,74 @@
   <button type="button"
     class="btn js-unset-color-scheme btn-outline px-2"
     style="margin-left: -3px; border-top-left-radius: 0; border-bottom-left-radius: 0;"
-    aria-label="Automatically switch theme"
-    ><i class="fa-solid fa-rotate" title="Automatically switch theme"></i></button>
+    aria-label="Use system appearance"
+    ><i class="fa-solid fa-rotate" title="Use system appearance"></i></button>
 </span>
 
 <script>
+(function() {
+  // Prevent double-loading
+  if (window.themeScriptRan) return;
+  window.themeScriptRan = true;
+
   document.addEventListener("DOMContentLoaded", function() {
-    if (!jtd) { return; }
+    // Check if JTD is actually loaded
+    if (typeof jtd === 'undefined') {
+      console.error("JTD is not defined. Check if jtd.js is loading.");
+      return; 
+    }
 
     const toggleSchemeBtn = document.querySelector('.js-toggle-dark-mode');
     const unsetColorScheme = document.querySelector('.js-unset-color-scheme');
 
-    // If the browser suggests a color scheme, and user hasn't saved/switch one yet..
-    if (window.matchMedia && !localStorage['jtd-theme']) {
-      if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        jtd.setTheme('dark');
+    function updateButtonUI(theme) {
+      if (!toggleSchemeBtn) return;
+      if (theme === 'dark') {
         toggleSchemeBtn.textContent = '🔆 Light Mode';
         toggleSchemeBtn.ariaLabel = 'Switch to Light Mode';
-      } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-        jtd.setTheme('light');
+      } else {
         toggleSchemeBtn.textContent = '🌙 Dark Mode';
         toggleSchemeBtn.ariaLabel = 'Switch to Dark Mode';
       }
-    } else if (localStorage['jtd-theme']) {
-      jtd.setTheme(localStorage['jtd-theme']);
     }
 
+    // Apply theme before button listeners
+    const savedTheme = localStorage.getItem('jtd-theme');
+    const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const initialTheme = savedTheme || (systemDark ? 'dark' : 'light');
+
+    jtd.setTheme(initialTheme);
+    updateButtonUI(initialTheme);
+
+    // Toggle Logic
     jtd.addEvent(toggleSchemeBtn, 'click', function() {
-      if (jtd.getTheme() === 'dark') {
-        localStorage['jtd-theme'] = 'light';
-        jtd.setTheme('light');
-        toggleSchemeBtn.textContent = '🌙 Dark Mode';
-        toggleSchemeBtn.ariaLabel = 'Switch to Dark Mode';
-      } else {
-        jtd.setTheme('dark');
-        localStorage['jtd-theme'] = 'dark';
-        toggleSchemeBtn.textContent = '🔆 Light Mode';
-        toggleSchemeBtn.ariaLabel = 'Switch to Light Mode';
-      }
+      const current = document.documentElement.getAttribute('data-theme') || jtd.getTheme();
+      const nextTheme = (current === 'dark') ? 'light' : 'dark';
+
+      console.log("Toggling from", current, "to", nextTheme);
+
+      jtd.setTheme(nextTheme);
+      localStorage.setItem('jtd-theme', nextTheme);
+      updateButtonUI(nextTheme);
     });
 
-    // Add a way to unset the saved theme.
-    // "default" respect's the site config setting, but not the user browser pref
-    // So, check the pref and set the theme to the preferred one, if possible.
-    jtd.addEvent(unsetColorScheme, 'click', function() {
-      delete localStorage['jtd-theme'];
+    // Reset Logic (Sync with system preference)
+    if (unsetColorScheme) {
+      jtd.addEvent(unsetColorScheme, 'click', function() {
+        // Clear the manual override
+        localStorage.removeItem('jtd-theme');
 
-      if (window.matchMedia) {
-        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          jtd.setTheme('dark');
-        } else if (window.matchMedia('(prefers-color-scheme: light)').matches) {
-          jtd.setTheme('light');
-        }
-      } else {
-        jtd.setTheme('default');
-      }
-    });
+        // Determine what the system wants
+        const systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const newTheme = systemDark ? 'dark' : 'light';
+
+        // Apply it immediately without reloading
+        jtd.setTheme(newTheme);
+        updateButtonUI(newTheme);
+        
+        console.log("Reset to system preference:", newTheme);
+      });
+    }
   });
+})();
 </script>
