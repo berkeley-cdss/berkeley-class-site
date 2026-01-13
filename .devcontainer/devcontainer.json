@@ -1,7 +1,6 @@
 {
   "name": "Jekyll",
-  "image": "mcr.microsoft.com/devcontainers/jekyll:latest",
-  // points to mcr.microsoft.com/devcontainers/jekyll:2.1.8-3.3-bookworm at time of comment
+  "image": "mcr.microsoft.com/devcontainers/jekyll:2.2.1-3.3-bookworm",
 
   "features": {},
 
