@@ -21,8 +21,6 @@ tagline: A Jekyll template for course websites
 description: A modern, highly customizable, responsive Jekyll template for course websites
 # TODO(template): this should be built from the staff list...
 author: Various Bears
-# You should use either light or dark as the theme.
-color_scheme: light
 
 # TODO(setup): Set this to the semester, e.g. /sp24, (faXX / spXX / suXX / wiXX )
 baseurl: '/berkeley-class-site' # the subpath of your site, which should just be the semester.
@@ -188,6 +186,12 @@ defaults:
       type: announcements
     values:
       layout: announcement
+  - scope:
+      path: ''
+      type: lectures
+    values:
+      layout: lecture
+      time: 00:00 # Default release time of lectures is currently set to 12:00 AM 
 
 
 ######################################################################
@@ -220,6 +224,7 @@ sass:
   sourcemap: always
   quiet_deps: true
   verbose: false
+  silence_deprecations: ["import"]
 
 # Theme settings
 theme: just-the-docs
@@ -257,6 +262,7 @@ compress_html:
 
 # Likely not necessary, but a google default for Berkeley
 timezone: America/Los_Angeles
+future: true
 
 # Note: dotfiles are excluded by default. .htaccess is included as a common case.
 include:

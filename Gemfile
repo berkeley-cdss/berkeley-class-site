@@ -10,6 +10,10 @@ gem 'jekyll', '~> 4'
 gem 'faraday-retry', '~> 2.2'
 gem 'kramdown-parser-gfm'
 
+gem 'base64'
+gem 'bigdecimal'
+gem 'webrick'
+
 group :jekyll_plugins do
   gem 'jekyll-github-metadata', '~> 2.16'
   gem 'jekyll-jupyter-notebook'
@@ -29,7 +33,6 @@ group :development, :test do
   gem 'rackup'
   gem 'rspec'
   gem 'selenium-webdriver'
-  gem 'webrick'
 end
 
 group :development, :rubocop do

@@ -24,14 +24,14 @@ $border-color: $grey-dk-200;
 
 // Override dark-mode variables here
 $berkeley-blue: #002676; // rgb(0, 38, 118);
-$grey-dk-400: #0C0A0E !default;
+$grey-dk-400: #141414 !default;
 $body-background-color: $grey-dk-400;
 $sidebar-color: $grey-dk-400;
 $search-background-color: $grey-dk-400;
 $body-text-color: $white;
 $body-lighter-color: darken($body-text-color, 20%);
 
-$link-color: #406FFE;
+$link-color: #6ea3ff;
 $hover-focus-link-color: darken($link-color, 10%);
 
 // TODO(template): We need to figure out a much better solution!

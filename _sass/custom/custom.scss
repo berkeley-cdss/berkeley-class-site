@@ -7,7 +7,6 @@
 // Just the Class customizations are all loaded in one file.
 @import '../just-the-class/just-the-class';
 @import '../berkeley/berkeley';
-
 @import '../color_schemes/dark_overrides';
 
 div.highlighter-rouge {
@@ -38,7 +37,7 @@ div.highlighter-rouge div.highlight {
       color: black;
     }
     &.label-discussion {
-      background-color: #ff8389;
+      background-color: #FFC31B;
       color: black;
     }
     &.label-homework {
@@ -63,7 +62,7 @@ div.highlighter-rouge div.highlight {
       color: white;
     }
     &.label-exam-prep {
-      background-color: #FFC31B;
+      background-color: #ff8389;
       color: black;
     }
     &.label-reading {

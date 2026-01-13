@@ -4,6 +4,8 @@ nav_exclude: true
 ---
 
 <div class="lecture">
+  <!-- Note: This content is repeated in the .md files for each lecture. 
+   You can choose to use the content here with the front matter format, or edit the individual md files.-->
   <h1 class="title">Lecture {{page.number}} - {{page.title}}</h1>
   {% if page.presented_by or page.date %}
   <div class="subhead mb-3">
@@ -35,8 +37,19 @@ nav_exclude: true
       {% if page.files.pdf_slides %}
       <li><a href="{{ page.files.pdf_slides }}" target="_blank">Slides (PDF)</a></li>
       {% endif %}
+      {% if page.slido %}
+        <span class="fs-5 m-1">
+          <a href="{{ page.slido }}" target="_blank" class="btn btn-green">
+            <i class="fa-solid fa-question" aria-hidden="true"></i>
+            Slido Q&A
+          </a>
+        </span>
+        {% endif %}
       {% if page.files.notes %}
       <li><a href="{{ page.files.notes }}" target="_blank">Notes</a></li>
+      {% endif %}
+      {% if page.files.reading %}
+      <li><a href="{{ page.files.reading }}">Reading</a></li>
       {% endif %}
       {% if page.files.code %}
       <li><a href="{{ page.files.code }}">Code</a></li>

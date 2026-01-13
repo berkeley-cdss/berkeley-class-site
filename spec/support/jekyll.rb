@@ -13,10 +13,8 @@ def site_config
 end
 
 def build_jekyll_site!
-  puts 'Building site...'
   @site = Jekyll::Site.new(site_config)
   @site.process
-  puts 'Site build complete.'
 end
 
 def load_sitemap
