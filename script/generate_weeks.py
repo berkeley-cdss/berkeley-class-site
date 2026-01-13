@@ -60,6 +60,9 @@ TEMPLATE_DAY_BLOCK = (
 
 
 def parse_args():
+    """
+    Parse arguments
+    """
     p = argparse.ArgumentParser(
         description="Generate week markdown files for course schedule"
     )
@@ -130,6 +133,7 @@ def interactive_fill(args):
 
 
 def parse_start_date(s: str, default_year: int | None) -> datetime.date:
+    """Parse start date from string s."""
     s = s.strip()
     # Try ISO first
     try:
@@ -142,7 +146,7 @@ def parse_start_date(s: str, default_year: int | None) -> datetime.date:
         parts = s.split()
         if len(parts) == 3:
             return datetime.datetime.strptime(s, "%b %d %Y").date()
-        elif len(parts) == 2:
+        if len(parts) == 2:
             if default_year is None:
                 raise ValueError("Year required when providing month/day without year; use --year")
             return datetime.datetime.strptime(f"{s} {default_year}", "%b %d %Y").date()
@@ -152,6 +156,7 @@ def parse_start_date(s: str, default_year: int | None) -> datetime.date:
 
 
 def build_mapping(map_arg: str | None) -> Dict[str, List[str]]:
+    """Build the event mapping from the map_arg string or use defaults."""
     mapping = DEFAULT_MAPPING.copy()
     if not map_arg:
         return mapping
@@ -169,6 +174,7 @@ def build_mapping(map_arg: str | None) -> Dict[str, List[str]]:
 
 
 def normalize_weekday_name(short: str) -> str:
+    """Normalize a short weekday name to full name."""
     s = short.strip().lower()
     for name in WEEKDAYS:
         if name.lower().startswith(s):
@@ -177,19 +183,23 @@ def normalize_weekday_name(short: str) -> str:
 
 
 def mkdir_p(path: str):
+    """Create directory path if it doesn't exist"""
     os.makedirs(path, exist_ok=True)
 
 
 def format_date_for_md(d: datetime.date) -> str:
+    """Format date for markdown output without leading zero on day."""
     # e.g. Aug 24 (no leading zero)
     return d.strftime("%b %-d") if sys.platform != "win32" else d.strftime("%b %#d")
 
 
 def zero_pad(n: int, width: int = 2) -> str:
+    """Return zero-padded string of number n with given width."""
     return str(n).zfill(width)
 
 
 def event_class_for_label(label: str) -> str:
+    """Return CSS class name for event label."""
     return label.lower().replace(" ", "-")
 
 
@@ -225,7 +235,8 @@ def generate_week_content(
     mapping: Dict[str, List[str]],
     hw_counter_start: int,
 ) -> Tuple[str, int]:
-    """Generate markdown content for a single week (1-based week_index). Returns (content, next_hw_counter)."""
+    """Generate markdown content for a single week (1-based week_index).
+     Returns (content, next_hw_counter)."""
     week_start = start_date + datetime.timedelta(weeks=week_index - 1)
     content_lines: List[str] = []
     # Front matter
@@ -264,6 +275,7 @@ def generate_week_content(
 
 
 def write_week_file(outdir: str, week_index: int, content: str):
+    """Write the week content to a file in outdir."""
     mkdir_p(outdir)
     filename = os.path.join(outdir, f"week-{zero_pad(week_index)}.md")
     with open(filename, "w", encoding="utf-8") as f:
