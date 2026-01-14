@@ -67,7 +67,7 @@ module Jekyll
       # Attach a machine-readable ISO timestamp in `data-release`.
       release_iso = lecture_time.utc.iso8601
       # Use the lecture's URL (Jekyll document.url) and include the data-release attribute.
-      "**Lecture #{@number}**{: .label .label-lec } <a href=\"..#{lecture_url}\" data-release=\"#{release_iso}\">#{lecture_title}</a>"
+      "**Lecture #{@number}**{: .label .label-lecture } <a href=\"..#{lecture_url}\" data-release=\"#{release_iso}\">#{lecture_title}</a>"
     end
   end
 

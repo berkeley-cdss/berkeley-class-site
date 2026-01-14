@@ -1,0 +1,20 @@
+### LECTURE ORDERING ###
+# each entry requires either a 'slug' or a 'title' field
+# you may have both if you'd like to override the title from the lecture file
+# optionally you may also include a 'nonumber' boolean field to suppress numbering
+# and a 'link' field to override the default link to the lecture page or provide an external link
+lectures:
+  - slug: intro
+  - slug: "02"
+  - slug: "03"
+  - slug: "04"
+  - slug: "05"
+  - slug: "06"
+  - slug: "07"
+  - slug: "08"
+  - title: "No Lecture"
+    nonumber: true
+    # link: "https://registrar.berkeley.edu/wp-content/uploads/UCB_AcademicCalendar_2025-26.pdf"
+  - slug: "09"
+  - slug: "10"
+  - slug: "11"

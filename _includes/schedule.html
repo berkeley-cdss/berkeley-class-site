@@ -1,0 +1,286 @@
+<!-- Inspired heavily by the CS 161 template -->
+
+{%- comment -%}
+  - This file auto-generates the schedule with all the days of the semester.
+  - You should not need to touch anything in here unless you're rewriting
+  the website; all configuration variables can be changed in the _data folder.
+{%- endcomment -%}
+
+{%- comment -%}
+  - Create a list, valid_dates, with a list of all days we want to appear on the schedule.
+  - Uses Unix time to calculate days, because Jekyll is weird.
+  - Use start_date, end_date, and class_days in syllabus.yml to control this.
+{%- endcomment -%}
+{%- assign start_epoch = site.data.syllabus.start_date | date: '%s' -%}
+{%- assign end_epoch = site.data.syllabus.end_date | date: '%s' -%}
+{%- assign seconds_in_day = 60 | times: 60 | times: 24 -%}
+{%- assign start_days_epoch = start_epoch | divided_by: seconds_in_day -%}
+{%- assign end_days_epoch = end_epoch | divided_by: seconds_in_day -%}
+{%- assign valid_dates = '' | split: '' -%}
+{%- for days_epoch in (start_days_epoch..end_days_epoch) -%}
+  {%- assign date = days_epoch | times: seconds_in_day -%}
+  {%- assign day_of_week = date | date: '%w' -%}
+  
+  {%- comment -%} Check if this day is a Lecture, Discussion, or Lab day {%- endcomment -%}
+  {%- if site.data.syllabus.class_days contains day_of_week or 
+    site.data.syllabus.discussion_days contains day_of_week or 
+    site.data.syllabus.lab_days contains day_of_week or 
+    site.data.syllabus.hw_days contains day_of_week-%}
+    {%- assign valid_dates = valid_dates | push: date -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- comment -%}
+  - Manually add any extra days we need to appear on the schedule.
+  - Use extra_days_col2 in syllabus.yml to control this.
+{%- endcomment -%}
+{%- for item in site.data.syllabus.extra_days_col2 -%}
+  {%- assign extra_day_epoch = item.date | date: '%s' | plus: 0 -%}
+  {%- assign valid_dates = valid_dates | push: extra_day_epoch -%}
+{%- endfor -%}
+
+{%- comment -%}
+  Sort days and group into weeks.
+  sorted_dates is an array, where each element is a hash with three fields:
+  - "name" is the week number (between 1 and 52)
+  - "items" is an array of days we'll display in that week (in Unix time)
+  - "size" is the number of days we'll display in that week
+{%- endcomment -%}
+{%- assign sorted_dates = valid_dates | sort | uniq | group_by_exp: 'it', "it | date: '%U'" -%}
+
+{%- assign lecture_index = 0 -%}
+{%- assign discussion_index = 0 -%}
+{%- assign lab_index = 0 -%}
+{%- assign homework_index = 0 -%}
+{%- assign reading_index = 0 -%}
+{%- assign lecture_number = site.data.syllabus.starting_lecture_number | default: 1 -%}
+{%- assign discussion_number = site.data.syllabus.starting_discussion_number | default: 1 -%}
+{%- assign lab_number = site.data.syllabus.starting_lab_number | default: 1 -%}
+{%- assign homework_number = site.data.syllabus.starting_homework_number | default: 1 -%}
+
+
+<div class="syllabus-container">
+{%- for week in sorted_dates -%}
+  {%- assign week_number = forloop.index -%}
+  {%- if site.data.syllabus.starting_week_number == '0' -%}
+    {%- assign week_number = forloop.index0 -%}
+  {%- endif -%}
+
+  <div id="week-{{ week.name }}" class="week-label"><strong>Week {{ week_number }}</strong></div>
+  
+  <table class="spanned-table" style="margin-bottom: 1.5rem; table-layout: fixed; width: 100%;">
+    <tbody>
+      {%- for day in week.items -%}
+        <tr>
+          <td style="width:{{ site.data.syllabus.date_width }}; vertical-align: top;">
+            {{ day | date: '%a, %b %d' }}
+          </td>
+
+          <td style="width:{{ site.data.syllabus.col2_width }}; vertical-align: top;">
+            {%- comment -%} --- EXTRA DAYS / EVENTS LOGIC --- {%- endcomment -%}
+            {%- assign current_date = day | date: "%Y-%m-%d" -%}
+
+            {%- for extra in site.data.syllabus.extra_days_col2 -%}
+            {%- comment -%} Convert the YAML date to a string to match current_date {%- endcomment -%}
+            {%- assign extra_date_string = extra.date | date: "%Y-%m-%d" -%}
+
+            {%- if extra_date_string == current_date -%}
+                <div class="syllabus-item" style="margin-bottom: 8px;">
+                {%- if extra.label and extra.label != "none" -%}
+                    <strong class="label label-{{ extra.label }}">
+                    {{ extra.label | capitalize }}
+                    </strong>
+                {%- endif -%}
+                <span>{{ extra.title }}</span>
+                </div>
+            {%- endif -%}
+            {%- endfor -%}
+
+            {%- assign day_of_week = day | date: '%w' -%}
+            {%- comment -%} --- LECTURE LOGIC (Tues/Thurs) --- {%- endcomment -%}
+            {%- if site.data.syllabus.class_days contains day_of_week -%}
+                {%- assign entry = site.data.lectures.lectures[lecture_index] -%}
+                
+                {%- if entry -%}
+                    {%- comment -%} Wrap the entire output in a div for block spacing {%- endcomment -%}
+                    <div class="syllabus-item" style="margin-bottom: 4px;">
+                        {%- assign lecture_obj = nil -%}
+                        
+                        {%- comment -%} 1. FIND THE OBJECT (If slug exists) {%- endcomment -%}
+                        {%- if entry.slug -%}
+                            {%- assign target_slug = entry.slug | append: "" -%}
+                            {%- for l in site.lectures -%}
+                                {%- if l.slug == target_slug -%}
+                                    {%- assign lecture_obj = l -%}
+                                    {%- break -%}
+                                {%- endif -%}
+                            {%- endfor -%}
+                        {%- endif -%}
+
+                        {%- comment -%} 2. DETERMINE TITLE, LINK, AND RELEASE DATE {%- endcomment -%}
+                        {%- assign display_title = entry.title | default: lecture_obj.title -%}
+                        
+                        {%- if entry.link -%}
+                            {%- assign display_link = entry.link -%}
+                        {%- elsif lecture_obj -%}
+                            {%- assign display_link = lecture_obj.url | relative_url -%}
+                        {%- else -%}
+                            {%- assign display_link = nil -%}
+                        {%- endif -%}
+
+                        {%- if lecture_obj.date -%}
+                            {%- assign release_iso = lecture_obj.date | date_to_xmlschema -%}
+                        {%- else -%}
+                            {%- assign release_iso = nil -%}
+                        {%- endif -%}
+
+                        {%- comment -%} 3. RENDER LABEL (Unless nonumber is true) {%- endcomment -%}
+                        {%- unless entry.nonumber -%}
+                            <strong class="label label-lecture">Lecture {{ lecture_number }}</strong>
+                            {%- assign lecture_number = lecture_number | plus: 1 -%}
+                        {%- endunless -%}
+
+                        {%- comment -%} 4. RENDER LINK OR TITLE {%- endcomment -%}
+                        {%- if display_link -%}
+                            <a href="{{ display_link }}" {% if release_iso %}data-release="{{ release_iso }}"{% endif %}>
+                                {{ display_title }}
+                            </a>
+                        {%- else -%}
+                            <span>{{ display_title }}</span>
+                        {%- endif -%}
+                    </div>
+
+                    {%- comment -%} 5. ALWAYS INCREMENT INDEX TO MOVE TO NEXT YAML ENTRY {%- endcomment -%}
+                    {%- assign lecture_index = lecture_index | plus: 1 -%}
+                {%- endif -%}
+            {%- endif -%}
+
+            {%- comment -%} --- DISCUSSION LOGIC --- {%- endcomment -%}
+            {%- if site.data.syllabus.discussion_days contains day_of_week -%}
+                {%- assign disc = site.data.discussions.discussions[discussion_index] -%}
+                {%- if disc -%}
+                    {%- unless disc.skip -%}
+                        <div class="syllabus-item" style="margin-bottom: 4px;">
+                            <strong class="label label-discussion">Discussion {{ discussion_number }}</strong>
+                            {%- if disc.link -%}
+                                <a href="{{ disc.link }}">{{ disc.title }}</a>
+                            {%- else -%}
+                                <span>{{ disc.title }}</span>
+                            {%- endif -%}
+                        </div>
+                        {%- assign discussion_number = discussion_number | plus: 1 -%}
+                    {%- endunless -%}
+                    
+                    {%- assign discussion_index = discussion_index | plus: 1 -%}
+                {%- endif -%}
+            {%- endif -%}
+
+            {%- comment -%} --- LAB LOGIC --- {%- endcomment -%}
+            {%- if site.data.syllabus.lab_days contains day_of_week -%}
+                {%- assign lab = site.data.labs.labs[lab_index] -%}
+                {%- if lab -%}
+                    {%- unless lab.skip -%}
+                        <div class="syllabus-item" style="margin-bottom: 4px;">
+                            <strong class="label label-lab">Lab {{ lab_number }}</strong>
+                            {%- if lab.link -%}
+                                <a href="{{ lab.link }}">{{ lab.title }}</a>
+                            {%- else -%}
+                                <span>{{ lab.title }}</span>
+                            {%- endif -%}
+                        </div>
+                        {%- assign lab_number = lab_number | plus: 1 -%}
+                    {%- endunless -%}
+                    
+                    {%- assign lab_index = lab_index | plus: 1 -%}
+                {%- endif -%}
+            {%- endif -%}
+
+            {%- comment -%} --- HOMEWORK LOGIC --- {%- endcomment -%}
+            {%- if site.data.syllabus.hw_days contains day_of_week -%}
+                {%- assign hw = site.data.homeworks.homeworks[homework_index] -%}
+                {%- if hw -%}
+                    {%- unless hw.skip -%}
+                        <div class="syllabus-item" style="margin-bottom: 4px;">
+                            <strong class="label label-homework">Homework {{ homework_number }}</strong>
+                            {%- if hw.link -%}
+                                <a href="{{ hw.link }}">{{ hw.title }}</a>
+                            {%- else -%}
+                                <span>{{ hw.title }}</span>
+                            {%- endif -%}
+                        </div>
+                        {%- assign hw_number = hw_number | plus: 1 -%}
+                    {%- endunless -%}
+                    
+                    {%- assign hw_index = hw_index | plus: 1 -%}
+                {%- endif -%}
+            {%- endif -%}
+
+            {%- comment -%} --- PROJECT LOGIC (Date-Driven) --- {%- endcomment -%}
+            {%- assign current_date = day | date: "%Y-%m-%d" -%}
+
+            {%- for project in site.data.projects.projects -%}
+            {%- assign project_date = project.date | date: "%Y-%m-%d" -%}
+            
+            {%- if project_date == current_date -%}
+                <div class="syllabus-item" style="margin-bottom: 8px;">
+                <strong class="label label-project">Project {{project.label-number}}</strong>
+                {%- if project.link -%}
+                    <a href="{{ project.link }}"><strong>{{ project.title }}</strong></a>
+                {%- else -%}
+                    <strong>{{ project.title }}</strong>
+                {%- endif -%}
+                </div>
+            {%- endif -%}
+            {%- endfor -%}
+          </td>
+
+          <td style="width:{{ site.data.syllabus.col3_width }}; vertical-align: top;">
+            {%- comment -%} --- READINGS LOGIC --- {%- endcomment -%}
+            {%- if site.data.syllabus.class_days contains day_of_week -%}
+                {%- assign reading = site.data.readings.readings[reading_index] -%}
+                {%- if reading -%}
+                    {%- unless reading.skip -%}
+                        <div class="syllabus-item" style="margin-bottom: 4px;">
+                            <strong class="label label-reading">Reading</strong>
+                            {%- if reading.links -%}
+                                {{ reading.title }}
+                                <div class="links-list" style="margin-left: 20px; font-size: 0.9em;">
+                                {%- for link in reading.links -%}
+                                    <a href="{{ link.url }}">{{ link.text }}</a>{% unless forloop.last %}, {% endunless %}
+                                {%- endfor -%}
+                                </div>
+                            {%- elsif reading.link -%}
+                                <a href="{{ reading.link }}">{{ reading.title }}</a>
+                            {%- else -%}
+                                <span>{{ reading.title }}</span>
+                            {%- endif -%}
+                        </div>
+                    {%- endunless -%}
+                    
+                    {%- assign reading_index = reading_index | plus: 1 -%}
+                {%- endif -%}
+            {%- endif -%}
+
+            {%- comment -%} --- EXTRA LINKS LOGIC --- {%- endcomment -%}
+
+            {%- for extra in site.data.syllabus.extra_links_col3 -%}
+            {%- assign extra_date = extra.date | date: "%Y-%m-%d" -%}
+            
+            {%- if extra_date == current_date -%}
+                <div class="syllabus-item" style="margin-bottom: 8px;">
+                {%- if extra.link -%}
+                    <a href="{{ extra.link }}">{{ extra.title }}</a>
+                {%- else -%}
+                    {{ extra.title }}
+                {%- endif -%}
+                </div>
+            {%- endif -%}
+            {%- endfor -%}
+
+          </td>
+        </tr>
+      {%- endfor -%}
+    </tbody>
+  </table>
+{%- endfor -%}
+</div>
