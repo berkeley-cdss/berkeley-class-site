@@ -118,7 +118,6 @@ google_calendar:
 collections:
   staffers:
     sort_by: name
-  modules:
   calendars:
   announcements:
   labs:
@@ -171,11 +170,6 @@ defaults:
       height: 300
       subpath: '/assets/images/'
       width: 300
-  - scope:
-      path: ''
-      type: modules
-    values:
-      layout: module
   - scope:
       path: ''
       type: calendars
