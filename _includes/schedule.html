@@ -21,7 +21,10 @@
   {%- assign date = days_epoch | times: seconds_in_day -%}
   {%- assign day_of_week = date | date: '%w' -%}
   
-  {%- comment -%} Check if this day is a Lecture, Discussion, or Lab day {%- endcomment -%}
+  {%- comment -%} 
+    Gather the days to show on the calendar based on lecture, discussion,
+    lab, and homework days defined in _data/syllabus.yml.
+  {%- endcomment -%}
   {%- if site.data.syllabus.class_days contains day_of_week or 
     site.data.syllabus.discussion_days contains day_of_week or 
     site.data.syllabus.lab_days contains day_of_week or 
@@ -48,11 +51,11 @@
 {%- endcomment -%}
 {%- assign sorted_dates = valid_dates | sort | uniq | group_by_exp: 'it', "it | date: '%U'" -%}
 
+{%- comment -%} counters {%- endcomment -%}
 {%- assign lecture_index = 0 -%}
 {%- assign discussion_index = 0 -%}
 {%- assign lab_index = 0 -%}
 {%- assign homework_index = 0 -%}
-{%- assign reading_index = 0 -%}
 {%- assign lecture_number = site.data.syllabus.starting_lecture_number | default: 1 -%}
 {%- assign discussion_number = site.data.syllabus.starting_discussion_number | default: 1 -%}
 {%- assign lab_number = site.data.syllabus.starting_lab_number | default: 1 -%}
@@ -99,56 +102,58 @@
             {%- assign day_of_week = day | date: '%w' -%}
             {%- comment -%} --- LECTURE LOGIC (Tues/Thurs) --- {%- endcomment -%}
             {%- if site.data.syllabus.class_days contains day_of_week -%}
-                {%- assign entry = site.data.lectures.lectures[lecture_index] -%}
+                {%- assign lec_entry = site.data.lectures.lectures[lecture_index] -%}
                 
-                {%- if entry -%}
-                    {%- comment -%} Wrap the entire output in a div for block spacing {%- endcomment -%}
-                    <div class="syllabus-item" style="margin-bottom: 4px;">
-                        {%- assign lecture_obj = nil -%}
-                        
-                        {%- comment -%} 1. FIND THE OBJECT (If slug exists) {%- endcomment -%}
-                        {%- if entry.slug -%}
-                            {%- assign target_slug = entry.slug | append: "" -%}
-                            {%- for l in site.lectures -%}
-                                {%- if l.slug == target_slug -%}
-                                    {%- assign lecture_obj = l -%}
-                                    {%- break -%}
-                                {%- endif -%}
-                            {%- endfor -%}
-                        {%- endif -%}
+                {%- if lec_entry -%}
+                    {%- comment -%} 0. CHECK FOR SKIP {%- endcomment -%}
+                    {%- unless lec_entry.skip -%}
+                        <div class="syllabus-item" style="margin-bottom: 4px;">
+                            {%- assign lecture_obj = nil -%}
+                            
+                            {%- comment -%} 1. FIND THE OBJECT (If slug exists) {%- endcomment -%}
+                            {%- if lec_entry.slug -%}
+                                {%- assign target_slug = lec_entry.slug | append: "" -%}
+                                {%- for l in site.lectures -%}
+                                    {%- if l.slug == target_slug -%}
+                                        {%- assign lecture_obj = l -%}
+                                        {%- break -%}
+                                    {%- endif -%}
+                                {%- endfor -%}
+                            {%- endif -%}
 
-                        {%- comment -%} 2. DETERMINE TITLE, LINK, AND RELEASE DATE {%- endcomment -%}
-                        {%- assign display_title = entry.title | default: lecture_obj.title -%}
-                        
-                        {%- if entry.link -%}
-                            {%- assign display_link = entry.link -%}
-                        {%- elsif lecture_obj -%}
-                            {%- assign display_link = lecture_obj.url | relative_url -%}
-                        {%- else -%}
-                            {%- assign display_link = nil -%}
-                        {%- endif -%}
+                            {%- comment -%} 2. DETERMINE TITLE, LINK, AND RELEASE DATE {%- endcomment -%}
+                            {%- assign display_title = lec_entry.title | default: lecture_obj.title -%}
+                            
+                            {%- if lec_entry.link -%}
+                                {%- assign display_link = lec_entry.link -%}
+                            {%- elsif lecture_obj -%}
+                                {%- assign display_link = lecture_obj.url | relative_url -%}
+                            {%- else -%}
+                                {%- assign display_link = nil -%}
+                            {%- endif -%}
 
-                        {%- if lecture_obj.date -%}
-                            {%- assign release_iso = lecture_obj.date | date_to_xmlschema -%}
-                        {%- else -%}
-                            {%- assign release_iso = nil -%}
-                        {%- endif -%}
+                            {%- if lecture_obj.date -%}
+                                {%- assign release_iso = lecture_obj.date | date_to_xmlschema -%}
+                            {%- else -%}
+                                {%- assign release_iso = nil -%}
+                            {%- endif -%}
 
-                        {%- comment -%} 3. RENDER LABEL (Unless nonumber is true) {%- endcomment -%}
-                        {%- unless entry.nonumber -%}
-                            <strong class="label label-lecture">Lecture {{ lecture_number }}</strong>
-                            {%- assign lecture_number = lecture_number | plus: 1 -%}
-                        {%- endunless -%}
+                            {%- comment -%} 3. RENDER LABEL (Unless nonumber is true) {%- endcomment -%}
+                            {%- unless lec_entry.nonumber -%}
+                                <strong class="label label-lecture">Lecture {{ lecture_number }}</strong>
+                                {%- assign lecture_number = lecture_number | plus: 1 -%}
+                            {%- endunless -%}
 
-                        {%- comment -%} 4. RENDER LINK OR TITLE {%- endcomment -%}
-                        {%- if display_link -%}
-                            <a href="{{ display_link }}" {% if release_iso %}data-release="{{ release_iso }}"{% endif %}>
-                                {{ display_title }}
-                            </a>
-                        {%- else -%}
-                            <span>{{ display_title }}</span>
-                        {%- endif -%}
-                    </div>
+                            {%- comment -%} 4. RENDER LINK OR TITLE {%- endcomment -%}
+                            {%- if display_link -%}
+                                <a href="{{ display_link }}" {% if release_iso %}data-release="{{ release_iso }}"{% endif %}>
+                                    {{ display_title }}
+                                </a>
+                            {%- else -%}
+                                <span>{{ display_title }}</span>
+                            {%- endif -%}
+                        </div>
+                    {%- endunless -%}
 
                     {%- comment -%} 5. ALWAYS INCREMENT INDEX TO MOVE TO NEXT YAML ENTRY {%- endcomment -%}
                     {%- assign lecture_index = lecture_index | plus: 1 -%}
@@ -157,61 +162,154 @@
 
             {%- comment -%} --- DISCUSSION LOGIC --- {%- endcomment -%}
             {%- if site.data.syllabus.discussion_days contains day_of_week -%}
-                {%- assign disc = site.data.discussions.discussions[discussion_index] -%}
-                {%- if disc -%}
-                    {%- unless disc.skip -%}
+                {%- assign disc_entry = site.data.discussions.discussions[discussion_index] -%}
+                
+                {%- if disc_entry -%}
+                    {%- unless disc_entry.skip -%}
                         <div class="syllabus-item" style="margin-bottom: 4px;">
-                            <strong class="label label-discussion">Discussion {{ discussion_number }}</strong>
-                            {%- if disc.link -%}
-                                <a href="{{ disc.link }}">{{ disc.title }}</a>
+                            {%- assign disc_obj = nil -%}
+                            
+                            {%- comment -%} 1. FIND THE OBJECT (If slug exists) {%- endcomment -%}
+                            {%- if disc_entry.slug -%}
+                                {%- assign target_slug = disc_entry.slug | append: "" -%}
+                                {%- for d in site.discussions -%}
+                                    {%- if d.slug == target_slug -%}
+                                        {%- assign disc_obj = d -%}
+                                        {%- break -%}
+                                    {%- endif -%}
+                                {%- endfor -%}
+                            {%- endif -%}
+
+                            {%- comment -%} 2. DETERMINE TITLE AND LINK {%- endcomment -%}
+                            {%- assign display_title = disc_entry.title | default: disc_obj.title -%}
+                            
+                            {%- if disc_entry.link -%}
+                                {%- assign display_link = disc_entry.link -%}
+                            {%- elsif disc_obj -%}
+                                {%- assign display_link = disc_obj.url | relative_url -%}
                             {%- else -%}
-                                <span>{{ disc.title }}</span>
+                                {%- assign display_link = nil -%}
+                            {%- endif -%}
+
+                            {%- comment -%} 3. RENDER LABEL (Unless nonumber is true) {%- endcomment -%}
+                            {%- unless disc_entry.nonumber -%}
+                                <strong class="label label-discussion">Discussion {{ discussion_number }}</strong>
+                                {%- assign discussion_number = discussion_number | plus: 1 -%}
+                            {%- endunless -%}
+
+                            {%- comment -%} 4. RENDER LINK OR TITLE {%- endcomment -%}
+                            {%- if display_link -%}
+                                <a href="{{ display_link }}">{{ display_title }}</a>
+                            {%- else -%}
+                                <span>{{ display_title }}</span>
                             {%- endif -%}
                         </div>
-                        {%- assign discussion_number = discussion_number | plus: 1 -%}
                     {%- endunless -%}
-                    
+
+                    {%- comment -%} 5. ALWAYS INCREMENT INDEX {%- endcomment -%}
                     {%- assign discussion_index = discussion_index | plus: 1 -%}
                 {%- endif -%}
             {%- endif -%}
 
             {%- comment -%} --- LAB LOGIC --- {%- endcomment -%}
             {%- if site.data.syllabus.lab_days contains day_of_week -%}
-                {%- assign lab = site.data.labs.labs[lab_index] -%}
-                {%- if lab -%}
-                    {%- unless lab.skip -%}
+                {%- assign lab_entry = site.data.labs.labs[lab_index] -%}
+                
+                {%- if lab_entry -%}
+                    {%- unless lab_entry.skip -%}
                         <div class="syllabus-item" style="margin-bottom: 4px;">
-                            <strong class="label label-lab">Lab {{ lab_number }}</strong>
-                            {%- if lab.link -%}
-                                <a href="{{ lab.link }}">{{ lab.title }}</a>
+                            {%- assign lab_obj = nil -%}
+                            
+                            {%- comment -%} 1. FIND THE OBJECT (If slug exists) {%- endcomment -%}
+                            {%- if lab_entry.slug -%}
+                                {%- assign target_slug = lab_entry.slug | append: "" -%}
+                                {%- for l in site.labs -%}
+                                    {%- if l.slug == target_slug -%}
+                                        {%- assign lab_obj = l -%}
+                                        {%- break -%}
+                                    {%- endif -%}
+                                {%- endfor -%}
+                            {%- endif -%}
+
+                            {%- comment -%} 2. DETERMINE TITLE AND LINK {%- endcomment -%}
+                            {%- assign display_title = lab_entry.title | default: lab_obj.title -%}
+                            
+                            {%- if lab_entry.link -%}
+                                {%- assign display_link = lab_entry.link -%}
+                            {%- elsif lab_obj -%}
+                                {%- assign display_link = lab_obj.url | relative_url -%}
                             {%- else -%}
-                                <span>{{ lab.title }}</span>
+                                {%- assign display_link = nil -%}
+                            {%- endif -%}
+
+                            {%- comment -%} 3. RENDER LABEL (Unless nonumber is true) {%- endcomment -%}
+                            {%- unless lab_entry.nonumber -%}
+                                <strong class="label label-lab">Lab {{ lab_number }}</strong>
+                                {%- assign lab_number = lab_number | plus: 1 -%}
+                            {%- endunless -%}
+
+                            {%- comment -%} 4. RENDER LINK OR TITLE {%- endcomment -%}
+                            {%- if display_link -%}
+                                <a href="{{ display_link }}">{{ display_title }}</a>
+                            {%- else -%}
+                                <span>{{ display_title }}</span>
                             {%- endif -%}
                         </div>
-                        {%- assign lab_number = lab_number | plus: 1 -%}
                     {%- endunless -%}
-                    
+
+                    {%- comment -%} 5. ALWAYS INCREMENT INDEX {%- endcomment -%}
                     {%- assign lab_index = lab_index | plus: 1 -%}
                 {%- endif -%}
             {%- endif -%}
 
             {%- comment -%} --- HOMEWORK LOGIC --- {%- endcomment -%}
             {%- if site.data.syllabus.hw_days contains day_of_week -%}
-                {%- assign hw = site.data.homeworks.homeworks[homework_index] -%}
-                {%- if hw -%}
-                    {%- unless hw.skip -%}
+                {%- assign hw_entry = site.data.homework.homework[homework_index] -%}
+                
+                {%- if hw_entry -%}
+                    {%- unless hw_entry.skip -%}
                         <div class="syllabus-item" style="margin-bottom: 4px;">
-                            <strong class="label label-homework">Homework {{ homework_number }}</strong>
-                            {%- if hw.link -%}
-                                <a href="{{ hw.link }}">{{ hw.title }}</a>
+                            {%- assign hw_obj = nil -%}
+                            
+                            {%- comment -%} 1. FIND THE OBJECT (If slug exists) {%- endcomment -%}
+                            {%- if hw_entry.slug -%}
+                                {%- assign target_slug = hw_entry.slug | append: "" -%}
+                                {%- for h in site.homework -%}
+                                    {%- if h.slug == target_slug -%}
+                                        {%- assign hw_obj = h -%}
+                                        {%- break -%}
+                                    {%- endif -%}
+                                {%- endfor -%}
+                            {%- endif -%}
+
+                            {%- comment -%} 2. DETERMINE TITLE AND LINK {%- endcomment -%}
+                            {%- assign display_title = hw_entry.title | default: hw_obj.title -%}
+                            
+                            {%- if hw_entry.link -%}
+                                {%- assign display_link = hw_entry.link -%}
+                            {%- elsif hw_obj -%}
+                                {%- assign display_link = hw_obj.url | relative_url -%}
                             {%- else -%}
-                                <span>{{ hw.title }}</span>
+                                {%- assign display_link = nil -%}
+                            {%- endif -%}
+
+                            {%- comment -%} 3. RENDER LABEL (Unless nonumber is true) {%- endcomment -%}
+                            {%- unless hw_entry.nonumber -%}
+                                <strong class="label label-homework">Homework {{ homework_number }}</strong>
+                                {%- assign homework_number = homework_number | plus: 1 -%}
+                            {%- endunless -%}
+
+                            {%- comment -%} 4. RENDER LINK OR TITLE {%- endcomment -%}
+                            {%- if display_link -%}
+                                <a href="{{ display_link }}">{{ display_title }}</a>
+                            {%- else -%}
+                                <span>{{ display_title }}</span>
                             {%- endif -%}
                         </div>
-                        {%- assign hw_number = hw_number | plus: 1 -%}
                     {%- endunless -%}
-                    
-                    {%- assign hw_index = hw_index | plus: 1 -%}
+
+                    {%- comment -%} 5. ALWAYS INCREMENT INDEX {%- endcomment -%}
+                    {%- assign homework_index = homework_index | plus: 1 -%}
                 {%- endif -%}
             {%- endif -%}
 
@@ -225,9 +323,9 @@
                 <div class="syllabus-item" style="margin-bottom: 8px;">
                 <strong class="label label-project">Project {{project.label-number}}</strong>
                 {%- if project.link -%}
-                    <a href="{{ project.link }}"><strong>{{ project.title }}</strong></a>
+                    <a href="{{ project.link }}">{{ project.title }}</a>
                 {%- else -%}
-                    <strong>{{ project.title }}</strong>
+                    {{ project.title }}
                 {%- endif -%}
                 </div>
             {%- endif -%}
@@ -235,48 +333,47 @@
           </td>
 
           <td style="width:{{ site.data.syllabus.col3_width }}; vertical-align: top;">
-            {%- comment -%} --- READINGS LOGIC --- {%- endcomment -%}
+            {%- comment -%} --- READINGS LOGIC (Consolidated & Inline) --- {%- endcomment -%}
             {%- if site.data.syllabus.class_days contains day_of_week -%}
-                {%- assign reading = site.data.readings.readings[reading_index] -%}
-                {%- if reading -%}
-                    {%- unless reading.skip -%}
-                        <div class="syllabus-item" style="margin-bottom: 4px;">
-                            <strong class="label label-reading">Reading</strong>
-                            {%- if reading.links -%}
-                                {{ reading.title }}
-                                <div class="links-list" style="margin-left: 20px; font-size: 0.9em;">
-                                {%- for link in reading.links -%}
-                                    <a href="{{ link.url }}">{{ link.text }}</a>{% unless forloop.last %}, {% endunless %}
+                {%- if lec_entry.readings -%}
+                    <div class="syllabus-item" style="margin-bottom: 4px;">
+                        <strong class="label label-reading">Reading</strong>
+                        
+                        <span class="readings-list">
+                        {%- for r in lec_entry.readings -%}
+                            {%- if r.links -%}
+                                {%- comment -%} Handle multiple links list (e.g., Python, Data Types) {%- endcomment -%}
+                                {%- for item in r.links -%}
+                                    <a href="{{ item.url }}">{{ item.text }}</a>{% unless forloop.last %}, {% endunless %}
                                 {%- endfor -%}
-                                </div>
-                            {%- elsif reading.link -%}
-                                <a href="{{ reading.link }}">{{ reading.title }}</a>
+                            {%- elsif r.link -%}
+                                {%- comment -%} Handle single title/link pair {%- endcomment -%}
+                                <a href="{{ r.link }}">{{ r.title }}</a>
                             {%- else -%}
-                                <span>{{ reading.title }}</span>
+                                <span>{{ r.title }}</span>
                             {%- endif -%}
-                        </div>
-                    {%- endunless -%}
-                    
-                    {%- assign reading_index = reading_index | plus: 1 -%}
+                            
+                            {%- comment -%} Add a comma between different reading entries in the YAML list {%- endcomment -%}
+                            {%- unless forloop.last -%}, {% endunless -%}
+                        {%- endfor -%}
+                        </span>
+                    </div>
                 {%- endif -%}
             {%- endif -%}
 
             {%- comment -%} --- EXTRA LINKS LOGIC --- {%- endcomment -%}
-
             {%- for extra in site.data.syllabus.extra_links_col3 -%}
-            {%- assign extra_date = extra.date | date: "%Y-%m-%d" -%}
-            
-            {%- if extra_date == current_date -%}
-                <div class="syllabus-item" style="margin-bottom: 8px;">
-                {%- if extra.link -%}
-                    <a href="{{ extra.link }}">{{ extra.title }}</a>
-                {%- else -%}
-                    {{ extra.title }}
+                {%- assign extra_date = extra.date | date: "%Y-%m-%d" -%}
+                {%- if extra_date == current_date -%}
+                    <div class="syllabus-item" style="margin-bottom: 8px;">
+                        {%- if extra.link -%}
+                            <a href="{{ extra.link }}">{{ extra.title }}</a>
+                        {%- else -%}
+                            {{ extra.title }}
+                        {%- endif -%}
+                    </div>
                 {%- endif -%}
-                </div>
-            {%- endif -%}
             {%- endfor -%}
-
           </td>
         </tr>
       {%- endfor -%}

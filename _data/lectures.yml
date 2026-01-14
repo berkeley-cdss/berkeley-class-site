@@ -1,16 +1,44 @@
 ### LECTURE ORDERING ###
 # each entry requires either a 'slug' or a 'title' field
-# you may have both if you'd like to override the title from the lecture file
-# optionally you may also include a 'nonumber' boolean field to suppress numbering
-# and a 'link' field to override the default link to the lecture page or provide an external link
+
+# use the slug if you utilize the _lectures collection. this will take info
+# from the front matter of the corresponding file in _lectures/
+# if your filename has a leading zero, quotes are required around the slug
+# if you use the _lectures collection, the title field will be useful for
+# one-off overrides like holidays or for placeholders; use the title field sparingly
+
+# nonumber supresses the label and numbering for the lecture entry
+# skip: true will omit the lecture from the schedule entirely
+
+# link overrides the default link to the lecture page from the collection if 
+# you provided a slug or provides an external link
+
+# readings appear in the third column of the schedule page. If you have a single reading
+# provide title and link. If you have multiple readings, provide a list of links with 
+# text and url fields (no title field necessary in this case). You can skip readings by not
+# providing the readings field.
+
 lectures:
   - slug: intro
-  - slug: "02"
+    readings:
+      - title: Introduction
+        link: https://inferentialthinking.com/chapters/01/what-is-data-science/index.html
+  - slug: 2
+    readings: 
+      - title: Causality and Experiments
+        link: https://inferentialthinking.com/chapters/02/causality-and-experiments/index.html
   - slug: "03"
+    readings:
+      - links: 
+          - text: "Programming in Python"
+            url: "https://inferentialthinking.com/chapters/03/programming-in-python/"
+          - text: "Data Types"
+            url: "https://inferentialthinking.com/chapters/04/data-types/"
   - slug: "04"
   - slug: "05"
   - slug: "06"
   - slug: "07"
+  # - skip: true
   - slug: "08"
   - title: "No Lecture"
     nonumber: true
@@ -18,3 +46,4 @@ lectures:
   - slug: "09"
   - slug: "10"
   - slug: "11"
+

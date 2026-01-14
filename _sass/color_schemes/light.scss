@@ -27,3 +27,10 @@ $body-lighter-color: $grey-dk-100;
 
 // Custom colors
 $hw-rel: #005d5d;
+
+.btn-outline-primary {
+  &:hover {
+    background-color: #5dade2 !important;
+    color: #000000 !important;
+  }
+}

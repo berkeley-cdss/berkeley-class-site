@@ -133,6 +133,9 @@ collections:
   projects:
     output: true
     permalink: /:collection/:path/
+  discussions:
+    output: true
+    permalink: /:collection/:path/
 
 # The sitemap **must** be enabled. It's published as /baseurl/sitemap.xml
 plugins:
@@ -150,6 +153,13 @@ defaults:
     values:
       layout: lab
       nav_exclude: true
+  - scope:
+      path: ''
+      type: discussions
+    values:
+      layout: discussion
+      nav_exclude: true
+      subpath: 'assets/discussions/'
   - scope:
       path: ''
       type: hw
@@ -254,7 +264,8 @@ compress_html:
 # The default false removes files in that directory, which is useful for when you unpublish pages.
 # keep_files: false
 
-# Likely not necessary, but a google default for Berkeley
+# Set the timezone to ensure days appear correctly on the auto-generated schedule
+# This fixed one-off problems with extra days (extra_days_col2) defined in _data/syllabus.yml
 timezone: UTC
 future: true
 
