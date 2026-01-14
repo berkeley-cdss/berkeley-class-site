@@ -1,12 +1,21 @@
 ### LAB ORDERING ###
-# title (or skip) is required for each entry
-# link is optional
-# you may skip a lab from showing on the schedule by 
-# setting the entry to "skip: true"
+# each entry requires either a 'slug' or a 'title' field
+
+# use the slug if you utilize the _labs collection. this will take info
+# from the front matter of the corresponding file in _labs/
+# if your filename has a leading zero, quotes are required around the slug.
+# if you use the _labs collection, the title field will be useful for
+# one-off overrides like holidays or for placeholders; use the title field sparingly
+
+# nonumber supresses the label and numbering for the lab entry
+# skip: true will omit the lab from the schedule entirely
+
+# link overrides the default link to the lab page from the collection if 
+# you provided a slug or provides an external link
 labs:
-  - title: Lab 1
-    link: https://datahub.berkeley.edu/hub/login?next=%2Fhub%2F
+  - slug: lab01
   - title: Lab 2
+    link: https://datahub.berkeley.edu/hub/login?next=%2Fhub%2F
   - title: Lab 3
   - skip: true
   - title: Lab 4

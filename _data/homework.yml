@@ -1,13 +1,23 @@
 ### HOMEWORK ORDERING ###
-# title (or skip) is required for each entry
-# link is optional
-# you may skip a homework from showing on the schedule by 
-# setting the entry to "skip: true"
+# each entry requires either a 'slug' or a 'title' field
+
+# use the slug if you utilize the _hw collection. this will take info
+# from the front matter of the corresponding file in _hw/
+# if your filename has a leading zero, quotes are required around the slug.
+# if you use the _hw collection, the title field will be useful for
+# one-off overrides like holidays or for placeholders; use the title field sparingly
+
+# nonumber supresses the label and numbering for the homework entry
+# skip: true will omit the homework from the schedule entirely
+
+# link overrides the default link to the homework page from the collection if 
+# you provided a slug or provides an external link
 homework:
-  - title: Homework 1
-    link: https://datahub.berkeley.edu/hub/login?next=%2Fhub%2F
+  - slug: hw01
   - title: Homework 2
+    link: https://datahub.berkeley.edu/hub/login?next=%2Fhub%2F
   - title: Homework 3
   - title: Homework 4
+  - skip: true
   - title: Homework 5
   - title: Homework 6

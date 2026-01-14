@@ -10,7 +10,7 @@
 # nonumber supresses the label and numbering for the lecture entry
 # skip: true will omit the lecture from the schedule entirely
 
-# link overrides the default link to the lecture page (rom the collection if 
+# link overrides the default link to the lecture page from the collection if 
 # you provided a slug or provides an external link
 
 # readings appear in the third column of the schedule page. If you have a single reading
