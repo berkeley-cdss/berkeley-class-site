@@ -34,6 +34,10 @@ recording:
   type: string
   required: false
   note: Must be a valid URL
+askademia:
+  type: string
+  required: false
+  note: Must be a valid URL. Treated the same as "recording"
 slido:
     type: string
     required: false
