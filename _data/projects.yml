@@ -1,0 +1,10 @@
+### PROJECTS ORDERING ###
+# title and date are required for each entry
+# link is optional
+# label number is optional. You can make this 
+# 1, 2, 3, etc. or A, B, C, etc. or whatever you want
+projects:
+  - title: "Project 1: Panda Bears"
+    date: 2026-01-30
+    link: https://datahub.berkeley.edu/hub/login?next=%2Fhub%2F
+    label-number: 1

@@ -261,7 +261,7 @@ compress_html:
 # keep_files: false
 
 # Likely not necessary, but a google default for Berkeley
-timezone: America/Los_Angeles
+timezone: UTC
 future: true
 
 # Note: dotfiles are excluded by default. .htaccess is included as a common case.

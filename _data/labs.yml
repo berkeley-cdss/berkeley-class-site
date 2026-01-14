@@ -1,0 +1,13 @@
+### LAB ORDERING ###
+# title (or skip) is required for each entry
+# link is optional
+# you may skip a lab from showing on the schedule by 
+# setting the entry to "skip: true"
+labs:
+  - title: Lab 1
+    link: https://datahub.berkeley.edu/hub/login?next=%2Fhub%2F
+  - title: Lab 2
+  - title: Lab 3
+  - skip: true
+  - title: Lab 4
+  - title: Lab 5

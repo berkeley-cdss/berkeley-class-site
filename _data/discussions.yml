@@ -1,0 +1,13 @@
+### DISCUSSION ORDERING ###
+# title (or skip) is required for each entry
+# link is optional
+# you may skip a discussion from showing on the schedule by 
+# setting the entry to "skip: true"
+discussions:
+  - title: Discussion 0
+    link: https://datahub.berkeley.edu/hub/login?next=%2Fhub%2F
+  - title: Discussion 1
+  - title: Discussion 2
+  - skip: true
+  - title: Discussion 3
+  - title: Discussion 4

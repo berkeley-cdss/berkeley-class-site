@@ -17,6 +17,18 @@ div.highlighter-rouge div.highlight {
   overflow-x: unset;
 }
 
+// Override default JTD CSS for larger/more accessibile fonts.
+// (used in schedule)
+
+.main-content .syllabus-container table.spanned-table tbody tr td {
+    font-size: 16px !important; /* !important is a last resort, but let's test if it works */
+}
+
+.syllabus-container table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
 .label {
     border-radius: $border-radius;
     margin-left: 0;

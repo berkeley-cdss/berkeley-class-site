@@ -1,0 +1,15 @@
+### THIS PROVIDES THE LINKS IN THE THIRD COLUMN OF THE SCHEDULE PAGE ###
+# readings are synced to class_days in _data/syllabus.yml
+# you can skip a reading by setting the entry to "skip: true"
+readings:
+  - title: Introduction
+    link: https://inferentialthinking.com/chapters/01/what-is-data-science/index.html
+  - title: Causality and Experiments
+    link: https://inferentialthinking.com/chapters/02/causality-and-experiments/index.html
+  - skip: true
+  - title: "Programming and Data Types"
+    links:
+      - text: "Programming in Python"
+        url: "https://inferentialthinking.com/chapters/03/programming-in-python/"
+      - text: "Data Types"
+        url: "https://inferentialthinking.com/chapters/04/data-types/"
