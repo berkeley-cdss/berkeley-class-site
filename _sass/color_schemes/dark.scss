@@ -55,5 +55,17 @@ $base-button-color: $grey-dk-200;
   color: $white;
 }
 
+.btn-outline-primary {
+  // Option A: Keep white text but darken the button background
+  background-color: #333232 !important; 
+  color: #ffffff !important;
+  border-color: #5dade2 !important; // A lighter blue for visibility
+
+  &:hover {
+    background-color: #5dade2 !important;
+    color: #000000 !important;
+  }
+}
+
 // Custom colors
 $hw-rel: #009d9a;
