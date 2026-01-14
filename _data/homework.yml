@@ -3,7 +3,7 @@
 # link is optional
 # you may skip a homework from showing on the schedule by 
 # setting the entry to "skip: true"
-homeworks:
+homework:
   - title: Homework 1
     link: https://datahub.berkeley.edu/hub/login?next=%2Fhub%2F
   - title: Homework 2
