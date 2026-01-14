@@ -133,6 +133,9 @@ collections:
   projects:
     output: true
     permalink: /:collection/:path/
+  discussions:
+    output: true
+    permalink: /:collection/:path/
 
 # The sitemap **must** be enabled. It's published as /baseurl/sitemap.xml
 plugins:
@@ -150,6 +153,13 @@ defaults:
     values:
       layout: lab
       nav_exclude: true
+  - scope:
+      path: ''
+      type: discussions
+    values:
+      layout: discussion
+      nav_exclude: true
+      subpath: 'assets/discussions/'
   - scope:
       path: ''
       type: hw
