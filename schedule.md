@@ -15,8 +15,8 @@ To set this up for your course, edit the YML files in `_data/`. Start with `syll
 
 We assume that lectures, labs, discussions, readings, and homeworks happen with a regular weekly cadence whereas projects are more sparse. If you want to set dates specifically for course components, examine how projects are set up in `_data/projects.yml` and `_inclides/schedule.html`. Note that projects are the only course component that does not have `project_days` (project equivalent of `class_days`) set in `_data/syllabus.yml`.
 
+We also recommend moving to use the `_lectures` collection to distribute slides, code, and other materials for lectures. This will keep the schedule cleaner. You can compare using this recommended approach used by [Data 100](https://ds100.org/fa25/) to [Data 88E](https://data88e.org/fa25/) which does not use the `_lectures` collection.
 
 <div>
 {%- include schedule.html -%}
 </div>
-

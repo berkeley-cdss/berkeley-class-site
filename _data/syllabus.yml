@@ -2,7 +2,8 @@
 # Config you will need to change once per semester    #
 #######################################################
 
-# The first and last day of class, respectively.
+# Set start_date to the Monday of the first week of instruction.
+# Set end_date to the Friday of exams week.
 start_date: 2026-01-20
 end_date: 2026-02-21
 
