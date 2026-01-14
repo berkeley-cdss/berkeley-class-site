@@ -8,6 +8,7 @@
 # one-off overrides like holidays or for placeholders; use the title field sparingly
 
 # nonumber supresses the label and numbering for the lecture entry
+# skip: true will omit the lecture from the schedule entirely
 
 # link overrides the default link to the lecture page (rom the collection if 
 # you provided a slug or provides an external link
@@ -37,6 +38,7 @@ lectures:
   - slug: "05"
   - slug: "06"
   - slug: "07"
+  # - skip: true
   - slug: "08"
   - title: "No Lecture"
     nonumber: true

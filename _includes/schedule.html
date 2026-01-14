@@ -101,53 +101,55 @@
                 {%- assign entry = site.data.lectures.lectures[lecture_index] -%}
                 
                 {%- if entry -%}
-                    {%- comment -%} Wrap the entire output in a div for block spacing {%- endcomment -%}
-                    <div class="syllabus-item" style="margin-bottom: 4px;">
-                        {%- assign lecture_obj = nil -%}
-                        
-                        {%- comment -%} 1. FIND THE OBJECT (If slug exists) {%- endcomment -%}
-                        {%- if entry.slug -%}
-                            {%- assign target_slug = entry.slug | append: "" -%}
-                            {%- for l in site.lectures -%}
-                                {%- if l.slug == target_slug -%}
-                                    {%- assign lecture_obj = l -%}
-                                    {%- break -%}
-                                {%- endif -%}
-                            {%- endfor -%}
-                        {%- endif -%}
+                    {%- comment -%} 0. CHECK FOR SKIP {%- endcomment -%}
+                    {%- unless entry.skip -%}
+                        <div class="syllabus-item" style="margin-bottom: 4px;">
+                            {%- assign lecture_obj = nil -%}
+                            
+                            {%- comment -%} 1. FIND THE OBJECT (If slug exists) {%- endcomment -%}
+                            {%- if entry.slug -%}
+                                {%- assign target_slug = entry.slug | append: "" -%}
+                                {%- for l in site.lectures -%}
+                                    {%- if l.slug == target_slug -%}
+                                        {%- assign lecture_obj = l -%}
+                                        {%- break -%}
+                                    {%- endif -%}
+                                {%- endfor -%}
+                            {%- endif -%}
 
-                        {%- comment -%} 2. DETERMINE TITLE, LINK, AND RELEASE DATE {%- endcomment -%}
-                        {%- assign display_title = entry.title | default: lecture_obj.title -%}
-                        
-                        {%- if entry.link -%}
-                            {%- assign display_link = entry.link -%}
-                        {%- elsif lecture_obj -%}
-                            {%- assign display_link = lecture_obj.url | relative_url -%}
-                        {%- else -%}
-                            {%- assign display_link = nil -%}
-                        {%- endif -%}
+                            {%- comment -%} 2. DETERMINE TITLE, LINK, AND RELEASE DATE {%- endcomment -%}
+                            {%- assign display_title = entry.title | default: lecture_obj.title -%}
+                            
+                            {%- if entry.link -%}
+                                {%- assign display_link = entry.link -%}
+                            {%- elsif lecture_obj -%}
+                                {%- assign display_link = lecture_obj.url | relative_url -%}
+                            {%- else -%}
+                                {%- assign display_link = nil -%}
+                            {%- endif -%}
 
-                        {%- if lecture_obj.date -%}
-                            {%- assign release_iso = lecture_obj.date | date_to_xmlschema -%}
-                        {%- else -%}
-                            {%- assign release_iso = nil -%}
-                        {%- endif -%}
+                            {%- if lecture_obj.date -%}
+                                {%- assign release_iso = lecture_obj.date | date_to_xmlschema -%}
+                            {%- else -%}
+                                {%- assign release_iso = nil -%}
+                            {%- endif -%}
 
-                        {%- comment -%} 3. RENDER LABEL (Unless nonumber is true) {%- endcomment -%}
-                        {%- unless entry.nonumber -%}
-                            <strong class="label label-lecture">Lecture {{ lecture_number }}</strong>
-                            {%- assign lecture_number = lecture_number | plus: 1 -%}
-                        {%- endunless -%}
+                            {%- comment -%} 3. RENDER LABEL (Unless nonumber is true) {%- endcomment -%}
+                            {%- unless entry.nonumber -%}
+                                <strong class="label label-lecture">Lecture {{ lecture_number }}</strong>
+                                {%- assign lecture_number = lecture_number | plus: 1 -%}
+                            {%- endunless -%}
 
-                        {%- comment -%} 4. RENDER LINK OR TITLE {%- endcomment -%}
-                        {%- if display_link -%}
-                            <a href="{{ display_link }}" {% if release_iso %}data-release="{{ release_iso }}"{% endif %}>
-                                {{ display_title }}
-                            </a>
-                        {%- else -%}
-                            <span>{{ display_title }}</span>
-                        {%- endif -%}
-                    </div>
+                            {%- comment -%} 4. RENDER LINK OR TITLE {%- endcomment -%}
+                            {%- if display_link -%}
+                                <a href="{{ display_link }}" {% if release_iso %}data-release="{{ release_iso }}"{% endif %}>
+                                    {{ display_title }}
+                                </a>
+                            {%- else -%}
+                                <span>{{ display_title }}</span>
+                            {%- endif -%}
+                        </div>
+                    {%- endunless -%}
 
                     {%- comment -%} 5. ALWAYS INCREMENT INDEX TO MOVE TO NEXT YAML ENTRY {%- endcomment -%}
                     {%- assign lecture_index = lecture_index | plus: 1 -%}
