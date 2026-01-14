@@ -21,7 +21,10 @@
   {%- assign date = days_epoch | times: seconds_in_day -%}
   {%- assign day_of_week = date | date: '%w' -%}
   
-  {%- comment -%} Check if this day is a Lecture, Discussion, or Lab day {%- endcomment -%}
+  {%- comment -%} 
+    Gather the days to show on the calendar based on lecture, discussion,
+    lab, and homework days defined in _data/syllabus.yml.
+  {%- endcomment -%}
   {%- if site.data.syllabus.class_days contains day_of_week or 
     site.data.syllabus.discussion_days contains day_of_week or 
     site.data.syllabus.lab_days contains day_of_week or 
@@ -48,6 +51,7 @@
 {%- endcomment -%}
 {%- assign sorted_dates = valid_dates | sort | uniq | group_by_exp: 'it', "it | date: '%U'" -%}
 
+{%- comment -%} counters {%- endcomment -%}
 {%- assign lecture_index = 0 -%}
 {%- assign discussion_index = 0 -%}
 {%- assign lab_index = 0 -%}
@@ -319,57 +323,58 @@
                 <div class="syllabus-item" style="margin-bottom: 8px;">
                 <strong class="label label-project">Project {{project.label-number}}</strong>
                 {%- if project.link -%}
-                    <a href="{{ project.link }}"><strong>{{ project.title }}</strong></a>
+                    <a href="{{ project.link }}">{{ project.title }}</a>
                 {%- else -%}
-                    <strong>{{ project.title }}</strong>
+                    {{ project.title }}
                 {%- endif -%}
                 </div>
             {%- endif -%}
             {%- endfor -%}
           </td>
-          <td style="width:{{ site.data.syllabus.col3_width }}; vertical-align: top;">
-        {%- comment -%} --- READINGS LOGIC (Consolidated & Inline) --- {%- endcomment -%}
-        {%- if site.data.syllabus.class_days contains day_of_week -%}
-            {%- if entry.readings -%}
-                <div class="syllabus-item" style="margin-bottom: 4px;">
-                    <strong class="label label-reading">Reading</strong>
-                    
-                    <span class="readings-list">
-                    {%- for r in entry.readings -%}
-                        {%- if r.links -%}
-                            {%- comment -%} Handle multiple links list (e.g., Python, Data Types) {%- endcomment -%}
-                            {%- for item in r.links -%}
-                                <a href="{{ item.url }}">{{ item.text }}</a>{% unless forloop.last %}, {% endunless %}
-                            {%- endfor -%}
-                        {%- elsif r.link -%}
-                            {%- comment -%} Handle single title/link pair {%- endcomment -%}
-                            <a href="{{ r.link }}">{{ r.title }}</a>
-                        {%- else -%}
-                            <span>{{ r.title }}</span>
-                        {%- endif -%}
-                        
-                        {%- comment -%} Add a comma between different reading entries in the YAML list {%- endcomment -%}
-                        {%- unless forloop.last -%}, {% endunless -%}
-                    {%- endfor -%}
-                    </span>
-                </div>
-            {%- endif -%}
-        {%- endif -%}
 
-        {%- comment -%} --- EXTRA LINKS LOGIC --- {%- endcomment -%}
-        {%- for extra in site.data.syllabus.extra_links_col3 -%}
-            {%- assign extra_date = extra.date | date: "%Y-%m-%d" -%}
-            {%- if extra_date == current_date -%}
-                <div class="syllabus-item" style="margin-bottom: 8px;">
-                    {%- if extra.link -%}
-                        <a href="{{ extra.link }}">{{ extra.title }}</a>
-                    {%- else -%}
-                        {{ extra.title }}
-                    {%- endif -%}
-                </div>
+          <td style="width:{{ site.data.syllabus.col3_width }}; vertical-align: top;">
+            {%- comment -%} --- READINGS LOGIC (Consolidated & Inline) --- {%- endcomment -%}
+            {%- if site.data.syllabus.class_days contains day_of_week -%}
+                {%- if lec_entry.readings -%}
+                    <div class="syllabus-item" style="margin-bottom: 4px;">
+                        <strong class="label label-reading">Reading</strong>
+                        
+                        <span class="readings-list">
+                        {%- for r in lec_entry.readings -%}
+                            {%- if r.links -%}
+                                {%- comment -%} Handle multiple links list (e.g., Python, Data Types) {%- endcomment -%}
+                                {%- for item in r.links -%}
+                                    <a href="{{ item.url }}">{{ item.text }}</a>{% unless forloop.last %}, {% endunless %}
+                                {%- endfor -%}
+                            {%- elsif r.link -%}
+                                {%- comment -%} Handle single title/link pair {%- endcomment -%}
+                                <a href="{{ r.link }}">{{ r.title }}</a>
+                            {%- else -%}
+                                <span>{{ r.title }}</span>
+                            {%- endif -%}
+                            
+                            {%- comment -%} Add a comma between different reading entries in the YAML list {%- endcomment -%}
+                            {%- unless forloop.last -%}, {% endunless -%}
+                        {%- endfor -%}
+                        </span>
+                    </div>
+                {%- endif -%}
             {%- endif -%}
-        {%- endfor -%}
-        </td>
+
+            {%- comment -%} --- EXTRA LINKS LOGIC --- {%- endcomment -%}
+            {%- for extra in site.data.syllabus.extra_links_col3 -%}
+                {%- assign extra_date = extra.date | date: "%Y-%m-%d" -%}
+                {%- if extra_date == current_date -%}
+                    <div class="syllabus-item" style="margin-bottom: 8px;">
+                        {%- if extra.link -%}
+                            <a href="{{ extra.link }}">{{ extra.title }}</a>
+                        {%- else -%}
+                            {{ extra.title }}
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+            {%- endfor -%}
+          </td>
         </tr>
       {%- endfor -%}
     </tbody>
