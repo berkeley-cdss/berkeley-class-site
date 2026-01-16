@@ -9,6 +9,9 @@ nav_order: 3
 Use this calendar if you want to integrate your class's Google Calendar into the website. 
 
 ## Directions
+{. :important}
+If your `baseurl` is set to `/`, your calendar will not display out of the box. You need to edit `_includes/fullcalendar-assets.html` and `_layouts/calendar_dynamic.html` as in [this commit](https://github.com/prob140/prob140.github.io/commit/c4a926e8076af03b761009066248ed88ed126062) to remove the `/` before `assets` to avoid it resolving to `//assets`.
+
 1. Ensure there is a calendar for your course. You may reuse the previous semester's calendar if it exists. We suggest that calendars belong to a course's SPA. [Directions for creating a new calendar here.](https://support.google.com/calendar/answer/37095?hl=en)
 1. In `config.yml`, set `google_calendar_id` to the calendar's Calendar ID from the [settings page](https://support.google.com/calendar/answer/6084644?hl=en&co=GENIE.Platform%3DDesktop). 
 1. Create a Google API Key. You may be able to reuse the previous semester's API key if one exists.
@@ -21,8 +24,10 @@ Use this calendar if you want to integrate your class's Google Calendar into the
     1. You may want to take advantage of the [recurring event feature](https://support.google.com/calendar/answer/37115?hl=en&co=GENIE.Platform%3DDesktop).
     1. View/edit event types in the `event_types` section of `config.yml`. Your Google Calendar titles should have the appropriate prefix or suffix matching these event types. For example, if your calendar event title is "[Data 101] Lecture", `_config.yml` should have `suffix: Lecture`. If instead, your calendar event title is "Lecture - Pivots and Joins", `_config.yml` should have `prefix: Lecture`. We recommend only changing `suffix` / `prefix` and none of the other fields.
 
+{. :note}
+The above directions are based loosely on [this](https://fullcalendar.io/docs/google-calendar) which is now out of date.
 
-Note: The above directions are based loosely on [this](https://fullcalendar.io/docs/google-calendar) which is now out of date.
+
 
 ## Properties of `event_types` in `config.yml`
 - `prefix` / `suffix`: Looks at the prefix / suffix of an event and sets the styling if it finds a match (see above).
