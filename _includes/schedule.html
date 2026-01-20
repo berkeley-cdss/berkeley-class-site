@@ -274,7 +274,7 @@
                             {%- comment -%} 1. FIND THE OBJECT (If slug exists) {%- endcomment -%}
                             {%- if hw_entry.slug -%}
                                 {%- assign target_slug = hw_entry.slug | append: "" -%}
-                                {%- for h in site.homework -%}
+                                {%- for h in site.hw -%}
                                     {%- if h.slug == target_slug -%}
                                         {%- assign hw_obj = h -%}
                                         {%- break -%}
