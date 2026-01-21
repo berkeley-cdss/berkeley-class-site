@@ -57,6 +57,7 @@
     const initialTheme = savedTheme || (systemDark ? 'dark' : 'light');
 
     jtd.setTheme(initialTheme);
+    document.documentElement.setAttribute('data-theme', initialTheme);
     updateButtonUI(initialTheme);
 
     // Toggle Logic
@@ -68,6 +69,7 @@
 
       jtd.setTheme(nextTheme);
       localStorage.setItem('jtd-theme', nextTheme);
+      document.documentElement.setAttribute('data-theme', nextTheme);
       updateButtonUI(nextTheme);
     });
 
@@ -83,6 +85,7 @@
 
         // Apply it immediately without reloading
         jtd.setTheme(newTheme);
+        document.documentElement.setAttribute('data-theme', newTheme);
         updateButtonUI(newTheme);
         
         console.log("Reset to system preference:", newTheme);
