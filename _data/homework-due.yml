@@ -1,0 +1,9 @@
+# treat this YAML similar to _data/homework.yml
+# you don't have to use this file if you don't want to
+# see DS-100/sp26 for an example of what this looks like.
+# they also implemented lab-due functionality
+homework-due:
+  - skip: true
+  - title: "HW 1"
+  - title: "Homework 2"
+  - title: "Homework 3"

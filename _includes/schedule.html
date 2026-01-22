@@ -28,7 +28,8 @@
   {%- if site.data.syllabus.class_days contains day_of_week or 
     site.data.syllabus.discussion_days contains day_of_week or 
     site.data.syllabus.lab_days contains day_of_week or 
-    site.data.syllabus.hw_days contains day_of_week-%}
+    site.data.syllabus.hw_days contains day_of_week or
+    site.data.syllabus.hw_due_days contains day_of_week -%}
     {%- assign valid_dates = valid_dates | push: date -%}
   {%- endif -%}
 {%- endfor -%}
@@ -56,11 +57,12 @@
 {%- assign discussion_index = 0 -%}
 {%- assign lab_index = 0 -%}
 {%- assign homework_index = 0 -%}
+{%- assign homework_due_index = 0 -%}
 {%- assign lecture_number = site.data.syllabus.starting_lecture_number | default: 1 -%}
 {%- assign discussion_number = site.data.syllabus.starting_discussion_number | default: 1 -%}
 {%- assign lab_number = site.data.syllabus.starting_lab_number | default: 1 -%}
 {%- assign homework_number = site.data.syllabus.starting_homework_number | default: 1 -%}
-
+{%- assign homework_due_number = site.data.syllabus.starting_homework_number | default: 1 -%}
 
 <div class="syllabus-container">
 {%- for week in sorted_dates -%}
@@ -304,7 +306,7 @@
 
                             {%- comment -%} 3. RENDER LABEL (Unless nonumber is true) {%- endcomment -%}
                             {%- unless hw_entry.nonumber -%}
-                                <strong class="label label-homework">Homework {{ homework_number }}</strong>
+                                <strong class="label label-homework-released">Homework {{ homework_number }}</strong>
                                 {%- assign homework_number = homework_number | plus: 1 -%}
                             {%- endunless -%}
 
@@ -319,6 +321,57 @@
 
                     {%- comment -%} 5. ALWAYS INCREMENT INDEX {%- endcomment -%}
                     {%- assign homework_index = homework_index | plus: 1 -%}
+                {%- endif -%}
+            {%- endif -%}
+
+            {%- comment -%} --- HOMEWORK DUE LOGIC --- {%- endcomment -%}
+            {%- if site.data.syllabus.hw_due_days contains day_of_week -%}
+                {%- assign hw_due_entry = site.data.homework-due.homework-due[homework_due_index] -%}
+                
+                {%- if hw_due_entry -%}
+                    {%- unless hw_due_entry.skip -%}
+                        <div class="syllabus-item" style="margin-bottom: 4px;">
+                            {%- assign hw_due_obj = nil -%}
+                            
+                            {%- comment -%} 1. FIND THE OBJECT (If slug exists) {%- endcomment -%}
+                            {%- if hw_due_entry.slug -%}
+                                {%- assign target_slug = hw_due_entry.slug | append: "" -%}
+                                {%- for h in site.hw -%}
+                                    {%- if h.slug == target_slug -%}
+                                        {%- assign hw_due_obj = h -%}
+                                        {%- break -%}
+                                    {%- endif -%}
+                                {%- endfor -%}
+                            {%- endif -%}
+
+                            {%- comment -%} 2. DETERMINE TITLE AND LINK {%- endcomment -%}
+                            {%- assign display_title = hw_due_entry.title | default: hw_due_obj.title -%}
+                            
+                            {%- if hw_due_entry.link -%}
+                                {%- assign display_link = hw_due_entry.link -%}
+                            {%- elsif hw_due_obj -%}
+                                {%- assign display_link = hw_due_obj.url | relative_url -%}
+                            {%- else -%}
+                                {%- assign display_link = nil -%}
+                            {%- endif -%}
+
+                            {%- comment -%} 3. RENDER LABEL (Unless nonumber is true) {%- endcomment -%}
+                            {%- unless hw_due_entry.nonumber -%}
+                                <strong class="label label-homework">Homework-due</strong>
+                                {%- assign homework_due_number = homework_due_number | plus: 1 -%}
+                            {%- endunless -%}
+
+                            {%- comment -%} 4. RENDER LINK OR TITLE {%- endcomment -%}
+                            {%- if display_link -%}
+                                <a href="{{ display_link }}">{{ display_title }}</a>
+                            {%- else -%}
+                                <span>{{ display_title }}</span>
+                            {%- endif -%}
+                        </div>
+                    {%- endunless -%}
+
+                    {%- comment -%} 5. ALWAYS INCREMENT INDEX {%- endcomment -%}
+                    {%- assign homework_due_index = homework_due_index | plus: 1 -%}
                 {%- endif -%}
             {%- endif -%}
 
