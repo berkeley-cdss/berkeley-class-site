@@ -1,12 +1,15 @@
+{% capture anchor_id %}{{ page.title | slugify }}{% endcapture %}
+
 <div class="announcement">
-  <h2>{{ page.title }}</h2>
+  <h2 id="{{ anchor_id }}">{{ page.title }}</h2>
+  
   <span class="announcement-meta">
     {% if page.date %}
     {{ page.date | date: '%b %e' }}
     &middot;
     {% endif %}
     {% assign minutes = content | strip_html | number_of_words | divided_by: 180.0 | round %}
-    {{ minutes }} min read
+    {{ minutes | at_least: 1 }} min read
   </span>
   <div>
     {{ content }}
