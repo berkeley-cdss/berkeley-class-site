@@ -29,7 +29,8 @@
     site.data.syllabus.discussion_days contains day_of_week or 
     site.data.syllabus.lab_days contains day_of_week or 
     site.data.syllabus.hw_days contains day_of_week or
-    site.data.syllabus.hw_due_days contains day_of_week -%}
+    site.data.syllabus.hw_due_days contains day_of_week or
+    site.data.syllabus.quiz_days contains day_of_week -%}
     {%- assign valid_dates = valid_dates | push: date -%}
   {%- endif -%}
 {%- endfor -%}
@@ -58,11 +59,13 @@
 {%- assign lab_index = 0 -%}
 {%- assign homework_index = 0 -%}
 {%- assign homework_due_index = 0 -%}
+{%- assign quiz_index = 0 -%}
 {%- assign lecture_number = site.data.syllabus.starting_lecture_number | default: 1 -%}
 {%- assign discussion_number = site.data.syllabus.starting_discussion_number | default: 1 -%}
 {%- assign lab_number = site.data.syllabus.starting_lab_number | default: 1 -%}
 {%- assign homework_number = site.data.syllabus.starting_homework_number | default: 1 -%}
 {%- assign homework_due_number = site.data.syllabus.starting_homework_number | default: 1 -%}
+{%- assign quiz_number = site.data.syllabus.starting_quiz_number | default: 1 -%}
 
 <div class="syllabus-container">
 {%- for week in sorted_dates -%}
@@ -168,6 +171,57 @@
 
                     {%- comment -%} 5. ALWAYS INCREMENT INDEX TO MOVE TO NEXT YAML ENTRY {%- endcomment -%}
                     {%- assign lecture_index = lecture_index | plus: 1 -%}
+                {%- endif -%}
+            {%- endif -%}
+
+            {%- comment -%} --- QUIZ LOGIC --- {%- endcomment -%}
+            {%- if site.data.syllabus.quiz_days contains day_of_week -%}
+                {%- assign quiz_entry = site.data.quizzes.quizzes[quiz_index] -%}
+                
+                {%- if quiz_entry -%}
+                    {%- unless quiz_entry.skip -%}
+                        <div class="syllabus-item" style="margin-bottom: 4px;">
+                            {%- assign quiz_obj = nil -%}
+                            
+                            {%- comment -%} 1. FIND THE OBJECT (If slug exists) {%- endcomment -%}
+                            {%- if quiz_entry.slug -%}
+                                {%- assign target_slug = quiz_entry.slug | append: "" -%}
+                                {%- for q in site.quizzes -%}
+                                    {%- if q.slug == target_slug -%}
+                                        {%- assign quiz_obj = q -%}
+                                        {%- break -%}
+                                    {%- endif -%}
+                                {%- endfor -%}
+                            {%- endif -%}
+
+                            {%- comment -%} 2. DETERMINE TITLE AND LINK {%- endcomment -%}
+                            {%- assign display_title = quiz_entry.title | default: quiz_obj.title -%}
+                            
+                            {%- if quiz_entry.link -%}
+                                {%- assign display_link = quiz_entry.link -%}
+                            {%- elsif quiz_obj -%}
+                                {%- assign display_link = quiz_obj.url | relative_url -%}
+                            {%- else -%}
+                                {%- assign display_link = nil -%}
+                            {%- endif -%}
+
+                            {%- comment -%} 3. RENDER LABEL (Unless nonumber is true) {%- endcomment -%}
+                            {%- unless quiz_entry.nonumber -%}
+                                <strong class="label label-quiz">QUIZ {{ quiz_number }}</strong>
+                                {%- assign quiz_number = quiz_number | plus: 1 -%}
+                            {%- endunless -%}
+
+                            {%- comment -%} 4. RENDER LINK OR TITLE {%- endcomment -%}
+                            {%- if display_link -%}
+                                <a href="{{ display_link }}">{{ display_title }}</a>
+                            {%- else -%}
+                                <span>{{ display_title }}</span>
+                            {%- endif -%}
+                        </div>
+                    {%- endunless -%}
+
+                    {%- comment -%} 5. ALWAYS INCREMENT INDEX {%- endcomment -%}
+                    {%- assign quiz_index = quiz_index | plus: 1 -%}
                 {%- endif -%}
             {%- endif -%}
 
