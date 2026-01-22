@@ -9,6 +9,11 @@ nav_order: 1
 
 # Editing Content
 
+{% raw %}
+{: .important}
+If you're adding references to files, please use `{{ 'path/to/file' | relative_url }}` instead of `{{ site.baseurl }}/path/to/file`. In most cases using the baseurl is fine, but some classes have found this problematic. 
+{% endraw %}
+
 ## Jekyll
 
 [Jekyll][jekyll] is the static site generator we use to build the website. We highly recommend reading through the documentation to get an idea of what you can achieve with Jekyll, such as variables, collections, and page layouts, if you wish to customize your website further. However, if you are okay with the boilerplate collections we provide in this template, it is not strictly necessary.
