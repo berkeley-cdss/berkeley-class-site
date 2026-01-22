@@ -4,7 +4,7 @@
 
 # Set start_date to the Monday of the first week of instruction.
 # Set end_date to the Friday of exams week.
-start_date: 2026-01-20
+start_date: 2026-01-19
 end_date: 2026-02-21
 
 # Any other days you want to appear on the calendar (e.g. for one-time events
@@ -33,6 +33,7 @@ discussion_days: ['2']
 lab_days: ['2']
 hw_days: ['5']
 hw_due_days: ['4']
+quiz_days: ['1']
 
 # Where should we start automatically numbering each course component?
 # For example, if you set starting_homework_number to 0, then the first homework
@@ -44,6 +45,7 @@ starting_discussion_number: '0'
 starting_homework_number: '1'
 starting_lab_number: '1'
 starting_project_number: '1'
+starting_quiz_number: '1'
 # Is the first week of class Week 0 or Week 1? We currently don't support
 # starting at any other week number, so pick '0' or '1' here.
 starting_week_number: '1'
