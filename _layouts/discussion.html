@@ -10,8 +10,7 @@ layout: default
         {%- if page.pdfs -%}
             <h2>Materials</h2>
             {%- for pdf in page.pdfs -%}
-                <a href="{{ site.baseurl }}/{{ page.subpath }}{{ pdf }}" class="btn btn-outline-primary" style="margin-right: 10px;" target="_blank">
-                    View {{ pdf }}
+                <a href="{{ page.subpath | append: pdf | relative_url }}" class="btn btn-outline-primary" style="margin-right: 10px;" target="_blank">                    View {{ pdf }}
                 </a>
             {%- endfor -%}
         {%- endif -%}
