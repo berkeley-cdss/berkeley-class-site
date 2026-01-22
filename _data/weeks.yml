@@ -1,0 +1,14 @@
+### WEEK LABELS ###
+# entries should either be 
+# title: "title here" 
+# or
+# skip: true
+# if you provide fewer titles than weeks on your calendar, 
+# the weeks without titles will not be labeled 
+# you can also delete this file if you don't want to have any labeled weeks
+weeks:
+  - title: "Introduction"
+  - skip: true
+  - title: "Pandas and API"
+  - title: "Surveys and RCTs"
+  - title: "Visualization"

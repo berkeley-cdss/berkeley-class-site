@@ -69,7 +69,16 @@
     {%- assign week_number = forloop.index0 -%}
   {%- endif -%}
 
-  <h2 id="week-{{ week.name }}" class="week-label">Week {{ week_number }}</h2>
+  {%- comment -%} Look up the week info from _data/weeks.yml using the current loop index {%- endcomment -%}
+  {%- assign week_index = forloop.index0 -%}
+  {%- assign week_info = site.data.weeks.weeks[week_index] -%}
+
+  <h2 id="week-{{ week_number }}" class="week-label">
+    Week {{ week_number }}
+    {%- if week_info.title and week_info.skip != true -%}
+      : {{ week_info.title }}
+    {%- endif -%}
+  </h2>
   
   <table class="spanned-table" style="margin-bottom: 1.5rem; table-layout: fixed; width: 100%;">
     <tbody>
