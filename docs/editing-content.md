@@ -9,10 +9,13 @@ nav_order: 1
 
 # Editing Content
 
-{% raw %}
-{: .important}
-If you're adding references to files, please use `{{ 'path/to/file' | relative_url }}` instead of `{{ site.baseurl }}/path/to/file`. In most cases using the baseurl is fine, but some classes have found this problematic. 
-{% endraw %}
+## Markdown and YAML
+Most of your edits will be to be to markdown and YAML. If you're unfamiliar with either of these, check out the following resources:
+* [Markdown guide](https://www.markdownguide.org/){:target="_blank"}
+* [YAML for geginners](https://www.redhat.com/en/blog/yaml-beginners){:target="_blank"}
+* [Front matter](https://jekyllrb.com/docs/front-matter/)
+* [Using YAML front matter](https://docs.github.com/en/contributing/writing-for-github-docs/using-yaml-frontmatter)
+* [YAML validator](https://www.yamllint.com/){:target="_blank"} or [with formatting](https://jsonformatter.org/yaml-validator){:target="_blank"}
 
 ## Jekyll
 
@@ -39,6 +42,10 @@ Some tags you may find useful:
 - `{% raw %}{% link <path> %}{% endraw %}` to link to a particular page on the website ([docs](https://jekyllrb.com/docs/liquid/tags/#links))
 
 Also see [Asset Tags]({% link docs/asset-tags.md %}) for custom tags we provide to link to various types of assets.
+
+{% raw %}
+If you're adding references to files, please use `{{ 'path/to/file' | relative_url }}` instead of `{{ site.baseurl }}/path/to/file`. In most cases using the baseurl is fine, but some classes have found this problematic. 
+{% endraw %}
 
 ## Just the Docs
 
