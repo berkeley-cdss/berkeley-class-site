@@ -9,14 +9,15 @@ files:
   pdf_slides: https://example.com
   code: https://example.com
   code_html: https://example.com
-  notebook: https://example.com
+  jupyter_notebook: https://example.com
   notes: https://example.com
   additional_files:
     - name: A link
       link: https://example.com
-      target: #or leave empty
+    - name: Another link
+      link: https://example.com
+      target: _blank #if you want to open in a new tab, or leave empty
 recording: https://youtube.com
 ---
 
-
-Content by many dedicated Data 100 instructors at UC Berkeley. See our [Acknowledgments](../../acks) page.
+Content by many dedicated instructors at UC Berkeley. 
