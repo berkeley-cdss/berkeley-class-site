@@ -29,6 +29,16 @@ div.highlighter-rouge div.highlight {
     border-collapse: collapse;
 }
 
+// fix Note block colors for dark mode
+p.note, blockquote.note {
+  border-left-color: #7253ed; 
+
+}
+p.note::before {
+  color: #7253ed;
+  font-weight: bold;
+}
+
 .label {
     border-radius: $border-radius;
     margin-left: 0;
