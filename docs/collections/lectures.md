@@ -13,6 +13,8 @@ nav_order: 3
 
 Additional fields may be configured in `layout/lecture.html` as needed. The only required field is `title`. 
 
+See [here](https://github.com/berkeley-cdss/berkeley-class-site/blob/main/_lectures/intro.md){:target="_blank"} for an example of a lecture file. Anything outside of the front matter will be included at the bottom of the lecture's page.
+
 ```yaml
 title:
   type: string
@@ -67,7 +69,7 @@ files:
     type: string
     required: false
     note: Must be a valid URL or relative path
-  notebook:
+  jupyter_notebook:
       type: string
     required: false
     note: Must be a valid URL (e.g. nbgitpuller link) or relative path
@@ -80,4 +82,8 @@ files:
       type: string
       required: false
       note: Must be a valid URL or relative path
+    target:
+      type: string
+      required: false
+      note: either set to "_blank" (open in new tab) or don't include/leave empty
 ```
