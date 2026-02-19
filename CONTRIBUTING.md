@@ -27,7 +27,7 @@ You can propose changes to the course website by:
    - The motivation for the change  
    - Any relevant context or screenshots
 
-   Ensure that your pull request also includes documentation for your changes. Documentation lives in the `docs` directory.
+   Ensure that your pull request also includes documentation for your changes. Documentation lives in the `docs` directory and is intended for users of the template (e.g. instructors and course staff).
 
 ## Contribution Guidelines
 
