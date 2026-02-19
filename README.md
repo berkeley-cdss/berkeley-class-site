@@ -111,7 +111,7 @@ Search throughout the repository for TODO items called `TODO(setup)` and complet
 
 ## Deployment
 
-The easiest way to deploy your site is with [GitHub Pages](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll) and the `.github/workflows/jekyll.yml` workflow included in this template.s
+The easiest way to deploy your site is with [GitHub Pages](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll) and the `.github/workflows/jekyll.yml` workflow included in this template.
 
 ## Contributing
 
