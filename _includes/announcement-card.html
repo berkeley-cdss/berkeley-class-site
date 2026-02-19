@@ -1,0 +1,14 @@
+{%- assign post = include.announcement -%}
+<div class="announcement-card">
+  <h2>{{ post.title }}</h2>
+  <div class="announcement-meta">
+    {{ post.date | date: '%b %e' }}
+  </div>
+  <div class="announcement-body">
+    {% if include.no_layout %}
+      {{ post.content | strip_newlines }}
+    {% else %}
+      {{ post.content }}
+    {% endif %}
+  </div>
+</div>

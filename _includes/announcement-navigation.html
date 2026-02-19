@@ -1,0 +1,57 @@
+{% assign today = site.time | date: "%Y-%m-%d" %}
+{% assign announcements = site.announcements | sort: 'week' | reverse %}
+{% assign most_recent = nil %}
+
+<div id="announcement-container" style="border: 1px solid var(--border-color); padding: 20px; border-radius: 5px; background-color: var(--code-background-color);">
+  
+  <div id="announcement-navigation" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 15px;">
+    <a href="#" id="prev-week" style="visibility: hidden; font-weight: bold; text-decoration: none; color: var(--link-color);">← Previous Week</a>
+    <span style="font-weight: bold; color: var(--body-text-color); text-transform: uppercase; letter-spacing: 1px; font-size: 0.8em; opacity: 0.9;">Announcements</span>
+    <a href="#" id="next-week" style="visibility: hidden; font-weight: bold; text-decoration: none; color: var(--link-color);">Next Week →</a>
+  </div>
+
+    {% for post in announcements %}
+    {% assign announcement_date = post.date | date: "%Y-%m-%d" %}
+    {% if post.week and post.week >= 0 and announcement_date <= today %}
+      {% if most_recent == nil %}{% assign most_recent = post %}{% endif %}
+
+      <div class="announcement" data-week="{{ post.week }}" data-date="{{ announcement_date }}" {% if post != most_recent %}style="display: none;"{% endif %}>
+        <div class="announcement-inner">
+          <h2 id="{{ post.title | slugify }}" style="margin-top: 0; margin-bottom: 5px; color: var(--heading-color);">{{ post.title }}</h2>
+          
+          <div class="announcement-meta" style="color: var(--body-text-color); opacity: 0.9; font-size: 0.9em; margin-bottom: 20px;">
+            {% if post.date %}{{ post.date | date: '%b %e' }}  {% endif %}
+          </div>
+
+          <div class="announcement-body" style="color: var(--body-text-color);">
+            {{ post.content }}
+          </div>
+        </div>
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const container = document.getElementById('announcement-container');
+  if (!container) return;
+  const slides = Array.from(container.getElementsByClassName('announcement'));
+  let currentIndex = slides.findIndex(s => s.style.display !== 'none');
+
+  const prevBtn = document.getElementById('prev-week');
+  const nextBtn = document.getElementById('next-week');
+
+  function updateUI() {
+    slides.forEach((slide, index) => {
+      slide.style.display = (index === currentIndex) ? 'block' : 'none';
+    });
+    nextBtn.style.visibility = (currentIndex > 0) ? 'visible' : 'hidden';
+    prevBtn.style.visibility = (currentIndex < slides.length - 1) ? 'visible' : 'hidden';
+  }
+
+  prevBtn.addEventListener('click', e => { e.preventDefault(); if (currentIndex < slides.length - 1) { currentIndex++; updateUI(); } });
+  nextBtn.addEventListener('click', e => { e.preventDefault(); if (currentIndex > 0) { currentIndex--; updateUI(); } });
+  updateUI();
+});
+</script>
