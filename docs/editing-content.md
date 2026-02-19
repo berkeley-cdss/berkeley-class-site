@@ -13,8 +13,8 @@ nav_order: 1
 Most of your edits will be to be to markdown and YAML. If you're unfamiliar with either of these, check out the following resources:
 * [Markdown guide](https://www.markdownguide.org/){:target="_blank"}
 * [YAML for geginners](https://www.redhat.com/en/blog/yaml-beginners){:target="_blank"}
-* [Front matter](https://jekyllrb.com/docs/front-matter/)
-* [Using YAML front matter](https://docs.github.com/en/contributing/writing-for-github-docs/using-yaml-frontmatter)
+* [Front matter](https://jekyllrb.com/docs/front-matter/){:target="_blank"}
+* [Using YAML front matter](https://docs.github.com/en/contributing/writing-for-github-docs/using-yaml-frontmatter){:target="_blank"}
 * [YAML validator](https://www.yamllint.com/){:target="_blank"} or [with formatting](https://jsonformatter.org/yaml-validator){:target="_blank"}
 
 ## Jekyll
