@@ -111,11 +111,11 @@ Search throughout the repository for TODO items called `TODO(setup)` and complet
 
 ## Deployment
 
-The easiest way to deploy your site is with [GitHub Pages](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll).
+The easiest way to deploy your site is with [GitHub Pages](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/about-github-pages-and-jekyll) and the `.github/workflows/jekyll.yml` workflow included in this template.
 
 ## Contributing
 
-See [CONTRIBUTING.md](.github/CONTRIBUTING.md) for instructions on how to develop this site as part of course staff or if you're interested in contributing to this template repository.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for instructions on how to develop this template as part of your role on course staff or if you're otherwise interested in contributing to this template repository.
 
 ## License
 
