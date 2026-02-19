@@ -10,8 +10,10 @@ You can propose changes to the course website by:
 1. **Forking** this repository  
    See GitHub’s guide on forking:  
    https://help.github.com/articles/fork-a-repo/
+   It is also perfectly acceptable to work on a **branch** if you have write access to this repository. 
+   Reach out to maintainers if you'd like write access.
 
-2. **Making edits** in your fork  
+2. **Making edits** in your fork or branch
    Examples of useful contributions include:
    - Fixing typos and broken features.
    - Implementing new features that will be useful for **all courses.** Course specific features are best implemented in your course's repository. If you're unsure, please open an [issue](https://github.com/berkeley-cdss/berkeley-class-site/issues) to start a discussion.
