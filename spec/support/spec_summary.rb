@@ -49,7 +49,9 @@ end
 
 def nicely_print(hash)
   hash.each_value do |values|
-    values.each { |item| }
+    # rubocop:disable RSpec/Output
+    values.each { |item| puts item }
+    # rubocop:enable RSpec/Output
   end
 end
 

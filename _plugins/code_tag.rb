@@ -84,7 +84,9 @@ module Jekyll
       [true, false].include?(value)
     end
 
+    # rubocop:disable Naming/PredicateMethod
     def to_boolean(value)
+      # rubocop:enable Naming/PredicateMethod
       unless string_boolean?(value)
         raise ArgumentError,
               "value must be 'true' or 'false' not '#{value}' (type #{value.class})"

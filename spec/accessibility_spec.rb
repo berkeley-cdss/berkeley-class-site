@@ -10,26 +10,26 @@ require 'spec_helper'
 # See https://github.com/dequelabs/axe-core/blob/develop/doc/API.md#axe-core-tags
 # Tests are segmented in 2.0, 2.1 and 2.2+
 # In most places WCAG 2.1AA is the minimum requirement, but 2.2 is the current WCAG Standard.
-required_a11y_standards = %i[wcag2a wcag2aa wcag21a wcag21aa]
-complete_a11y_standards = %i[wcag22aa best-practice section508]
+REQUIRED_A11Y_STANDARDS = %i[wcag2a wcag2aa wcag21a wcag21aa].freeze
+COMPLETE_A11Y_STANDARDS = %i[wcag22aa best-practice section508].freeze
 
 # axe-core rules that are not required to be accessible / do not apply
 # You may temporarily want to add rules here during development.
 # See: https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md
-skipped_rules = []
+SKIPPED_RULES = [].freeze
 # These are elements that are not required to be accessible
 # It should be rare to add to this list. This disables all rules for an element.
 # e.g. <img data-a11y-errors="true" src="..." /> would pass even though it's missing alt text.
-excluded_elements = [
+EXCLUDED_ELEMENTS = [
   '[data-a11y-errors="true"]'
-]
+].freeze
 
-# Add pages here that do not need to have a11y tests run. 
-# Full paths as output by the tests should be used. 
-# It should be rare to add to this array. One acceptable 
-# use is to add redirect pages because they can introduce 
+# Add pages here that do not need to have a11y tests run.
+# Full paths as output by the tests should be used.
+# It should be rare to add to this array. One acceptable
+# use is to add redirect pages because they can introduce
 # race conditions and make the a11y tests fail inconsistently.
-SKIPPED_PAGES = []
+SKIPPED_PAGES = [].freeze
 
 # We must call this to ensure the build it up-to-date.
 build_jekyll_site!
@@ -40,16 +40,16 @@ PAGES_TO_TEST = ALL_PAGES - SKIPPED_PAGES
 RSpec.shared_examples 'a11y tests' do
   it 'meets WCAG 2.1' do
     expect(page).to be_axe_clean
-      .according_to(*required_a11y_standards)
-      .skipping(*skipped_rules)
-      .excluding(*excluded_elements)
+      .according_to(*REQUIRED_A11Y_STANDARDS)
+      .skipping(*SKIPPED_RULES)
+      .excluding(*EXCLUDED_ELEMENTS)
   end
 
   it 'meets WCAG 2.2' do
     expect(page).to be_axe_clean
-      .according_to(*complete_a11y_standards)
-      .skipping(*skipped_rules)
-      .excluding(*excluded_elements)
+      .according_to(*COMPLETE_A11Y_STANDARDS)
+      .skipping(*SKIPPED_RULES)
+      .excluding(*EXCLUDED_ELEMENTS)
   end
 end
 

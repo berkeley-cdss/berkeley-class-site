@@ -4,3 +4,15 @@
   background-color: #9C3848 !important;
   color: white !important;
 }
+
+// This affects the size of the course logo/name on the top left. We recommend commenting out/removing
+// this styling if you are using just your course name rather than a course logo image
+div.site-header {
+  height: 100%;
+  max-height: 150px;
+}
+
+// This affects the positioning of the course logo image (if it exists) on the top left
+.site-logo {
+  background-position: center;
+}
