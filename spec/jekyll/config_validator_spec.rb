@@ -9,7 +9,8 @@ RSpec.describe Jekyll::ConfigValidator do
       'baseurl' => '/sp26',
       'course_department' => 'dsus',
       'semester_start_date' => '2026-01-21',
-      'semester_end_date' => '2026-05-09'
+      'semester_end_date' => '2026-05-09',
+      'class_archive_path' => '/'
     }
   end
 
@@ -25,6 +26,25 @@ RSpec.describe Jekyll::ConfigValidator do
 
     expect { validator.validate }
       .to raise_error(ConfigValidationError, /semester_start_date is missing.*semester_end_date is missing/m)
+  end
+
+  it 'requires class_archive_path' do
+    validator = described_class.new(base_config.except('class_archive_path'))
+
+    expect { validator.validate }
+      .to raise_error(ConfigValidationError, /class_archive_path is missing from site config/)
+  end
+
+  it 'allows class_archive_path as a full URL' do
+    validator = described_class.new(base_config.merge('class_archive_path' => 'https://c88c.org/archive'))
+
+    expect { validator.validate }.not_to raise_error
+  end
+
+  it 'rejects class_archive_path values that are not paths or full URLs' do
+    validator = described_class.new(base_config.merge('class_archive_path' => 'archive'))
+    expected = %r{`class_archive_path` must be an absolute path starting with `/` or a full URL}
+    expect { validator.validate }.to raise_error(ConfigValidationError, expected)
   end
 
   it 'validates ISO-8601 semester dates' do

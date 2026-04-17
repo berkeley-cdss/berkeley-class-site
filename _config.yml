@@ -44,9 +44,8 @@ logo: /assets/images/berkeley_walking_bear.png
 # This should be one of eecs, dsus, stat
 # (Future) This will control some footer text, and later custom styling.
 course_department: dsus
-# This should be the page of all class archives
-# Typically just / for DS courses (with a visible index page), or /archives if you're hosting your own, or a link to the inst.eecs page
-# If you have no archive page, comment this line out or leave blank.
+# This path/URL is used by the archive banner shown when the site date is outside the semester window.
+# Keep this key present. Default `/` is fine for class-listing homepages, and `/archive` is also a good option.
 # We recommend listing archived offerings as "Archive" or "Not Updated" in course listings.
 class_archive_path: /
 

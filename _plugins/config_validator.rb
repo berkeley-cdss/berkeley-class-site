@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'date'
+require 'uri'
 
 # A UC Berkeley-specific validator for Jekyll sites
 # This class validates the following options:
@@ -48,7 +49,8 @@ module Jekyll
       course_department: :inclusion_validator,
       color_scheme: :inclusion_validator,
       semester_start_date: :validate_iso8601_date,
-      semester_end_date: :validate_iso8601_date
+      semester_end_date: :validate_iso8601_date,
+      class_archive_path: :validate_archive_path
     }.freeze
 
     attr_accessor :config, :errors
@@ -73,7 +75,7 @@ module Jekyll
     end
 
     def validate_keys!
-      required_keys = %i[baseurl course_department semester_start_date semester_end_date]
+      required_keys = %i[baseurl course_department semester_start_date semester_end_date class_archive_path]
       required_keys.each do |key|
         errors << "#{key} is missing from site config" unless @config.key?(key.to_s)
       end
@@ -115,6 +117,19 @@ module Jekyll
       return unless start_date > end_date
 
       errors << '`semester_start_date` must be on or before `semester_end_date`'
+    end
+
+    def validate_archive_path(_key, value)
+      path = value.to_s.strip
+      return errors << '`class_archive_path` cannot be blank' if path.empty?
+      return if path.match?(%r{^/})
+
+      uri = URI.parse(path)
+      return if uri.is_a?(URI::HTTP) && uri.host
+
+      errors << "`class_archive_path` must be an absolute path starting with `/` or a full URL, not '#{value}'"
+    rescue URI::InvalidURIError
+      errors << "`class_archive_path` must be an absolute path starting with `/` or a full URL, not '#{value}'"
     end
 
     def parse_iso8601_date(value)
