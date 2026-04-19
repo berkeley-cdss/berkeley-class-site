@@ -6,7 +6,7 @@
 A template for UC Berkeley class websites (with a focus on EECS/CS/DS courses).
 
 ## Contact
-Please [open an issue](https://github.com/berkeley-cdss/berkeley-class-site/issues), join a [discussion](https://github.com/berkeley-cdss/berkeley-class-site/discussions). You may also email silascs AT berkeley DOT edu.
+Please [open an issue](https://github.com/berkeley-cdss/berkeley-class-site/issues) or join a [discussion](https://github.com/berkeley-cdss/berkeley-class-site/discussions) to let us know your thoughts! You may also email silascs AT berkeley DOT edu.
 
 ## Installation
 
