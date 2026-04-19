@@ -5,6 +5,15 @@
 
 A template for UC Berkeley class websites (with a focus on EECS/CS/DS courses).
 
+If you have questions, concerns, or otherwise wish to contact the development team, please:
+
+1. File a GitHub issue, and/or
+2. Email us:
+
+- [Silas Santini](mailto:silascs@berkeley.edu)
+- [Michael Ball](mailto:ball@berkeley.edu)
+- [Lisa Yan](mailto:yanlisa@berkeley.edu)
+
 ## Installation
 
 To get started on development, please setup your environment using one of two methods.
