@@ -1,15 +1,13 @@
 <div id="archive-banner" class="archive-banner" role="status">
   This site is archived. Please check:
-  <a id="archive-banner-link" class="archive-banner-link" href="#"></a>
+  <a id="archive-banner-link" class="archive-banner-link" href="{{ site.class_archive_path | absolute_url }}">{{ site.class_archive_path | absolute_url }}</a>
 </div>
 
 <script>
   (() => {
     const semesterStart = {{ site.semester_start_date | jsonify }};
     const semesterEnd = {{ site.semester_end_date | jsonify }};
-    const archivePath = {{ site.class_archive_path | jsonify }};
-
-    if (!semesterStart || !semesterEnd || !archivePath) {
+    if (!semesterStart || !semesterEnd) {
       return;
     }
 
@@ -31,15 +29,11 @@
       return;
     }
 
-    const archiveUrl = new URL(archivePath, window.location.origin).toString();
     const banner = document.getElementById('archive-banner');
-    const archiveLink = document.getElementById('archive-banner-link');
-    if (!banner || !archiveLink) {
+    if (!banner) {
       return;
     }
 
-    archiveLink.href = archiveUrl;
-    archiveLink.textContent = archiveUrl;
     banner.style.display = 'block';
     document.body.classList.add('archive-banner-visible');
   })();
