@@ -1,0 +1,41 @@
+{% assign archive_url = site.class_archive_path | absolute_url %}
+<div id="archive-banner" class="archive-banner" role="status">
+  This site is archived. Please check:
+  <a id="archive-banner-link" class="archive-banner-link" href="{{ archive_url }}">{{ archive_url }}</a>
+</div>
+
+<script>
+  (() => {
+    const semesterStart = {{ site.semester_start_date | jsonify }};
+    const semesterEnd = {{ site.semester_end_date | jsonify }};
+    if (!semesterStart || !semesterEnd) {
+      return;
+    }
+
+    const parseDate = (value) => {
+      const parsed = new Date(value);
+      return Number.isNaN(parsed.getTime()) ? null : parsed;
+    };
+
+    const startDate = parseDate(semesterStart);
+    const endDate = parseDate(semesterEnd);
+    if (!startDate || !endDate) {
+      return;
+    }
+
+    endDate.setHours(23, 59, 59, 999);
+    const currentDate = new Date();
+    const isOutsideSemester = currentDate < startDate || currentDate > endDate;
+    if (!isOutsideSemester) {
+      return;
+    }
+
+    const banner = document.getElementById('archive-banner');
+    if (!banner) {
+      return;
+    }
+
+    banner.style.display = 'block';
+    document.body.classList.add('archive-banner-visible');
+  })();
+</script>

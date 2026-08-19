@@ -35,16 +35,18 @@ course_email: COURSE_EMAIL@berkeley.edu
 gradescope_course_id: 123456 # you can find this in the Gradescope URL after /courses
 bcourses_course_id: 123456 # Same as above, but for bCourses. Leave blank if not in use...
 ed_course_id: 123456 # Again, same as above.
-sememster: spYY | suYY | faYY # set for the current seemester
+semester: spYY | suYY | faYY # set for the current semester
+semester_start_date: '2025-01-21' # Required for the archive banner logic (YYYY-MM-DD)
+semester_end_date: '2025-05-09' # Required for the archive banner logic (YYYY-MM-DD)
 # TODO(setup): Set this to the file path of your course logo image, or leave it blank to display your course name.
 # To edit the size and positioning of the logo/course name, see _sass/custom/course_overrides.scss
 logo: /assets/images/berkeley_walking_bear.png
 # This should be one of eecs, dsus, stat
 # (Future) This will control some footer text, and later custom styling.
 course_department: dsus
-# This should be the page of all class archives
-# Typically just / for DS courses (with a visible index page), or /archives if you're hosting your own, or a link to the inst.eecs page
-# If you have no archive page, comment this line out or leave blank.
+# This path/URL is used by the archive banner shown when the site date is outside the semester window.
+# Keep this key present. Default `/` is fine for class-listing homepages, and `/archive` is also a good option.
+# We recommend listing archived offerings as "Archive" or "Not Updated" in course listings.
 class_archive_path: /
 
 # TODO(setup): Remove this line if your favicon is named favicon.ico and is in the root directory,

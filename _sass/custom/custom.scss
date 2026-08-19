@@ -137,9 +137,34 @@ p.note::before {
     @include btn-color($white, #6929c4);
   }
   
-  .btn-officehours{
-    @include btn-color($white, #009d9a);
-  }
+.btn-officehours{
+  @include btn-color($white, #009d9a);
+}
+
+.archive-banner {
+  display: none;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 999;
+  padding: 0.75rem 1rem;
+  background-color: $berkeley-rose-medium;
+  color: #fff;
+  font-weight: 700;
+  text-align: center;
+}
+
+.archive-banner-link,
+.archive-banner-link:visited {
+  color: #fff;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+body.archive-banner-visible {
+  padding-top: 3rem;
+}
 
 @if $color-scheme == dark {
   @include dark-mode-overrides;
