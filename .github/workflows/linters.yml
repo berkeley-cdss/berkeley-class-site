@@ -8,7 +8,7 @@ jobs:
     name: runner / pylint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: dciborow/action-pylint@0.1.1
         with:
           github_token: ${{ secrets.github_token }}
@@ -26,7 +26,7 @@ jobs:
     name: runner / black
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: Check files using the black formatter
         uses: rickstaa/action-black@v1.3.3
         id: action_black
@@ -44,7 +44,7 @@ jobs:
     name: runner / markdownlint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: markdownlint
         uses: reviewdog/action-markdownlint@v0.20.0
         with:
@@ -60,7 +60,7 @@ jobs:
     env:
       BUNDLE_ONLY: rubocop
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: ruby/setup-ruby@v1
         with:
           bundler-cache: true
