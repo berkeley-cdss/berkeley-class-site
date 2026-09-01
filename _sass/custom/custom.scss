@@ -39,6 +39,19 @@ p.note::before {
   font-weight: bold;
 }
 
+// for narrow screens (12%), make date column more readable
+@media (max-width: 600px) {
+    .syllabus-container table.spanned-table tbody tr td:nth-child(1) {
+        width: 25% !important;
+    }
+    .syllabus-container table.spanned-table tbody tr td:nth-child(2) {
+        width: 50% !important;
+    }
+    .syllabus-container table.spanned-table tbody tr td:nth-child(3) {
+        width: 25% !important;
+    }
+}
+
 .label {
     border-radius: $border-radius;
     margin-left: 0;
@@ -147,3 +160,5 @@ p.note::before {
 
 // Place all of your course-specific CSS here.
 @import './course_overrides';
+
+
