@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'date'
+require 'uri'
+
 # A UC Berkeley-specific validator for Jekyll sites
 # This class validates the following options:
 # 1) Ensures required attributes are present in the config file.
@@ -44,7 +47,10 @@ module Jekyll
       url: :validate_clean_url,
       baseurl: :validate_semester_format,
       course_department: :inclusion_validator,
-      color_scheme: :inclusion_validator
+      color_scheme: :inclusion_validator,
+      semester_start_date: :validate_iso8601_date,
+      semester_end_date: :validate_iso8601_date,
+      class_archive_path: :validate_archive_path
     }.freeze
 
     attr_accessor :config, :errors
@@ -61,13 +67,15 @@ module Jekyll
         send(validator, key, config[key.to_s]) if @config.key?(key.to_s)
       end
 
+      validate_semester_date_range
+
       raise ConfigValidationError, errors if errors.length.positive?
 
       puts 'Passed Berkeley YAML Config Validations'
     end
 
     def validate_keys!
-      required_keys = %i[baseurl course_department]
+      required_keys = %i[baseurl course_department semester_start_date semester_end_date class_archive_path]
       required_keys.each do |key|
         errors << "#{key} is missing from site config" unless @config.key?(key.to_s)
       end
@@ -94,6 +102,40 @@ module Jekyll
     def inclusion_validator(key, value)
       allowed = self.class.const_get("VALID_#{key.upcase}")
       errors << "`#{key}` must be one of #{allowed} (not '#{value}')" unless allowed.include?(value)
+    end
+
+    def validate_iso8601_date(key, value)
+      return if parse_iso8601_date(value)
+
+      errors << "`#{key}` must be a valid ISO-8601 date string (YYYY-MM-DD), not '#{value}'"
+    end
+
+    def validate_semester_date_range
+      start_date = parse_iso8601_date(config['semester_start_date'])
+      end_date = parse_iso8601_date(config['semester_end_date'])
+      return unless start_date && end_date
+      return unless start_date > end_date
+
+      errors << '`semester_start_date` must be on or before `semester_end_date`'
+    end
+
+    def validate_archive_path(_key, value)
+      path = value.to_s.strip
+      return errors << '`class_archive_path` cannot be blank' if path.empty?
+      return if path.match?(%r{^/})
+
+      uri = URI.parse(path)
+      return if uri.is_a?(URI::HTTP) && uri.host
+
+      errors << "`class_archive_path` must be an absolute path starting with `/` or a full URL, not '#{value}'"
+    rescue URI::InvalidURIError
+      errors << "`class_archive_path` must be an absolute path starting with `/` or a full URL, not '#{value}'"
+    end
+
+    def parse_iso8601_date(value)
+      Date.iso8601(value.to_s)
+    rescue Date::Error
+      nil
     end
   end
 end
