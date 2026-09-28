@@ -255,7 +255,7 @@ GEM
       lint_roller (~> 1.1)
       rubocop (~> 1.81)
     ruby-progressbar (1.13.0)
-    rubyzip (3.2.2)
+    rubyzip (3.4.0)
     safe_yaml (1.0.5)
     sass-embedded (1.97.2-aarch64-linux-gnu)
       google-protobuf (~> 4.31)
