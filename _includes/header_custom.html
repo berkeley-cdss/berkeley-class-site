@@ -1,0 +1,30 @@
+<!-- Button that hides or shows the left sidebar on wide screens. -->
+<button type="button" class="btn btn-outline fs-3 sidebar-toggle"
+  aria-label="Hide sidebar" title="Hide sidebar">«</button>
+
+<script>
+(function() {
+  const sidebarButton = document.querySelector('.sidebar-toggle');
+
+  // Input: none.
+  // Output: none; sets the button's arrow, label, and hover text.
+  // Description: Shows » with "Show sidebar" when the sidebar is hidden, and
+  // « with "Hide sidebar" when it's open, so the button says what a click will do.
+  function updateSidebarButton() {
+    const isCollapsed = document.documentElement.classList.contains('sidebar-collapsed');
+    const label = isCollapsed ? 'Show sidebar' : 'Hide sidebar';
+    sidebarButton.textContent = isCollapsed ? '»' : '«';
+    sidebarButton.ariaLabel = label;
+    sidebarButton.title = label;
+  }
+
+  updateSidebarButton();
+
+  // On click, switch the sidebar-collapsed class on <html> and save the choice for the next page.
+  sidebarButton.addEventListener('click', function() {
+    const isCollapsed = document.documentElement.classList.toggle('sidebar-collapsed');
+    localStorage.setItem('sidebar-collapsed', isCollapsed);
+    updateSidebarButton();
+  });
+})();
+</script>
