@@ -46,6 +46,8 @@ course_department: dsus
 # Typically just / for DS courses (with a visible index page), or /archives if you're hosting your own, or a link to the inst.eecs page
 # If you have no archive page, comment this line out or leave blank.
 class_archive_path: /
+# Set to true to remove the button (top left on wide screens) that lets students hide the sidebar.
+hide_sidebar_toggle: false
 
 # TODO(setup): Remove this line if your favicon is named favicon.ico and is in the root directory,
 # otherwise set this to the path to your favicon.

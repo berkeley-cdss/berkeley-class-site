@@ -3,8 +3,10 @@
   // Quick-set theme to prevent flashing
   const theme = localStorage.getItem('jtd-theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
   document.documentElement.setAttribute('data-theme', theme);
+{%- unless site.hide_sidebar_toggle == true %}
   // Hide the sidebar right away if the student collapsed it on an earlier page.
   if (localStorage.getItem('sidebar-collapsed') === 'true') document.documentElement.classList.add('sidebar-collapsed');
+{%- endunless %}
 </script>
 
   <!-- Loading the v6 core styles and the Solid and Brands styles -->
