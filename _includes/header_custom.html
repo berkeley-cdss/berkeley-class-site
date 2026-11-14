@@ -1,0 +1,46 @@
+{%- unless site.hide_sidebar_toggle == true -%}
+<!-- Button that hides or shows the left sidebar on wide screens.
+     Set hide_sidebar_toggle: true in _config.yml to remove it. -->
+<button type="button" class="btn btn-outline fs-3 sidebar-toggle"
+  aria-label="Hide sidebar" title="Hide sidebar" aria-expanded="true">«</button>
+
+<script>
+(function() {
+  const sidebarButton = document.querySelector('.sidebar-toggle');
+  const sidebar = document.querySelector('.side-bar');
+
+  // Pages with the sidebar turned off (nav_enabled: false) have nothing to toggle.
+  if (!sidebar) {
+    sidebarButton.remove();
+    document.documentElement.classList.remove('sidebar-collapsed');
+    return;
+  }
+
+  // The theme's sidebar has no id, so give it one for aria-controls.
+  if (!sidebar.id) sidebar.id = 'side-bar';
+  sidebarButton.setAttribute('aria-controls', sidebar.id);
+
+  // Input: none.
+  // Output: none; sets the button's arrow, label, hover text, and aria-expanded.
+  // Description: Shows » with "Show sidebar" when the sidebar is hidden, and
+  // « with "Hide sidebar" when it's open, so the button says what a click will do.
+  function updateSidebarButton() {
+    const isCollapsed = document.documentElement.classList.contains('sidebar-collapsed');
+    const label = isCollapsed ? 'Show sidebar' : 'Hide sidebar';
+    sidebarButton.textContent = isCollapsed ? '»' : '«';
+    sidebarButton.setAttribute('aria-label', label);
+    sidebarButton.setAttribute('aria-expanded', String(!isCollapsed));
+    sidebarButton.title = label;
+  }
+
+  updateSidebarButton();
+
+  // On click, switch the sidebar-collapsed class on <html> and save the choice for the next page.
+  sidebarButton.addEventListener('click', function() {
+    const isCollapsed = document.documentElement.classList.toggle('sidebar-collapsed');
+    localStorage.setItem('sidebar-collapsed', isCollapsed);
+    updateSidebarButton();
+  });
+})();
+</script>
+{%- endunless -%}

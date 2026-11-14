@@ -158,6 +158,52 @@ p.note::before {
   @include dark-mode-overrides;
 }
 
+// Toggle button for the left sidebar. Hidden on narrow screens, where
+// the theme's ☰ menu already handles the sidebar.
+.sidebar-toggle {
+  display: none;
+}
+
+@include mq(md) {
+  // Fixed so it stays put on scroll, like the sidebar. Sits in the top-right
+  // corner of the sidebar's title area; the sidebar is $nav-width-md wide here.
+  .sidebar-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 1;
+    top: calc((#{$header-height} - 2rem) / 2);
+    left: calc(#{$nav-width-md} - 2.5rem);
+    width: 2rem;
+    height: 2rem;
+    padding: 0;
+  }
+
+  // When collapsed: hide the sidebar, move the button to the top-left corner,
+  // and center the content while leaving room on the left for the button.
+  .sidebar-collapsed {
+    .side-bar {
+      display: none;
+    }
+
+    .side-bar + .main {
+      margin-left: Max(3.5rem, calc((100% - #{$content-width}) / 2));
+    }
+
+    .sidebar-toggle {
+      left: $sp-4;
+    }
+  }
+}
+
+@include mq(lg) {
+  // Same width formula the theme uses for the sidebar at this size.
+  .sidebar-toggle {
+    left: calc(Max(#{$nav-width}, calc((100% - #{$nav-width + $content-width}) / 2 + #{$nav-width})) - 2.5rem);
+  }
+}
+
 // Place all of your course-specific CSS here.
 @import './course_overrides';
 
