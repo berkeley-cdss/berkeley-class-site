@@ -17,6 +17,8 @@ We assume that lectures, labs, discussions, readings, and homeworks happen with 
 
 We also recommend moving to use the `_lectures` collection to distribute slides, code, and other materials for lectures. This will keep the schedule cleaner. You can compare using this recommended approach used by [Data 100](https://ds100.org/fa25/) to [Data 88E](https://data88e.org/fa25/) which does not use the `_lectures` collection.
 
+A floating "Jump to today" button appears in the bottom right corner whenever today's row is scrolled out of view. It scrolls to today's row (or the next upcoming row, or the last row once the semester is over), briefly highlights it, and then offers a jump back to the top. "Today" is the current date in Pacific time. To remove the button, set `hide_jump_to_today: true` in `_config.yml`.
+
 <div>
 {%- include schedule.html -%}
 </div>

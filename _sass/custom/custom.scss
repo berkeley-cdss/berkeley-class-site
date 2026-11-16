@@ -204,6 +204,64 @@ p.note::before {
   }
 }
 
+// "Jump to today" button on the schedule (see _includes/schedule.html).
+// Floats in the bottom-right corner of the window. Colored like the theme's
+// other solid buttons: Berkeley blue with white text. Dark mode uses a
+// lighter Berkeley blue, which would otherwise disappear against the dark
+// page background (the theme keeps solid button text white in dark mode).
+$jump-to-today-bg: $berkeley-blue;
+@if $color-scheme == dark {
+  $jump-to-today-bg: lighten($berkeley-blue, 20%);
+}
+
+.jump-to-today {
+  @include btn-color($white, $jump-to-today-bg);
+
+  position: fixed;
+  right: $sp-5;
+  bottom: $sp-5;
+  z-index: 100;
+
+  // .btn sets display, which would otherwise override the hidden attribute.
+  &[hidden] {
+    display: none;
+  }
+
+  // On a phone the labelled button covers too much of the text behind it, so
+  // it becomes a round button with just the arrow, big enough to tap and
+  // closer to the corner. Its aria-label still names it in full.
+  @media (max-width: 640px) {
+    right: $sp-3;
+    bottom: calc(#{$sp-3} + env(safe-area-inset-bottom, 0px));
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 1.375rem;
+    line-height: 1;
+
+    .jump-label {
+      display: none;
+    }
+  }
+}
+
+// Brief highlight on the row that was jumped to. An inset shadow rather than
+// a background, so it shows over the table cell backgrounds of either theme.
+$jump-flash-color: rgba($berkeley-blue, 0.08);
+@if $color-scheme == dark {
+  $jump-flash-color: rgba($white, 0.09);
+}
+
+.syllabus-container tr.jump-flash td {
+  animation: jump-flash 2.4s ease-out;
+}
+
+@keyframes jump-flash {
+  0%, 75% { box-shadow: inset 0 0 0 999px $jump-flash-color; }
+  100% { box-shadow: inset 0 0 0 999px rgba($jump-flash-color, 0); }
+}
+
 // Place all of your course-specific CSS here.
 @import './course_overrides';
 
