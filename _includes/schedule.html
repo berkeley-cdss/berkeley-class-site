@@ -88,7 +88,7 @@
   <table class="spanned-table" style="margin-bottom: 1.5rem; table-layout: fixed; width: 100%;">
     <tbody>
       {%- for day in week.items -%}
-        <tr>
+        <tr data-date="{{ day | date: '%Y-%m-%d' }}">
           <td style="width:{{ site.data.syllabus.date_width }}; vertical-align: top;">
             {{ day | date: '%a, %b %d' }}
           </td>
@@ -495,3 +495,174 @@
   </table>
 {%- endfor -%}
 </div>
+
+{%- comment -%}
+  Jump-to-today button. Floats in the corner whenever the row for today (or,
+  on a day with no row, the next upcoming one) is scrolled out of view, with
+  an arrow pointing toward it. Pressing it scrolls to that row and briefly
+  highlights it. Once pressed it becomes "Jump to top", and
+  goes back to "Jump to today" after that is pressed or the row is scrolled
+  away from. "Today" is the Pacific date in the visitor's browser, so it
+  stays right between site builds. Rows are matched through the data-date
+  attribute set on each <tr> above. Styles are in _sass/custom/custom.scss.
+  Set hide_jump_to_today: true in _config.yml to remove the button.
+{%- endcomment -%}
+{%- unless site.hide_jump_to_today == true -%}
+<button type="button" id="jump-to-today" class="btn jump-to-today" aria-label="Jump to today" hidden>
+  <span class="jump-arrow" aria-hidden="true">↓</span> <span class="jump-label">Jump to today</span>
+</button>
+<script>
+(function () {
+  function init() {
+    var button = document.getElementById('jump-to-today');
+    var rows = Array.prototype.slice.call(
+      document.querySelectorAll('.syllabus-container tr[data-date]'));
+    if (!button || rows.length === 0) return;
+
+    // en-CA formats as YYYY-MM-DD, which compares correctly as a string.
+    var today;
+    try {
+      today = new Intl.DateTimeFormat('en-CA', {
+        timeZone: 'America/Los_Angeles',
+        year: 'numeric', month: '2-digit', day: '2-digit'
+      }).format(new Date());
+    } catch (e) {
+      today = new Date().toISOString().slice(0, 10);
+    }
+
+    // Today's row, else the next upcoming one, else (after the semester) the last.
+    var target = rows[rows.length - 1];
+    for (var i = 0; i < rows.length; i++) {
+      if (rows[i].dataset.date >= today) { target = rows[i]; break; }
+    }
+
+    // Highlights the row briefly, restarting if it is already running.
+    var flashTimer;
+    function flash() {
+      clearTimeout(flashTimer);
+      target.classList.remove('jump-flash');
+      void target.offsetWidth;
+      target.classList.add('jump-flash');
+      flashTimer = setTimeout(function () {
+        target.classList.remove('jump-flash');
+      }, 2400);
+    }
+
+    var arrow = button.querySelector('.jump-arrow');
+    var label = button.querySelector('.jump-label');
+
+    // 'today': offer the jump to today, hidden while the row is in view.
+    // 'jumping': pressed, still scrolling to the row; already offers the top.
+    // 'top': at the row, offering the top until the row is scrolled away from.
+    // 'leaving': "Jump to top" pressed, still scrolling away from the row.
+    var state = 'today';
+
+    function rowPosition() {
+      var rect = target.getBoundingClientRect();
+      var above = rect.bottom < 0;
+      var below = rect.top > window.innerHeight;
+      return { above: above, inView: !(above || below) };
+    }
+
+    function update() {
+      var pos = rowPosition();
+      if (state === 'top' && !pos.inView) state = 'today';
+
+      if (state === 'jumping' || state === 'top') {
+        button.hidden = false;
+        arrow.textContent = '↑';
+        label.textContent = 'Jump to top';
+      } else {
+        // While leaving, the button stays up rather than blinking out until
+        // the row has scrolled out of view.
+        button.hidden = state === 'today' && pos.inView;
+        arrow.textContent = pos.above ? '↑' : '↓';
+        label.textContent = 'Jump to today';
+      }
+      // The label is hidden on phones, so the name is kept here as well.
+      button.setAttribute('aria-label', label.textContent);
+    }
+
+    // Scrolls the page to `top`, then calls done. Animated by hand instead of
+    // with behavior: 'smooth', whose speed is up to the browser and is far too
+    // quick on phones: this takes longer the further there is to go, within
+    // 0.6 to 1.8 seconds. Any scrolling input from the visitor stops it early.
+    var frame = 0;
+    var finish = null;
+    function stopScrolling() {
+      if (!finish) return;
+      cancelAnimationFrame(frame);
+      var done = finish;
+      finish = null;
+      done();
+    }
+    ['wheel', 'touchstart', 'keydown'].forEach(function (type) {
+      window.addEventListener(type, stopScrolling, { passive: true });
+    });
+
+    function scrollPageTo(top, done) {
+      stopScrolling();
+      var limit = document.documentElement.scrollHeight - window.innerHeight;
+      top = Math.max(0, Math.min(top, limit));
+      var start = window.scrollY;
+      var distance = top - start;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var duration = reduce ? 0 : Math.max(600, Math.min(1800, Math.abs(distance) * 0.4));
+      var began = performance.now();
+      finish = done;
+
+      function step(now) {
+        var progress = duration ? Math.min(1, (now - began) / duration) : 1;
+        // Ease in and out, so the page starts and stops gently.
+        var eased = progress < 0.5
+          ? 4 * progress * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+        // 'instant', or the theme's smooth scrolling would animate every step.
+        window.scrollTo({ top: start + distance * eased, behavior: 'instant' });
+        if (progress < 1) frame = requestAnimationFrame(step);
+        else stopScrolling();
+      }
+      frame = requestAnimationFrame(step);
+    }
+
+    button.addEventListener('click', function () {
+      if (state === 'today' || state === 'leaving') {
+        state = 'jumping';
+        var rect = target.getBoundingClientRect();
+        var centered = window.scrollY + rect.top - (window.innerHeight - rect.height) / 2;
+        // Highlight once the row has come to rest. If the visitor scrolled
+        // off partway and the row never arrived, offer the jump again.
+        scrollPageTo(centered, function () {
+          if (state !== 'jumping') return;
+          if (rowPosition().inView) { state = 'top'; flash(); }
+          else state = 'today';
+          update();
+        });
+      } else {
+        state = 'leaving';
+        scrollPageTo(0, function () {
+          if (state !== 'leaving') return;
+          state = 'today';
+          update();
+        });
+      }
+      update();
+    });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(update).observe(target);
+    } else {
+      window.addEventListener('scroll', update, { passive: true });
+    }
+    window.addEventListener('resize', update);
+    update();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+{%- endunless -%}

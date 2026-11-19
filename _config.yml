@@ -48,6 +48,8 @@ course_department: dsus
 class_archive_path: /
 # Set to true to remove the button (top left on wide screens) that lets students hide the sidebar.
 hide_sidebar_toggle: false
+# Set to true to remove the floating "Jump to today" button (bottom right) from the schedule.
+hide_jump_to_today: false
 
 # TODO(setup): Remove this line if your favicon is named favicon.ico and is in the root directory,
 # otherwise set this to the path to your favicon.
